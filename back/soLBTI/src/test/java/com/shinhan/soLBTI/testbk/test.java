@@ -8,9 +8,5 @@ public class test {
 
     @Test
     void test1(){
-        
     }
-
-
-
 }

@@ -38,3 +38,5 @@ out/
 
 ###for test
 test*/
+
+application.properties
