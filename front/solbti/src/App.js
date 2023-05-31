@@ -9,7 +9,13 @@ import Signup from "auth/Signup";
 function App() {
   return (
     <div>
-      <Home />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth">
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+        </Route>
+      </Routes>
     </div>
   );
 }

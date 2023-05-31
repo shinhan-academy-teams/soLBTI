@@ -25,7 +25,7 @@ function Header(props) {
       <div className="header-body">
         <Navbar bg="light" expand="lg">
           <Container>
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/">
               <img src="/img/Logo.png" alt="logo"></img>
             </Navbar.Brand>
             <Navbar.Collapse id="basic-navbar-nav">
