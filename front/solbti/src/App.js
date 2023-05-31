@@ -6,14 +6,9 @@ import Home from "home/Home";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Header />}>
-        <Route index element={<Home />} />
-      </Route>
-      <Route path="/auth" element>
-        <Route path="" />
-      </Route>
-    </Routes>
+    <div>
+      <Home />
+    </div>
   );
 }
 
