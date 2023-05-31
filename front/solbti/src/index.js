@@ -13,6 +13,7 @@ import Home from "home/Home";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
+    <Header />
     <App />
   </BrowserRouter>
 );

@@ -48,13 +48,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Header(props) {
-  const handleSelect = (eventKey) => alert(`selected ${eventKey}`);
+  const handleSelect = (eventKey) => {};
+
+  if (window.location.pathname === "/poll") return null;
 
   return (
     <Nav variant="pills" activeKey="1" onSelect={handleSelect}>
       <Nav.Item>
-        <Nav.Link eventKey="2" title="Item">
-          NavLink 2 content
+        <Nav.Link href="/" eventKey="2" title="Item">
+          Home
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
@@ -91,10 +93,10 @@ function Header(props) {
           inputProps={{ "aria-label": "search" }}
         />
       </Search>
-      <Link to={"/auth/login"}>
+      <Link to={"/login"}>
         <Button color="inherit">로그인</Button>
       </Link>
-      <Link to={"/auth/signup"}>
+      <Link to={"/signup"}>
         <Button color="inherit">회원가입</Button>
       </Link>
     </Nav>
