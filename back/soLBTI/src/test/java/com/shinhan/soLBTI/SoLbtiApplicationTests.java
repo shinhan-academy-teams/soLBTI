@@ -9,5 +9,10 @@ class SoLbtiApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	
+	@Test
+	void yseony() {
+		System.out.println("ㅎㅇ");
+	}
 
 }
