@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+###for test
+test*/
+
+application.properties
