@@ -9,12 +9,14 @@ import Carousels from "componenet/Carousels";
 import { Container } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "home/Home";
+import Layout from "common/Layout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <Header />
-    <App />
+    <Layout>
+      <App />
+    </Layout>
   </BrowserRouter>
 );
 

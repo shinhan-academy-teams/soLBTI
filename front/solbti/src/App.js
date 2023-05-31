@@ -8,11 +8,9 @@ import Signup from "auth/Signup";
 
 function App() {
   return (
-    <Routes>
-      <Route index element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-    </Routes>
+    <div>
+      <Home />
+    </div>
   );
 }
 
