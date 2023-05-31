@@ -6,7 +6,6 @@ import { Container } from "react-bootstrap";
 function Home(props) {
   return (
     <Container fluid>
-      <Header />
       <Carousels />
     </Container>
   );
