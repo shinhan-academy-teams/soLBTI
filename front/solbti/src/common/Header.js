@@ -26,7 +26,7 @@ function Header(props) {
       <div className="header-body">
         <Navbar bg="light" expand="lg">
           <Container>
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/">
               <img src="/img/Logo.png" alt="logo"></img>
             </Navbar.Brand>
             <Navbar.Collapse id="basic-navbar-nav">
@@ -38,8 +38,8 @@ function Header(props) {
                   <NavDropdown.Item href="#action/3.1">
                     내 카드 조회
                   </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <Link to={"mypage/1"}>카드 이용 내역</Link>
+                  <NavDropdown.Item href="/mypage/1">
+                    카드 이용 내역
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3">
                     포인트 조회
