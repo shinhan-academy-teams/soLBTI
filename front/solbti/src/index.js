@@ -10,14 +10,17 @@ import { Container } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "home/Home";
 import Layout from "common/Layout";
+import Graphcomponent from "mypage/Graphcomponent";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Layout>
-      <App />
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/mypage/1" element={<Graphcomponent></Graphcomponent>} />
+      </Routes>
     </Layout>
   </BrowserRouter>
 );
-
 reportWebVitals();
