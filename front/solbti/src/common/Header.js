@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import { Nav, NavDropdown, Navbar, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function Header(props) {
   return (
@@ -37,7 +38,7 @@ function Header(props) {
                   <NavDropdown.Item href="#action/3.1">
                     내 카드 조회
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">
+                  <NavDropdown.Item href="/mypage/1">
                     카드 이용 내역
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3">
