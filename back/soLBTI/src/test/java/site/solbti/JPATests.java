@@ -15,12 +15,12 @@ import site.solbti.vo.PersonalCard;
 import java.util.List;
 
 @SpringBootTest
-class SoLbtiApplicationTests {
+class JPATests {
 	@Autowired
-	MembersRepository repo;
+	MembersRepository memRepo;
 
 	@Autowired
-	CommonCardRepository ccRepo;
+	CommonCardRepository commonCardRepo;
 
 	@Autowired
 	PersonalCardRepository personalCardRepo;
@@ -28,72 +28,50 @@ class SoLbtiApplicationTests {
 	@Autowired
 	PaymentHistoryRepository historyRepo;
 
-
-	@Test
-	void contextLoads() {
-	}
-	
-	@Test
-	void yseony() {
-		System.out.println("ㅎㅇ");
-	}
-
-	@Test
-	void dbtest() {
+	@Test // members 테이블 insert test
+	void testMember() {
 		Members member = Members.builder()
-				.memId("test").memPwd("test").memName("test").memEmail("test").memAddr("test").memPhone("test").build();
+				.memId("test_id1").memPwd("test_pwd1").memName("이진경").memEmail("test@naver.com").memAddr("test").memPhone("test").build();
 		Members member2 = Members.builder()
-				.memId("test2").memPwd("test2").memName("test2").memEmail("test2").memAddr("test2").memPhone("test2").build();
-		repo.save(member);
-		repo.save(member2);
+				.memId("test_id2").memPwd("test_pwd2").memName("김범기").memEmail("test@gmail.com").memAddr("test2").memPhone("test2").build();
+		memRepo.save(member);
+		memRepo.save(member2);
 	}
 
-	@Test
+	@Test // common_card 테이블 insert test
 	void testCard() {
 		CommonCard card = CommonCard.builder()
-				.cardName("국민카드").imgURL("test").build();
+				.cardName("국민카드").imgURL("test1").build();
 		CommonCard card2 = CommonCard.builder()
-				.cardName("현대카드").imgURL("test3").build();
+				.cardName("현대카드").imgURL("test2").build();
 		CommonCard card3 = CommonCard.builder()
-				.cardName("농협카드").imgURL("test12123123123123123123").build();
-		ccRepo.save(card);
-		ccRepo.save(card2);
-		ccRepo.save(card3);
+				.cardName("농협카드").imgURL("test3").build();
+		commonCardRepo.save(card);
+		commonCardRepo.save(card2);
+		commonCardRepo.save(card3);
 	}
 
 	@Test
-	void insertPersonalCard(){
-
-		CommonCard card = ccRepo.findById(20L).orElse(null);
-
+	void testPersonalCard(){ // personal_card 테이블 insert test
+		CommonCard card = commonCardRepo.findById(20L).orElse(null);
 		PersonalCard personalCard = PersonalCard.builder().card(card).build();
-//
-//		List<PersonalCard> mycards = repo.findById(1L).ifPresent(i->{
-//			i.getMyCards()
-//		});
-
-		repo.findById(1L).ifPresent(entity->{
+		memRepo.findById(1L).ifPresent(entity->{
 			List<PersonalCard> myCards = entity.getMyCards();
 			myCards.add(personalCard);
 			entity.setMyCards(myCards);
-
-			repo.save(entity);
+			memRepo.save(entity);
 		});
 
 	}
 
 	@Test
-	void historyTest(){
-
+	void historyTest(){ // payment_history 테이블 insert test
 		PersonalCard card = personalCardRepo.findById(10L).orElse(null);
-
 		PaymentHistory history = PaymentHistory.builder()
 				.price(1000L)
 				.personalCard(card)
 				.build();
-
 		historyRepo.save(history);
-
 	}
-
+	
 }
