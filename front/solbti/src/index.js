@@ -16,11 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Layout>
-      {/* <Routes> */}
-      {/* <Route path="/" element={<App />} />
-        <Route path="/mypage/1" element={<Graphcomponent></Graphcomponent>} /> */}
       <App />
-      {/* </Routes> */}
     </Layout>
   </BrowserRouter>
 );

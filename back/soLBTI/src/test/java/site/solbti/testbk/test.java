@@ -1,4 +1,4 @@
-package com.shinhan.soLBTI.testbk;
+package site.solbti.testbk;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
