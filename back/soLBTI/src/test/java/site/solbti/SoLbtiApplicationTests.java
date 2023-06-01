@@ -5,8 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import site.solbti.repository.CommonCardRepository;
 import site.solbti.repository.MembersRepository;
+import site.solbti.repository.PaymentHistoryRepository;
+import site.solbti.repository.PersonalCardRepository;
 import site.solbti.vo.CommonCard;
 import site.solbti.vo.Members;
+import site.solbti.vo.PaymentHistory;
+import site.solbti.vo.PersonalCard;
+
+import java.util.List;
 
 @SpringBootTest
 class SoLbtiApplicationTests {
@@ -15,6 +21,13 @@ class SoLbtiApplicationTests {
 
 	@Autowired
 	CommonCardRepository ccRepo;
+
+	@Autowired
+	PersonalCardRepository personalCardRepo;
+
+	@Autowired
+	PaymentHistoryRepository historyRepo;
+
 
 	@Test
 	void contextLoads() {
@@ -46,6 +59,41 @@ class SoLbtiApplicationTests {
 		ccRepo.save(card);
 		ccRepo.save(card2);
 		ccRepo.save(card3);
+	}
+
+	@Test
+	void insertPersonalCard(){
+
+		CommonCard card = ccRepo.findById(20L).orElse(null);
+
+		PersonalCard personalCard = PersonalCard.builder().card(card).build();
+//
+//		List<PersonalCard> mycards = repo.findById(1L).ifPresent(i->{
+//			i.getMyCards()
+//		});
+
+		repo.findById(1L).ifPresent(entity->{
+			List<PersonalCard> myCards = entity.getMyCards();
+			myCards.add(personalCard);
+			entity.setMyCards(myCards);
+
+			repo.save(entity);
+		});
+
+	}
+
+	@Test
+	void historyTest(){
+
+		PersonalCard card = personalCardRepo.findById(10L).orElse(null);
+
+		PaymentHistory history = PaymentHistory.builder()
+				.price(1000L)
+				.personalCard(card)
+				.build();
+
+		historyRepo.save(history);
+
 	}
 
 }

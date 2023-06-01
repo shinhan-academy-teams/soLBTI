@@ -6,6 +6,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,25 +26,30 @@ import java.sql.Timestamp;
 public class Members {
     @Id
     @GeneratedValue(
-            strategy=GenerationType.SEQUENCE,
-            generator="MEMBERS_SEQ_GEN"
+            strategy = GenerationType.SEQUENCE,
+            generator = "MEMBERS_SEQ_GEN"
     )
     private long memCode;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String memId;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String memPwd;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String memName;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String memEmail;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String memAddr;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String memPhone;
-    @Column(nullable=false)
+    @Column(nullable = false)
     @ColumnDefault("0.0")
     private double memPoint;
     @CreationTimestamp
     private Timestamp created;
+
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    List<PersonalCard> myCards;
 }
