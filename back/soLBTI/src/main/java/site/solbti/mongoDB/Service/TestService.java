@@ -1,9 +1,9 @@
-package com.shinhan.soLBTI.mongoDB.Service;
+package site.solbti.mongoDB.Service;
 
-import com.shinhan.soLBTI.mongoDB.repository.TestBenefitRepository;
-import com.shinhan.soLBTI.mongoDB.repository.TestRepository;
-import com.shinhan.soLBTI.mongoDB.vo.BenefitTestVO;
-import com.shinhan.soLBTI.mongoDB.vo.TestVO;
+import site.solbti.mongoDB.repository.TestBenefitRepository;
+import site.solbti.mongoDB.repository.TestRepository;
+import site.solbti.mongoDB.vo.BenefitTestVO;
+import site.solbti.mongoDB.vo.TestVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
