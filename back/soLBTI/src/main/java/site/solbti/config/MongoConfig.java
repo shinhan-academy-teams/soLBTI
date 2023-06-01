@@ -1,4 +1,4 @@
-package com.shinhan.soLBTI.config;
+package site.solbti.config;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;

@@ -1,9 +1,8 @@
-package com.shinhan.soLBTI.mongoDB.Controller;
+package site.solbti.mongoDB.Controller;
 
-import com.mongodb.client.MongoDatabase;
-import com.shinhan.soLBTI.mongoDB.Service.TestService;
-import com.shinhan.soLBTI.mongoDB.vo.BenefitTestVO;
-import com.shinhan.soLBTI.mongoDB.vo.TestVO;
+import site.solbti.mongoDB.Service.TestService;
+import site.solbti.mongoDB.vo.BenefitTestVO;
+import site.solbti.mongoDB.vo.TestVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
