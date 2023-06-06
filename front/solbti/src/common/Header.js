@@ -40,8 +40,8 @@ function Header(props) {
                   <NavDropdown.Item href="/mypage/2">
                     카드 이용 내역
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">
-                    포인트 조회
+                  <NavDropdown.Item href="/mypage/3">
+                    내 정보 관리
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.4">
                     실적 충족 현황
