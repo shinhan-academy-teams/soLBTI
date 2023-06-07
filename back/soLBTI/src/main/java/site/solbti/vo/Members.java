@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import site.solbti.vo.enums.MemberRole;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -52,4 +53,7 @@ public class Members {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     List<PersonalCard> myCards;
+
+    @Enumerated(EnumType.STRING)
+    MemberRole memberRole;
 }

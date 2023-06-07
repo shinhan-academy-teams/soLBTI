@@ -3,5 +3,8 @@ package site.solbti.repository;
 import org.springframework.data.repository.CrudRepository;
 import site.solbti.vo.Members;
 
+import java.util.Optional;
+
 public interface MembersRepository extends CrudRepository<Members, Long> {
+    Optional<Members> findByMemId(String aLong);
 }

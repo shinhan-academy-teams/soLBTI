@@ -67,7 +67,7 @@ class SoLbtiApplicationTests {
 		CommonCard card = ccRepo.findById(20L).orElse(null);
 
 		PersonalCard personalCard = PersonalCard.builder().card(card).build();
-//
+
 //		List<PersonalCard> mycards = repo.findById(1L).ifPresent(i->{
 //			i.getMyCards()
 //		});
@@ -79,7 +79,6 @@ class SoLbtiApplicationTests {
 
 			repo.save(entity);
 		});
-
 	}
 
 	@Test
@@ -93,7 +92,12 @@ class SoLbtiApplicationTests {
 				.build();
 
 		historyRepo.save(history);
-
 	}
 
+	@Test
+	void floatTest(){
+
+		System.out.println("1.1+0.3=1.4 ->"+(1.1+0.3==1.4));
+		System.out.println("1.0+0.5=1.5 ->"+(1.0+0.5==1.5));
+	}
 }
