@@ -27,4 +27,6 @@ public class CommonCard {
     private long commonCardCode;
     private String imgURL;
     private String cardName;
+    private String cardContent;
+    private String cardType;
 }
