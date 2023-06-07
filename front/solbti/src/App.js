@@ -7,6 +7,7 @@ import Login from "auth/Login";
 import Signup from "auth/Signup";
 import Graphcomponent from "mypage/Graphcomponent";
 import MoneyGraphComponent from "mypage/MoneyGraphComponent";
+import CardListHome from "componenet/CardListHome";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/mypage">
           <Route path="1" element={<Graphcomponent />} />
         </Route>
+        <Route path="/cardlist" element={<CardListHome />}></Route>
       </Routes>
     </div>
   );
