@@ -212,12 +212,3 @@ button {
 .Button:focus {
   box-shadow: 0 0 0 2px black;
 }
-
-.postmodal {
-  background: rgba(0, 0, 0, 0.25);
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 700px;
-  height: 450px;
-}

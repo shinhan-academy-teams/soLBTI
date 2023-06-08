@@ -1,6 +1,6 @@
 import React from "react";
 import DaumPostcode from "react-daum-postcode";
-import "./myinfo.css";
+import "./modal.css";
 
 function AddrComponent(props) {
   const complete = (data) => {

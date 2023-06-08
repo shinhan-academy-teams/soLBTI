@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import * as Form from "@radix-ui/react-form";
 import "./myinfo.css";
+import "./modal.css";
 import AddrComponent from "mypage/AddrComponent";
 
 function Myinfo(props) {
@@ -63,7 +64,9 @@ function Myinfo(props) {
                         onChange={handleInput}
                       />
                     </Form.Control>
-                    <button onClick={handleComplete}>우편번호 찾기</button>
+                    <button onClick={handleComplete}>
+                      {!popup ? "우편번호 찾기" : "닫기"}
+                    </button>
                     {popup && (
                       <AddrComponent
                         company={enroll_company}
@@ -87,7 +90,7 @@ function Myinfo(props) {
                         className="Input"
                         type="tel"
                         required
-                        placeholder={phone_num}
+                        value={phone_num}
                         pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}"
                       />
                     </Form.Control>
@@ -142,7 +145,7 @@ function Myinfo(props) {
 
                 <Form.Submit asChild>
                   <button className="Button" style={{ marginTop: 10 }}>
-                    Post question
+                    수정하기
                   </button>
                 </Form.Submit>
               </Form.Root>
