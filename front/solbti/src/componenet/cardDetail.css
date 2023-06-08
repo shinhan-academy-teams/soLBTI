@@ -1,0 +1,22 @@
+.inner-box {
+  background-color: aliceblue;
+  position: relative;
+  padding: 60px 150px;
+  border-radius: 12px;
+  margin: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-box2 {
+  background-color: rgb(233, 235, 237);
+  position: relative;
+  padding: 60px 150px;
+  border-radius: 12px;
+  margin: 50px;
+}
+
+.btn-join {
+  padding: 15px 30px;
+}
