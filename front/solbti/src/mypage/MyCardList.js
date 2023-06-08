@@ -41,7 +41,7 @@ function Card({ emoji, hueA, hueB }) {
       }),
       React.createElement(
         motion.div,
-        { className: "card", variants: cardVariants },
+        { className: "mycard", variants: cardVariants },
         React.createElement("img", {
           src: emoji,
           alt: "\uCE74\uB4DC\uC774\uBBF8\uC9C0",
