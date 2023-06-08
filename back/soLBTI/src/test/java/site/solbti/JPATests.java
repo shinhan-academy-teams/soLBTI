@@ -55,16 +55,8 @@ class JPATests {
 	void testPersonalCard(){ // personal_card 테이블 insert test
 		CommonCard card = commonCardRepo.findById(20L).orElse(null);
 		PersonalCard personalCard = PersonalCard.builder().card(card).build();
-<<<<<<< HEAD:back/soLBTI/src/test/java/site/solbti/SoLbtiApplicationTests.java
 
-//		List<PersonalCard> mycards = repo.findById(1L).ifPresent(i->{
-//			i.getMyCards()
-//		});
-
-		repo.findById(1L).ifPresent(entity->{
-=======
 		memRepo.findById(1L).ifPresent(entity->{
->>>>>>> 1347f9665e150df5f93e9c28f207e8076159efb0:back/soLBTI/src/test/java/site/solbti/JPATests.java
 			List<PersonalCard> myCards = entity.getMyCards();
 			myCards.add(personalCard);
 			entity.setMyCards(myCards);
@@ -81,8 +73,6 @@ class JPATests {
 				.build();
 		historyRepo.save(history);
 	}
-<<<<<<< HEAD:back/soLBTI/src/test/java/site/solbti/SoLbtiApplicationTests.java
-
 	@Test
 	void floatTest(){
 
@@ -90,7 +80,3 @@ class JPATests {
 		System.out.println("1.0+0.5=1.5 ->"+(1.0+0.5==1.5));
 	}
 }
-=======
-	
-}
->>>>>>> 1347f9665e150df5f93e9c28f207e8076159efb0:back/soLBTI/src/test/java/site/solbti/JPATests.java

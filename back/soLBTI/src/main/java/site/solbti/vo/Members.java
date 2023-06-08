@@ -2,6 +2,7 @@ package site.solbti.vo;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import site.solbti.vo.enums.MemberRole;
@@ -54,6 +55,6 @@ public class Members {
             fetch = FetchType.EAGER)
     List<PersonalCard> myCards;
 
-    @Enumerated(EnumType.STRING)
-    MemberRole memberRole;
+//    @Enumerated(EnumType.STRING)
+//    MemberRole memberRole;
 }
