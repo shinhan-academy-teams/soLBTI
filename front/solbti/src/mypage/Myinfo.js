@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import * as Accordion from "@radix-ui/react-accordion";
@@ -55,17 +54,11 @@ function Myinfo(props) {
   };
 
   const changePhone = (e) => {
-    setPhone_num({
-      ...phone_num,
-      [e.target.name]: e.target.value,
-    });
+    setPhone_num(e.target.value);
   };
 
   const changeEmail = (e) => {
-    setEmail({
-      ...email,
-      [email]: e.target.value,
-    });
+    setEmail(e.target.value);
   };
 
   const handleSubmit1 = (e) => {
@@ -86,7 +79,7 @@ function Myinfo(props) {
       },
     })
       .then((response) => {
-        console.log(response);
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -268,4 +261,3 @@ const AccordionContent = React.forwardRef(
 );
 
 export default Myinfo;
-

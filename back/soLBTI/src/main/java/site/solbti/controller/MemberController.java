@@ -23,14 +23,18 @@ public class MemberController {
     }
 
     @PutMapping  (value = "/modify.do")
-    public int updateMemInfo (Long memCode, String phone, String email, String addr) {
+    public Members updateMemInfo (Long memCode, String phone, String email, String addr) {
 //        System.out.println("id"+memCode);
 //        System.out.println("phone"+phone);
 //        System.out.println("email"+email);
 //        System.out.println("Addr"+addr);
-        //memRepo.findById(memCode).ifPresent();
+        Members members = memRepo.findById(memCode).orElse(null);
+        members.setMemAddr(addr);
+        members.setMemEmail(email);
+        members.setMemPhone(phone);
+        memRepo.save(members);
 
-        return 0;
+        return members;
     }
 
     @PostMapping(value = "/signup", consumes = "application/json")
