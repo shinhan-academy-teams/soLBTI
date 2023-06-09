@@ -20,7 +20,11 @@ function Myinfo(props) {
       params: { memCode: 21 },
     })
       .then((response) => {
-        setAddr(response.data.memAddr);
+        const Addr = response.data.memAddr;
+        setAddr(Addr);
+        setEnroll_company({
+          address: Addr,
+        });
         let phone = response.data.memPhone;
         phone = phone.slice(0, 3) + "-" + phone.slice(3); // "-" 추가
         phone = phone.slice(0, 8) + "-" + phone.slice(8); // "-" 추가
@@ -56,22 +60,36 @@ function Myinfo(props) {
     });
   };
 
+  const changeEmail = (e) => {
+    setEmail({
+      ...email,
+      [email]: e.target.value,
+    });
+  };
+
   const handleSubmit1 = (e) => {
     //default event막기 ->왜냐하면 form은 기본으로 action이 들어가 있어서 axios가 적용이 안되고
     //자기 페이지로만 돌아가고 데이터를 디비에 전달하지 못함.
     e.preventDefault();
-    console.log("안녕하세요 제출입니다");
-    console.log(phone_num);
-    // axios({
-    //   method: "post",
-    //   url: ``, //주소 형식과 맞춰줌
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    let phone = phone_num;
+    phone = phone.replace(/-/g, ""); // 모든 대시를 제거합니다
+
+    axios({
+      method: "put",
+      url: `/auth/modify.do`, //주소 형식과 맞춰줌
+      params: {
+        memCode: 21,
+        phone: phone,
+        email: email,
+        addr: enroll_company.address,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -165,6 +183,7 @@ function Myinfo(props) {
                         className="Input"
                         type="email"
                         required
+                        onChange={changeEmail}
                         placeholder={email}
                       />
                     </Form.Control>

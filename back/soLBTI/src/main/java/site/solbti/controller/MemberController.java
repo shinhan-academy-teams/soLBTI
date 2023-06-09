@@ -18,8 +18,19 @@ public class MemberController {
     MembersRepository memRepo;
 
     @GetMapping ("/modify.do")
-    public Members updateordelete (Long memCode) {
+    public Members findMemInfo (Long memCode) {
        return memRepo.findById(memCode).orElse(null);
+    }
+
+    @PutMapping  (value = "/modify.do")
+    public int updateMemInfo (Long memCode, String phone, String email, String addr) {
+//        System.out.println("id"+memCode);
+//        System.out.println("phone"+phone);
+//        System.out.println("email"+email);
+//        System.out.println("Addr"+addr);
+        //memRepo.findById(memCode).ifPresent();
+
+        return 0;
     }
 
     @PostMapping(value = "/signup", consumes = "application/json")
