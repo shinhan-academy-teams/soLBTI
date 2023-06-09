@@ -50,11 +50,10 @@ public class Members {
     @CreationTimestamp
     private Timestamp created;
 
-
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    List<PersonalCard> myCards;
+    private List<PersonalCard> myCards;
 
-//    @Enumerated(EnumType.STRING)
-//    MemberRole memberRole;
+    @Enumerated(EnumType.STRING)
+    private MemberRole mrole;
 }

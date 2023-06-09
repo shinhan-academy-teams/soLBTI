@@ -1,5 +1,6 @@
 package site.solbti;
 
+import oracle.jdbc.logging.annotations.Log;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +14,8 @@ import site.solbti.vo.PaymentHistory;
 import site.solbti.vo.PersonalCard;
 
 import java.util.List;
+import java.util.Optional;
+
 
 @SpringBootTest
 class JPATests {
@@ -73,6 +76,13 @@ class JPATests {
 				.build();
 		historyRepo.save(history);
 	}
+
+	@Test
+	public void securityTest1(){
+		Optional<Members> result = memRepo.findById(25L);
+		result.ifPresent(member-> System.out.println(member));
+	}
+
 	@Test
 	void floatTest(){
 
