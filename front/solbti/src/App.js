@@ -4,9 +4,13 @@ import Home from "home/Home";
 import Login from "auth/Login";
 import Signup from "auth/Signup";
 import Graphcomponent from "mypage/Graphcomponent";
+import CardListHome from "componenet/CardListHome";
 import MyCardList from "mypage/MyCardList";
 import Myinfo from "mypage/Myinfo";
-import CardListHome from "componenet/CardListHome";
+import CardDetail from "componenet/CardDetail";
+import JoinCard from "componenet/JoinCard";
+import MyPage from "mypage/MyPage";
+import MyCardDetail from "mypage/MyCardDetail";
 
 function App() {
   return (
@@ -18,11 +22,14 @@ function App() {
           <Route path="signup" element={<Signup />} />
         </Route>
         <Route path="/mypage">
+          <Route path="0" element={<MyPage />} />
           <Route path="cards" element={<MyCardList />} />
-          <Route path="analyze" element={<Graphcomponent />} />
+          <Route path="4" element={<MyCardDetail />} />
           <Route path="info" element={<Myinfo />} />
         </Route>
-        <Route path="/cardlist" element={<CardListHome />}></Route>
+        <Route path="/cardlist" element={<CardListHome />} />
+        <Route path="/cardlist/detail/:cno" element={<CardDetail />} />
+        <Route path="/cardlist/join/:cno" element={<JoinCard />} />
       </Routes>
     </div>
   );
