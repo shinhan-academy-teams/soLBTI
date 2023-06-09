@@ -31,16 +31,16 @@ function Header(props) {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link href="#home">카드 TOP10</Nav.Link>
-                <Nav.Link href="#link">검색</Nav.Link>
+                <Nav.Link href="/cardlist">전체</Nav.Link>
                 <Nav.Link href="#link">콘텐츠</Nav.Link>
                 <NavDropdown title="My" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="/mypage/1">
+                  <NavDropdown.Item href="/mypage/cards">
                     내 카드 조회
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/mypage/2">
+                  <NavDropdown.Item href="/mypage/analyze">
                     카드 이용 내역
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/mypage/3">
+                  <NavDropdown.Item href="/mypage/info">
                     내 정보 관리
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.4">

@@ -7,7 +7,8 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/joy": "^5.0.0-alpha.83",
-    "@mui/material": "^5.13.3",
+    "@mui/lab": "^5.0.0-alpha.133",
+    "@mui/material": "^5.13.4",
     "@mui/styled-engine-sc": "^5.12.0",
     "@nivo/core": "^0.83.0",
     "@nivo/line": "^0.83.0",
@@ -20,6 +21,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
+    "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.3",
     "framer-motion": "^10.12.16",
     "mdb-react-ui-kit": "^6.1.0",
@@ -55,5 +57,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:1190/"
 }

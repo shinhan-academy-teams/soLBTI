@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import classNames from "classnames";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
@@ -8,8 +9,28 @@ import "./modal.css";
 import AddrComponent from "mypage/AddrComponent";
 
 function Myinfo(props) {
-  const addr = "경기 양주시 화합로 777";
-  const phone_num = "010-4275-7579";
+  const [email, setEmail] = useState();
+  const [addr, setAddr] = useState();
+  const [phone_num, setPhone_num] = useState();
+
+  useEffect(() => {
+    axios({
+      url: "/auth/modify.do",
+      method: "get",
+      params: { memCode: 21 },
+    })
+      .then((response) => {
+        setAddr(response.data.memAddr);
+        let phone = response.data.memPhone;
+        phone = phone.slice(0, 3) + "-" + phone.slice(3); // "-" 추가
+        phone = phone.slice(0, 8) + "-" + phone.slice(8); // "-" 추가
+        setPhone_num(phone);
+        setEmail(response.data.memEmail);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const [enroll_company, setEnroll_company] = useState({
     address: "",
@@ -26,6 +47,31 @@ function Myinfo(props) {
 
   const handleComplete = (data) => {
     setPopup(!popup);
+  };
+
+  const changePhone = (e) => {
+    setPhone_num({
+      ...phone_num,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit1 = (e) => {
+    //default event막기 ->왜냐하면 form은 기본으로 action이 들어가 있어서 axios가 적용이 안되고
+    //자기 페이지로만 돌아가고 데이터를 디비에 전달하지 못함.
+    e.preventDefault();
+    console.log("안녕하세요 제출입니다");
+    console.log(phone_num);
+    // axios({
+    //   method: "post",
+    //   url: ``, //주소 형식과 맞춰줌
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
@@ -56,6 +102,7 @@ function Myinfo(props) {
                     <Form.Label className="FormLabel">집주소</Form.Label>
                     <Form.Control asChild>
                       <input
+                        style={{ width: "55%" }}
                         className="Input"
                         type="text"
                         readOnly
@@ -90,7 +137,8 @@ function Myinfo(props) {
                         className="Input"
                         type="tel"
                         required
-                        value={phone_num}
+                        placeholder={phone_num}
+                        onChange={changePhone}
                         pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}"
                       />
                     </Form.Control>
@@ -113,7 +161,12 @@ function Myinfo(props) {
                   >
                     <Form.Label className="FormLabel">Email</Form.Label>
                     <Form.Control asChild>
-                      <input className="Input" type="email" required />
+                      <input
+                        className="Input"
+                        type="email"
+                        required
+                        placeholder={email}
+                      />
                     </Form.Control>
                   </div>
                   <Form.Message className="FormMessage" match="valueMissing">
@@ -144,7 +197,11 @@ function Myinfo(props) {
                 </Form.Field> */}
 
                 <Form.Submit asChild>
-                  <button className="Button" style={{ marginTop: 10 }}>
+                  <button
+                    className="Button"
+                    style={{ marginTop: 10 }}
+                    onClick={handleSubmit1}
+                  >
                     수정하기
                   </button>
                 </Form.Submit>
