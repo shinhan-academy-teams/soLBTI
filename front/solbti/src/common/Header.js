@@ -1,8 +1,12 @@
 import { Button } from "@mui/material";
 import React from "react";
 import { Nav, NavDropdown, Navbar, Container } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 function Header(props) {
+  const locationNow = useLocation();
+  if (locationNow.pathname === "/welcome" || locationNow.pathname === "/")
+    return null;
   return (
     <div>
       <div className="header-top">
@@ -25,7 +29,7 @@ function Header(props) {
       <div className="header-body">
         <Navbar bg="light" expand="lg">
           <Container>
-            <Navbar.Brand href="/">
+            <Navbar.Brand href="/home">
               <img src="/img/Logo.png" alt="logo"></img>
             </Navbar.Brand>
             <Navbar.Collapse id="basic-navbar-nav">
@@ -44,7 +48,6 @@ function Header(props) {
                     카드 이용 내역
                   </NavDropdown.Item>
                   <NavDropdown.Item href="/mypage/info">
-
                     내 정보 관리
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.4">
