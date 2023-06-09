@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function JoinCard(props) {
   const { cno } = useParams();
@@ -10,6 +10,9 @@ function JoinCard(props) {
   const handleChange = (e) => {
     setCard({ ...card, [e.target.name]: e.target.value });
   };
+
+  const navigate = useNavigate();
+
   const handleInsert = (event) => {
     //default event막기 ->왜냐하면 form은 기본으로 action이 들어가 있어서 axios가 적용이 안되고
     //자기 페이지로만 돌아가고 데이터를 디비에 전달하지 못함.
@@ -135,9 +138,11 @@ function JoinCard(props) {
           </Form.Group>
 
           <div className="d-grid gap-1">
-            <Button variant="secondary" type="submit" onClick={handleInsert}>
-              카드 신청하기
-            </Button>
+            <Link to={"/cardlist/myinfocheck"}>
+              <Button variant="secondary" type="submit">
+                카드 신청하기
+              </Button>
+            </Link>
           </div>
         </Form>
       </Container>
