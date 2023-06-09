@@ -7,6 +7,8 @@ import Graphcomponent from "mypage/Graphcomponent";
 import MyCardList from "mypage/MyCardList";
 import Myinfo from "mypage/Myinfo";
 import CardListHome from "componenet/CardListHome";
+import MyCardList from "mypage/MyCardList";
+import Myinfo from "mypage/Myinfo";
 
 function App() {
   return (
@@ -18,9 +20,11 @@ function App() {
           <Route path="signup" element={<Signup />} />
         </Route>
         <Route path="/mypage">
+
           <Route path="cards" element={<MyCardList />} />
           <Route path="analyze" element={<Graphcomponent />} />
           <Route path="info" element={<Myinfo />} />
+
         </Route>
         <Route path="/cardlist" element={<CardListHome />}></Route>
       </Routes>
