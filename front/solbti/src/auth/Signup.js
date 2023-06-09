@@ -1,24 +1,32 @@
 import { Box, Button, Container, TextField } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
+import DaumPostcodeEmbed from "react-daum-postcode";
+import { useNavigate } from "react-router-dom";
 
 function Signup(props) {
+  const [postcode, setPostcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [detailAddress, setDetailAddress] = useState("");
+  const [extraAddress, setExtraAddress] = useState("");
+  const navi = useNavigate();
+
   const [member, setMember] = useState({
-    mem_id: "",
-    mem_pwd: "",
-    mem_name: "",
-    mem_email: "",
-    mem_addr: "",
-    mem_phone: "",
+    memId: "",
+    memPwd: "",
+    memName: "",
+    memEmail: "",
+    memAddr: "",
+    memPhone: "",
   });
 
   const [isValid, setIsValid] = useState({
-    mem_id: true,
-    mem_pwd: true,
-    mem_name: true,
-    mem_email: true,
-    mem_addr: true,
-    mem_phone: true,
+    memId: true,
+    memPwd: true,
+    memName: true,
+    memEmail: true,
+    memAddr: true,
+    memPhone: true,
   });
 
   const handleChange = (e) => {
@@ -28,47 +36,79 @@ function Signup(props) {
 
   const handleSubmit = () => {
     if (
-      member.mem_id === "" ||
-      member.mem_pwd === "" ||
-      member.mem_name === "" ||
-      member.mem_email === "" ||
-      member.mem_addr === "" ||
-      member.mem_phone === ""
+      member.memId === "" ||
+      member.memPwd === "" ||
+      member.memName === "" ||
+      member.memEmail === "" ||
+      member.memAddr === "" ||
+      member.memPhone === ""
     ) {
       // 유효성 검사 실패: 값이 비어 있음
       setIsValid({
-        mem_id: member.mem_id !== "",
-        mem_pwd: member.mem_pwd !== "",
-        mem_name: member.mem_name !== "",
-        mem_email: member.mem_email !== "",
-        mem_addr: member.mem_addr !== "",
-        mem_phone: member.mem_phone !== "",
+        memId: member.memId !== "",
+        memPwd: member.memPwd !== "",
+        memName: member.memName !== "",
+        memEmail: member.memEmail !== "",
+        memAddr: member.memAddr !== "",
+        memPhone: member.memPhone !== "",
       });
+      console.log("유효성 검사 실패");
       return;
     }
 
-    const handleAdd = (e) => {
-      axios({
-        url: "/auth/register",
-        method: "post",
-        data: member,
-      })
-        .then((responseData) => {
-          console.log(responseData.data);
-          // navi("/board/list");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
     // 유효성 검사 통과
     // 로그인 처리 로직 작성
+
+    axios({
+      url: "/auth/signup",
+      method: "post",
+      data: member,
+    })
+      .then((responseData) => {
+        console.log(responseData.data);
+        if (responseData.data == "signup success") {
+          navi("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleComplete = (data) => {
+    let fullAddress = data.address;
+    let extraAddress = "";
+
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
+
+    setMember((prevMember) => ({
+      ...prevMember,
+      memAddr: fullAddress,
+    }));
+
+    setIsValid((prevIsValid) => ({
+      ...prevIsValid,
+      memAddr: fullAddress !== "",
+    }));
   };
 
   return (
     <Container maxWidth="sm">
-      <p>회원가입페이지</p>
+      <p>회원가입 컴포넌트</p>
+      <p>{member.memId}</p>
+      <p>{member.memAddr}</p>
+      <p>{member.memEmail}</p>
+      <p>{member.memName}</p>
+      <p>{member.memPhone}</p>
+      <p>{member.memPwd}</p>
       <Box
         component="form"
         sx={{
@@ -80,21 +120,21 @@ function Signup(props) {
         <div>
           <TextField
             required
-            name="mem_id"
+            name="memId"
             label="ID"
-            error={!isValid.mem_id}
-            helperText={!isValid.mem_id ? "필수입니다." : ""}
+            error={!isValid.memId}
+            helperText={!isValid.memId ? "필수입니다." : ""}
             onChange={handleChange}
           />
         </div>
         <div>
           <TextField
             required
-            name="mem_pwd"
+            name="memPwd"
             label="비밀번호"
             type="password"
-            error={!isValid.mem_pwd}
-            helperText={!isValid.mem_pwd ? "필수입니다." : ""}
+            error={!isValid.memPwd}
+            helperText={!isValid.memPwd ? "필수입니다." : ""}
             onChange={handleChange}
           />
         </div>
@@ -109,32 +149,38 @@ function Signup(props) {
         <div>
           <TextField
             required
-            name="mem_name"
+            name="memName"
             label="이름"
-            error={!isValid.mem_name}
-            helperText={!isValid.mem_name ? "필수입니다." : ""}
+            error={!isValid.memName}
+            helperText={!isValid.memName ? "필수입니다." : ""}
             onChange={handleChange}
           />
         </div>
         <div>
           <TextField
             required
-            name="mem_email"
+            name="memEmail"
             label="e-mail"
             type="email"
-            error={!isValid.mem_email}
-            helperText={!isValid.mem_email ? "필수입니다." : ""}
+            error={!isValid.memEmail}
+            helperText={!isValid.memEmail ? "필수입니다." : ""}
             onChange={handleChange}
           />
+        </div>
+        <div>
+          {/* <TextField id="sample6_postcode" />
+          <Button onclick={sample6_execDaumPostcode} /> */}
+          <DaumPostcodeEmbed onComplete={handleComplete} {...props} />
+          <TextField aria-readonly value={member.memAddr} />
         </div>
         <div>
           {/*-표시 아직 안나옴 */}
           <TextField
             required
-            name="mem_phone"
+            name="memPhone"
             label="전화번호"
-            error={!isValid.mem_phone}
-            helperText={!isValid.mem_phone ? "필수입니다." : ""}
+            error={!isValid.memPhone}
+            helperText={!isValid.memPhone ? "필수입니다." : ""}
             onChange={handleChange}
           />
         </div>

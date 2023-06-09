@@ -43,3 +43,4 @@ public class PersonalCard {
     @ManyToOne(fetch = FetchType.LAZY)
     private CommonCard card;
 }
+
