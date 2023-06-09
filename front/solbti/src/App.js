@@ -11,6 +11,7 @@ import CardDetail from "componenet/CardDetail";
 import JoinCard from "componenet/JoinCard";
 import MyPage from "mypage/MyPage";
 import MyCardDetail from "mypage/MyCardDetail";
+import PaymentList from "mypage/PaymentList";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="cards" element={<MyCardList />} />
           <Route path="4" element={<MyCardDetail />} />
           <Route path="info" element={<Myinfo />} />
+          <Route path="analyze" element={<PaymentList />} />
         </Route>
         <Route path="/cardlist" element={<CardListHome />} />
         <Route path="/cardlist/detail/:cno" element={<CardDetail />} />

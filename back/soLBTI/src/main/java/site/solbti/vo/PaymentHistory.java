@@ -1,6 +1,7 @@
 package site.solbti.vo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import site.solbti.vo.enums.PaymentStatus;
@@ -37,6 +38,7 @@ public class PaymentHistory {
     private String storeCategory;
     private PaymentStatus paymentStatus;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personal_card")
     private PersonalCard personalCard;
