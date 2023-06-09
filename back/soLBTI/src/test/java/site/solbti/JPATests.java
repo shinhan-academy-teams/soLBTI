@@ -51,6 +51,7 @@ class JPATests {
 		commonCardRepo.save(card3);
 	}
 
+
 	@Test
 	void testPersonalCard(){ // personal_card 테이블 insert test
 		CommonCard card = commonCardRepo.findById(20L).orElse(null);
@@ -73,5 +74,18 @@ class JPATests {
 				.build();
 		historyRepo.save(history);
 	}
-	
+
+	@Test
+	void personalTest(){
+		PersonalCard card = PersonalCard.builder()
+				.serialNumber("a")
+				.cardCvc("121")
+				.firstName("JinGyeong")
+				.lastName("Lee")
+				.brand("shinhan")
+				.account("123-123")
+
+				.build();
+		personalCardRepo.save(card);
+	}
 }
