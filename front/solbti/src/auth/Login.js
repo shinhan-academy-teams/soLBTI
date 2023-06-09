@@ -1,9 +1,12 @@
 import { Box, Button, Container, TextField } from "@mui/material";
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login(props) {
-  const [member, setMember] = useState({ memberid: "", password: "" });
-  const [isValid, setIsValid] = useState({ memberid: true, password: true });
+  const [member, setMember] = useState({ memId: "", memPwd: "" });
+  const [isValid, setIsValid] = useState({ memId: true, memPwd: true });
+  const navi = useNavigate();
 
   const handleChange = (e) => {
     setMember({ ...member, [e.target.name]: e.target.value });
@@ -11,24 +14,36 @@ function Login(props) {
   };
 
   const handleSubmit = () => {
-    if (member.memberid === "" || member.password === "") {
+    if (member.memId === "" || member.memPwd === "") {
       // 유효성 검사 실패: 값이 비어 있음
       setIsValid({
-        memberid: member.memberid !== "",
-        password: member.password !== "",
+        memId: member.memId !== "",
+        memPwd: member.memPwd !== "",
       });
       return;
     }
 
     // 유효성 검사 통과
     // 로그인 처리 로직 작성
+    axios({
+      url: "/auth/login",
+      method: "post",
+      data: member,
+    })
+      .then((responseData) => {
+        console.log(responseData.data);
+        navi("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <Container maxWidth="sm">
-      <p>로그인페이지</p>
-      <p>{member.memberid}</p>
-      <p>{member.password}</p>
+      <p>로그인 컴포넌트</p>
+      <p>{member.memId}</p>
+      <p>{member.memPwd}</p>
       <Box
         component="form"
         sx={{
@@ -40,23 +55,23 @@ function Login(props) {
         <div>
           <TextField
             required
-            error={!isValid.memberid}
-            name="memberid"
+            name="memId"
             // className="outlined-required"
             label="ID"
-            helperText={!isValid.memberid ? "필수입니다." : ""}
+            error={!isValid.memId}
+            helperText={!isValid.memId ? "필수입니다." : ""}
             onChange={handleChange}
           />
         </div>
         <div>
           <TextField
             required
-            error={!isValid.password}
-            name="password"
+            error={!isValid.memPwd}
+            name="memPwd"
             // className="outlined-required"
             label="password"
             type="password"
-            helperText={!isValid.password ? "필수입니다." : ""}
+            helperText={!isValid.memPwd ? "필수입니다." : ""}
             onChange={handleChange}
           />
         </div>

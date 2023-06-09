@@ -37,13 +37,14 @@ function Header(props) {
                   <NavDropdown.Item href="/mypage/0">
                     마이페이지
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/mypage/1">
+                  <NavDropdown.Item href="/mypage/cards">
                     내 카드 조회
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/mypage/2">
+                  <NavDropdown.Item href="/mypage/analyze">
                     카드 이용 내역
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/mypage/3">
+                  <NavDropdown.Item href="/mypage/info">
+
                     내 정보 관리
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.4">

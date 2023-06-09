@@ -1,0 +1,10 @@
+.postmodal {
+  background: rgba(0, 0, 0, 0.25);
+  position: absolute;
+  left: 25%;
+  top: 25%;
+  height: 500px !important;
+  width: 500px !important;
+  padding: 7px;
+  z-index: 100;
+}
