@@ -1,9 +1,11 @@
 package site.solbti;
 
 import oracle.jdbc.logging.annotations.Log;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import site.solbti.controller.MemberController;
 import site.solbti.repository.CommonCardRepository;
 import site.solbti.repository.MembersRepository;
 import site.solbti.repository.PaymentHistoryRepository;
@@ -88,5 +90,14 @@ class JPATests {
 
 		System.out.println("1.1+0.3=1.4 ->"+(1.1+0.3==1.4));
 		System.out.println("1.0+0.5=1.5 ->"+(1.0+0.5==1.5));
+	}
+
+	@Test
+	void emailDupCheckTest(){
+		MemberController memberController = new MemberController();
+		boolean result1 =  memberController.isValidEmail("test11@gmail.com");
+		Assertions.assertThat(result1).isEqualTo(false);
+		boolean result2 =  memberController.isValidEmail("noData@gmail.com");
+		Assertions.assertThat(result2).isEqualTo(true);
 	}
 }

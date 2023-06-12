@@ -1,10 +1,10 @@
 package site.solbti.vo;
 
 
-import jakarta.persistence.*;
 import lombok.*;
 import site.solbti.vo.enums.PaymentStatus;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Getter

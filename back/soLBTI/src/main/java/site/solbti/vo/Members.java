@@ -1,12 +1,11 @@
 package site.solbti.vo;
 
-import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import site.solbti.vo.enums.MemberRole;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -32,17 +31,18 @@ public class Members {
             generator = "MEMBERS_SEQ_GEN"
     )
     private long memCode;
-    @Column(nullable = false)
+
+    @Column(nullable = false, unique = true)
     private String memId;
     @Column(nullable = false)
     private String memPwd;
     @Column(nullable = false)
     private String memName;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String memEmail;
     @Column(nullable = false)
     private String memAddr;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String memPhone;
     @Column(nullable = false)
     @ColumnDefault("0.0")

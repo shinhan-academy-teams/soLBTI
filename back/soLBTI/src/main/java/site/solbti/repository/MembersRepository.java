@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface MembersRepository extends CrudRepository<Members, Long> {
     Optional<Members> findByMemId(String memId);
+
+    Optional<Members> findByMemEmail(String email);
 }
