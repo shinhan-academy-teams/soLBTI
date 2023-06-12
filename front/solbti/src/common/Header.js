@@ -1,9 +1,22 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Nav, NavDropdown, Navbar, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 function Header(props) {
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "accessToken",
+    "memCode",
+  ]);
+
+  const [memCode, setmemCode] = useState(cookies.memCode);
+
+  const logout = () => {
+    removeCookie("memCode");
+    removeCookie("accessToken");
+    window.location.reload();
+  };
+
   return (
     <div>
       <div className="header-top">
@@ -12,12 +25,22 @@ function Header(props) {
           <Container>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="/auth/login">
-                  <Button color="inherit">로그인</Button>
-                </Nav.Link>
-                <Nav.Link href="/auth/signup">
-                  <Button color="inherit">회원가입</Button>
-                </Nav.Link>
+                {memCode ? (
+                  <Nav.Link>
+                    <Button color="inherit" onClick={logout}>
+                      로그아웃
+                    </Button>
+                  </Nav.Link>
+                ) : (
+                  <>
+                    <Nav.Link href="/auth/login">
+                      <Button color="inherit">로그인</Button>
+                    </Nav.Link>
+                    <Nav.Link href="/auth/signup">
+                      <Button color="inherit">회원가입</Button>
+                    </Nav.Link>
+                  </>
+                )}
               </Nav>
             </Navbar.Collapse>
           </Container>
