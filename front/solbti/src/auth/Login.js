@@ -1,12 +1,18 @@
 import { Box, Button, Container, TextField } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
 function Login(props) {
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "accessToken",
+    "memId",
+  ]);
+  const navi = useNavigate();
+
   const [member, setMember] = useState({ memId: "", memPwd: "" });
   const [isValid, setIsValid] = useState({ memId: true, memPwd: true });
-  const navi = useNavigate();
 
   const handleChange = (e) => {
     setMember({ ...member, [e.target.name]: e.target.value });
@@ -25,14 +31,25 @@ function Login(props) {
 
     // 유효성 검사 통과
     // 로그인 처리 로직 작성
+
     axios({
       url: "/auth/login",
       method: "post",
       data: member,
     })
       .then((responseData) => {
-        console.log(responseData.data);
-        navi("/");
+        if (responseData.data) {
+          // localStorage.setItem("accessToken", responseData.data.data.token);
+          // console.log(responseData.data);
+
+          setCookie("accessToken", responseData.data.data.token, { path: "/" });
+          setCookie("memCode", responseData.data.data.memCode, { path: "/" });
+          //setMemCode(responseData.data.data.memCode);
+
+          navi(-1);
+        } else {
+          alert("로그인 실패");
+        }
       })
       .catch((error) => {
         console.log(error);

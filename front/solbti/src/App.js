@@ -12,15 +12,24 @@ import JoinCard from "componenet/JoinCard";
 import MyPage from "mypage/MyPage";
 import MyCardDetail from "mypage/MyCardDetail";
 import PaymentList from "mypage/PaymentList";
+import JwtTokenTest from "auth/JwtTokenTest";
+import { CookiesProvider } from "react-cookie";
+import { useCookies } from "react-cookie";
 
 function App() {
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "accessToken",
+    "memId",
+  ]);
+
   return (
-    <div>
+    <CookiesProvider>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth">
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="test" element={<JwtTokenTest />} />
         </Route>
         <Route path="/mypage">
           <Route path="0" element={<MyPage />} />
@@ -33,7 +42,7 @@ function App() {
         <Route path="/cardlist/detail/:cno" element={<CardDetail />} />
         <Route path="/cardlist/join/:cno" element={<JoinCard />} />
       </Routes>
-    </div>
+    </CookiesProvider>
   );
 }
 

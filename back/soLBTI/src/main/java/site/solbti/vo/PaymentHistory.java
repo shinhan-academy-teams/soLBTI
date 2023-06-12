@@ -2,7 +2,7 @@ package site.solbti.vo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import site.solbti.vo.enums.PaymentStatus;
 

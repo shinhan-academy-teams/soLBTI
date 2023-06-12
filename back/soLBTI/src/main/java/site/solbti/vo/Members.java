@@ -1,9 +1,9 @@
 package site.solbti.vo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+
+import javax.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
+
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import site.solbti.vo.enums.MemberRole;
@@ -53,8 +53,8 @@ public class Members {
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    List<PersonalCard> myCards;
+    private List<PersonalCard> myCards;
 
-//    @Enumerated(EnumType.STRING)
-//    MemberRole memberRole;
+    @Enumerated(EnumType.STRING)
+    private MemberRole mrole;
 }
