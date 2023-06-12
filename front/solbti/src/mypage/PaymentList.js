@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Graphcomponent from "./Graphcomponent";
 
 function PaymentList(props) {
   let now = new Date();
@@ -60,6 +61,12 @@ function PaymentList(props) {
       <h2>
         {yyyy}년 {mm}월 총 결제금액: {totalpay}
       </h2>
+      <br />
+
+      <div>
+        <Graphcomponent yyyy={yyyy} mm={mm} />
+      </div>
+
       <br />
       <div style={{ width: "1500px", margin: "0 auto" }}>
         <table

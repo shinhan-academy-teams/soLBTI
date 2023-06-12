@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.*;
 //import site.solbti.security.MemberService;
 import site.solbti.repository.MembersRepository;
 import site.solbti.vo.Members;
+import site.solbti.vo.PersonalCard;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Log
@@ -16,6 +19,18 @@ public class MemberController {
 
     @Autowired
     MembersRepository memRepo;
+
+    @GetMapping("/mycardlist.do")
+    public List<PersonalCard> mycardSelect(Long id) {
+        List<PersonalCard> myCards = new ArrayList<>();
+        memRepo.findByMemCode(id).ifPresent( entity->{
+            if(!entity.getMyCards().isEmpty()){
+                myCards.addAll(entity.getMyCards());
+            }
+
+        });
+        return myCards;
+    }
 
     @GetMapping ("/modify.do")
     public Members findMemInfo (Long memCode) {

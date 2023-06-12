@@ -1,5 +1,6 @@
 package site.solbti.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -49,7 +50,6 @@ public class Members {
     private double memPoint;
     @CreationTimestamp
     private Timestamp created;
-
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
