@@ -1,4 +1,4 @@
-import { Box, Button, Container, TextField } from "@mui/material";
+import { Alert, Box, Button, Container, TextField } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
@@ -74,6 +74,28 @@ function Signup(props) {
         console.log(error);
       });
   };
+
+  const emailDupCheck = () => {
+    console.log(member.memEmail);
+    axios({
+      url: "/auth/isValidEmail",
+      method: "post",
+      data: member,
+    })
+      .then((responseData) => {
+        console.log(responseData.data);
+        if (responseData.data == true) {
+          alert("사용 가능한 이메일");
+        } else {
+          alert("중복된 email");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  //주소입력
   const handleComplete = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
@@ -166,6 +188,7 @@ function Signup(props) {
             helperText={!isValid.memEmail ? "필수입니다." : ""}
             onChange={handleChange}
           />
+          <Button onClick={emailDupCheck}>중복 확인</Button>
         </div>
         <div>
           {/* <TextField id="sample6_postcode" />

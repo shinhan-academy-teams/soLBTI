@@ -1,8 +1,11 @@
 package site.solbti;
 
+import oracle.jdbc.logging.annotations.Log;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import site.solbti.controller.MemberController;
 import site.solbti.repository.CommonCardRepository;
 import site.solbti.repository.MembersRepository;
 import site.solbti.repository.PaymentHistoryRepository;
@@ -13,6 +16,8 @@ import site.solbti.vo.PaymentHistory;
 import site.solbti.vo.PersonalCard;
 
 import java.util.List;
+import java.util.Optional;
+
 
 @SpringBootTest
 class JPATests {
@@ -76,17 +81,19 @@ class JPATests {
 	}
 
 	@Test
-	void personalTest(){
-		PersonalCard card = PersonalCard.builder()
-				.serialNumber("a")
-				.cardCvc("121")
-				.firstName("JinGyeong")
-				.lastName("Lee")
-				.brand("shinhan")
-				.account("123-123")
-
-				.build();
-		personalCardRepo.save(card);
-
+	public void securityTest1(){
+		Optional<Members> result = memRepo.findById(25L);
+		result.ifPresent(member-> System.out.println(member));
 	}
+
+
+	@Test
+	void emailDupCheckTest(){
+		MemberController memberController = new MemberController();
+		boolean result1 =  memberController.isValidEmail("test11@gmail.com");
+		Assertions.assertThat(result1).isEqualTo(false);
+		boolean result2 =  memberController.isValidEmail("noData@gmail.com");
+		Assertions.assertThat(result2).isEqualTo(true);
+	}
+
 }
