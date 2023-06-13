@@ -13,7 +13,7 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collation = "common_card")
+@Document("common_card")
 public class MongoCommonCard {
     @Id
     private Long commonCardCode;
