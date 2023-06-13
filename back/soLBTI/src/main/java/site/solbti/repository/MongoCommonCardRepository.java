@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import site.solbti.vo.MongoCommonCard;
 
 public interface MongoCommonCardRepository extends MongoRepository<MongoCommonCard,Long> {
-    public Document findByCommonCardCode(Long id);
+    public MongoCommonCard findByCommonCardCode(Long id);
 }

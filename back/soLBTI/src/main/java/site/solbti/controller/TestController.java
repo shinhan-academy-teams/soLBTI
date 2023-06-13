@@ -19,10 +19,6 @@ public class TestController {
     @GetMapping("/benefit/{cno}")
     public Document testReturnDocu(@PathVariable Long cno){
 
-        Document document = mongorepo.findByCommonCardCode(cno);
-
-        System.out.println(document);
-
-        return document;
+        return null;
     }
 }
