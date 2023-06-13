@@ -11,5 +11,4 @@ public class SoLbtiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SoLbtiApplication.class, args);
 	}
-
 }
