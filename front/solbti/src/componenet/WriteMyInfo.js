@@ -55,31 +55,22 @@ function WriteMyInfo(props) {
               controlId="formPlaintextPassword"
             >
               <Col sm>
-                <Form.Control
-                  type="text"
-                  placeholder="paymentdate"
-                  name="paymentdate"
-                />
+                <select name="paymentdate">
+                  {Array.from({ length: 31 }, (_, index) => (
+                    <option
+                      key={index + 1}
+                      value={index + 1}
+                      style={{ order: 31 - index }}
+                    >
+                      {index + 1}
+                    </option>
+                  ))}
+                </select>
               </Col>
             </Form.Group>
             비밀번호
             <div>
               <SecurityKeypad> </SecurityKeypad>
-
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextPassword"
-              >
-                <Col sm>
-                  <Form.Control
-                    type="text"
-                    placeholder="account"
-                    name="account"
-                    onChange={handleChange}
-                  />
-                </Col>
-              </Form.Group>
             </div>
             <br></br>
             계좌
