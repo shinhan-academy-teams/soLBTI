@@ -1,9 +1,9 @@
 package site.solbti.vo;
 
-import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Getter
@@ -33,6 +33,7 @@ public class PersonalCard {
     private String cardCvc;
     private String firstName;
     private String lastName;
+    private int password;
     @CreationTimestamp
     private Timestamp created;
     private Timestamp validated;
@@ -40,7 +41,7 @@ public class PersonalCard {
     private String brand;
     private String account;
     @JoinColumn(name = "common_card")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private CommonCard card;
 }
 

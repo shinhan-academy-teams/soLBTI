@@ -1,10 +1,9 @@
 package site.solbti.vo;
 
-
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
 import lombok.*;
 import site.solbti.vo.enums.PaymentStatus;
-
 import java.sql.Timestamp;
 
 @Getter
@@ -37,6 +36,7 @@ public class PaymentHistory {
     private String storeCategory;
     private PaymentStatus paymentStatus;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personal_card")
     private PersonalCard personalCard;

@@ -10,11 +10,20 @@ import CardDetail from "componenet/CardDetail";
 import JoinCard from "componenet/JoinCard";
 import MyPage from "mypage/MyPage";
 import MyCardDetail from "mypage/MyCardDetail";
+import PaymentList from "mypage/PaymentList";
+import JwtTokenTest from "auth/JwtTokenTest";
+import { CookiesProvider } from "react-cookie";
+import { useCookies } from "react-cookie";
 import QuizMain from "quiz/QuizMain";
 
 function App() {
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "accessToken",
+    "memId",
+  ]);
+
   return (
-    <div>
+    <CookiesProvider>
       <Routes>
         {/* main */}
         <Route path="/" element={<Navigate to="/welcome" replace />} />
@@ -24,6 +33,7 @@ function App() {
         <Route path="/auth">
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="test" element={<JwtTokenTest />} />
         </Route>
         {/* mypage */}
         <Route path="/mypage">
@@ -31,13 +41,14 @@ function App() {
           <Route path="cards" element={<MyCardList />} />
           <Route path="4" element={<MyCardDetail />} />
           <Route path="info" element={<Myinfo />} />
+          <Route path="analyze" element={<PaymentList />} />
         </Route>
         {/* card */}
         <Route path="/cardlist" element={<CardListHome />} />
         <Route path="/cardlist/detail/:cno" element={<CardDetail />} />
         <Route path="/cardlist/join/:cno" element={<JoinCard />} />
       </Routes>
-    </div>
+    </CookiesProvider>
   );
 }
 
