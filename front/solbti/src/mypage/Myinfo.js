@@ -7,17 +7,19 @@ import * as Form from "@radix-ui/react-form";
 import "./myinfo.css";
 import "./modal.css";
 import AddrComponent from "mypage/AddrComponent";
+import { useCookies } from "react-cookie";
 
 function Myinfo(props) {
   const [email, setEmail] = useState();
   const [addr, setAddr] = useState();
   const [phone_num, setPhone_num] = useState();
+  const [cookies] = useCookies(["memCode"]);
 
   useEffect(() => {
     axios({
       url: "/auth/modify.do",
       method: "get",
-      params: { memCode: 21 },
+      params: { memCode: cookies.memCode },
     })
       .then((response) => {
         const Addr = response.data.memAddr;

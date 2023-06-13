@@ -1,11 +1,9 @@
 package site.solbti.vo;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import lombok.*;
 import site.solbti.vo.enums.PaymentStatus;
-
 import java.sql.Timestamp;
 
 @Getter

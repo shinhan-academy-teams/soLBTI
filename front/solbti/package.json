@@ -67,5 +67,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:1190/"
+  "proxy": "http://192.168.0.94:1190/"
 }

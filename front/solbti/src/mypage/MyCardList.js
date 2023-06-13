@@ -2,6 +2,7 @@ import "./cardliststyles.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { useCookies } from "react-cookie";
 
 const cardVariants = {
   offscreen: {
@@ -59,11 +60,12 @@ function Card({ emoji, hueA, hueB }) {
 
 export default function MyCardList() {
   const [data, setData] = useState([]);
+  const [cookies] = useCookies(["memCode"]);
   useEffect(() => {
     axios({
       url: "/auth/mycardlist.do",
       method: "get",
-      params: { id: 28 },
+      params: { id: cookies.memCode },
     })
       .then((response) => {
         const newData = response.data.map((item, index) => [

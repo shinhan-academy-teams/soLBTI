@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 import Graphcomponent from "./Graphcomponent";
 
 function PaymentList(props) {
@@ -9,10 +10,30 @@ function PaymentList(props) {
   const [mm, setMm] = useState(now_month);
   const [yyyy, setYyyy] = useState(now_year);
 
-  const [totalpay, setTotalPay] = useState();
+  const [totalpay, setTotalPay] = useState(0);
   const [payList, setPayList] = useState([]);
 
+  const [cookies] = useCookies(["memCode"]);
+
   useEffect(() => {
+    // 카드 리스트 가져옴
+    axios({
+      url: "/auth/mycardlist.do",
+      method: "get",
+      params: { id: cookies.memCode },
+    })
+      .then((response) => {
+        let cardList = [];
+        cardList = response.data.map((item) => item.personalCardCode);
+        fetchPaymentList(cardList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    // 총 금액
     axios({
       url: "/payment/total",
       method: "get",
@@ -26,33 +47,26 @@ function PaymentList(props) {
       });
   }, []);
 
-  useEffect(() => {
-    axios({
-      url: "/payment/total",
-      method: "get",
-      params: { year: yyyy, month: mm },
-    })
-      .then((response) => {
-        setTotalPay(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [yyyy, mm]);
-
-  useEffect(() => {
+  const fetchPaymentList = (cardList) => {
+    //총 구매 내역
     axios({
       url: "/payment/list.do",
       method: "get",
-      params: { year: yyyy, month: mm },
+      params: { year: yyyy, month: mm, myCardCode: cardList.join(",") },
     })
       .then((response) => {
-        setPayList(response.data);
+        let sum = 0;
+        let list = response.data.sort((a, b) => {
+          sum += response.data.price;
+          return a.paymentDate.localeCompare(b.paymentDate);
+        });
+        setTotalPay(sum);
+        setPayList(list);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [yyyy, mm]);
+  };
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -63,9 +77,9 @@ function PaymentList(props) {
       </h2>
       <br />
 
-      <div>
-        <Graphcomponent yyyy={yyyy} mm={mm} />
-      </div>
+      <span>
+        <Graphcomponent />
+      </span>
 
       <br />
       <div style={{ width: "1500px", margin: "0 auto" }}>

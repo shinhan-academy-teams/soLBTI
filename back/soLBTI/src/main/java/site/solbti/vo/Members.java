@@ -1,13 +1,12 @@
 package site.solbti.vo;
 
-
 import javax.persistence.*;
-import lombok.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import site.solbti.vo.enums.MemberRole;
-
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -33,17 +32,18 @@ public class Members {
             generator = "MEMBERS_SEQ_GEN"
     )
     private long memCode;
-    @Column(nullable = false)
+
+    @Column(nullable = false, unique = true)
     private String memId;
     @Column(nullable = false)
     private String memPwd;
     @Column(nullable = false)
     private String memName;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String memEmail;
     @Column(nullable = false)
     private String memAddr;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String memPhone;
     @Column(nullable = false)
     @ColumnDefault("0.0")

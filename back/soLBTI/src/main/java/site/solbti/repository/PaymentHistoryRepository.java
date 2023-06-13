@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface PaymentHistoryRepository extends CrudRepository<PaymentHistory, Long> {
-    @Query("SELECT p FROM PaymentHistory p WHERE EXTRACT(YEAR FROM p.paymentDate) = ?1 AND EXTRACT(MONTH FROM p.paymentDate) = ?2 and p.personalCard =?3 ORDER BY p.paymentDate ASC")
-    List<PaymentHistory> findByPaymentDateAAndPersonalCardOrderByPaymentDateAsc(int year, int month, PersonalCard pc);
+    @Query("SELECT p FROM PaymentHistory p WHERE EXTRACT(YEAR FROM p.paymentDate) = ?1 AND EXTRACT(MONTH FROM p.paymentDate) = ?2 and p.personalCard =?3")
+    List<PaymentHistory> findByPaymentDateAAndPersonalCardOrderByPaymentDate(int year, int month, PersonalCard code);
 
     @Query("SELECT SUM(p.price) FROM PaymentHistory p WHERE EXTRACT(YEAR FROM p.paymentDate) = ?1 AND EXTRACT(MONTH FROM p.paymentDate) = ?2")
     Integer findByPaymentTotal(int year, int month);
