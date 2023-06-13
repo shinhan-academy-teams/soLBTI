@@ -7,6 +7,8 @@ import "./cardDetail.css";
 function CardDetail(props) {
   const { cno } = useParams();
   const [card, setCard] = useState({});
+  const [benefit, setBenefit] = useState({});
+  const [brand, setBrand] = useState({});
 
   useEffect(() => {
     axios({
@@ -20,6 +22,36 @@ function CardDetail(props) {
         console.log(error);
       });
   }, []);
+
+  useEffect(() => {
+    axios({
+      url: `/card/${cno}/benefit`,
+      method: "get",
+    })
+      .then((responseData) => {
+        setBenefit(responseData.data);
+        console.log(Object.keys(benefit));
+        console.log(Object.values(benefit));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios({
+      url: `/card/${cno}/brand`,
+      method: "get",
+    })
+      .then((responseData) => {
+        setBrand(responseData.data);
+        console.log(brand);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="card-detail">
       {/* 기본 카드 정보 */}
@@ -42,7 +74,9 @@ function CardDetail(props) {
       <article className="card-benefit">
         <div className="inner-box2">
           <h3>주요 혜택</h3>
-          <div className="benefit-area"></div>
+          <div className="benefit-area">
+            <p>{brand[0]}</p>
+          </div>
         </div>
       </article>
     </div>
