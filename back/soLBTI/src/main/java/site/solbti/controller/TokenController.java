@@ -37,32 +37,4 @@ public class TokenController {
         return tokenResponseNoData;
     }
 
-    //==Response DTO==//
-//    @Data
-//    @AllArgsConstructor
-//    static class TokenResponse<T> {
-//
-//        private String code;
-//        private String msg;
-//        private T data;
-//    }
-//
-//    //==Response DTO==//
-//    @Data
-//    @AllArgsConstructor
-//    static class TokenResponseNoData<T> {
-//
-//        private String code;
-//        private String msg;
-//    }
-//
-//    //==Response DTO==//
-//    @Data
-//    @AllArgsConstructor
-//    static class TokenDataResponse {
-//        private String token;
-//        private String subject;
-//        private String issued_time;
-//        private String expired_time;
-//    }
 }
