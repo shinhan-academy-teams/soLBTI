@@ -16,10 +16,10 @@ const shuffle = (nums) => {
   return nums;
 };
 
-const SecurityKeypad = () => {
+const SecurityKeypad = ({ password, setPassword }) => {
   let nums_init = Array.from({ length: 10 }, (v, k) => k);
   const [nums, setNums] = useState(nums_init);
-  const [password, setPassword] = useState("");
+
   const handlePasswordChange = useCallback(
     (num) => {
       if (password.length === PASSWORD_MAX_LENGTH) {
@@ -46,6 +46,7 @@ const SecurityKeypad = () => {
   const shuffleNums = useCallback(
     (num) => (e) => {
       // 0 ~ 9 섞어주기
+      e.preventDefault();
       let nums_random = Array.from({ length: 10 }, (v, k) => k); // 이 배열을 변경해 입력문자 변경 가능
       setNums(shuffle(nums_random));
       handlePasswordChange(num);
@@ -55,6 +56,7 @@ const SecurityKeypad = () => {
 
   const onClickSubmitButton = (e) => {
     // 비밀번호 제출
+    e.preventDefault();
     if (password.length === 0) {
       alert("비밀번호를 입력 후 눌러주세요!");
     } else {
