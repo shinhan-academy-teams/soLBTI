@@ -1,23 +1,18 @@
 package site.solbti.repository;
 
 import org.springframework.data.jpa.repository.Query;
+
 import org.springframework.data.repository.CrudRepository;
 import site.solbti.vo.PaymentHistory;
 import site.solbti.vo.PersonalCard;
 
 import java.util.List;
-import java.util.Map;
 
-
-import java.util.Optional;
 
 public interface PaymentHistoryRepository extends CrudRepository<PaymentHistory, Long> {
-    @Query("SELECT p FROM PaymentHistory p WHERE EXTRACT(YEAR FROM p.paymentDate) = ?1 AND EXTRACT(MONTH FROM p.paymentDate) = ?2 and p.personalCard =?3")
-    List<PaymentHistory> findByPaymentDateAAndPersonalCardOrderByPaymentDate(int year, int month, PersonalCard code);
+    @Query(value="SELECT * FROM Payment_history WHERE EXTRACT(YEAR FROM payment_date) = ?1 AND EXTRACT(MONTH FROM payment_date) = ?2 and personal_card =?3", nativeQuery = true)
+    List<PaymentHistory> findByPaymentDayAndPersonalCardCode(int year, int month, Long code);
 
-    @Query("SELECT SUM(p.price) FROM PaymentHistory p WHERE EXTRACT(YEAR FROM p.paymentDate) = ?1 AND EXTRACT(MONTH FROM p.paymentDate) = ?2")
-    Integer findByPaymentTotal(int year, int month);
-
-    @Query("select storeCategory, COUNT(*) AS count from PaymentHistory WHERE EXTRACT(YEAR FROM paymentDate) = ?1 AND EXTRACT(MONTH FROM paymentDate) = ?2 GROUP By storeCategory")
-    List<Object[]> payRankSelect(int year, int month);
+    @Query(value="select store_category, COUNT(*) AS count from Payment_history WHERE EXTRACT(YEAR FROM payment_date) = ?1 AND EXTRACT(MONTH FROM payment_date) = ?2 and personal_card =?3 GROUP By store_category", nativeQuery = true)
+    List<Object[]> payRankSelect(int year, int month, Long code);
 }
