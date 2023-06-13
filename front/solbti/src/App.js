@@ -51,8 +51,8 @@ function App() {
         <Route path="/cardlist/detail/:cno" element={<CardDetail />} />
         <Route path="/cardlist/myinfoauth" element={<MyInfoAuth />} />
         <Route path="/cardlist/join/:cno" element={<MyInfoCheck />} />
-        <Route path="/cardlist/writemyinfo" element={<WriteMyInfo />} />
-        <Route path="/cardlist/agree" element={<CardAgree />} />
+        <Route path="/cardlist/writemyinfo/:cno" element={<WriteMyInfo />} />
+        <Route path="/cardlist/agree" element={<CardAgree></CardAgree>} />
       </Routes>
     </CookiesProvider>
   );
