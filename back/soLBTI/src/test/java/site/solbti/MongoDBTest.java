@@ -12,15 +12,15 @@ public class MongoDBTest {
     @Autowired
     MongoCommonCardRepository mongoRepo;
 
-    //@Test
+    @Test
     public void dataTest() {
-        System.out.println(mongoRepo.findByCommonCardCode(1001l));
+        System.out.println(mongoRepo.findAll());
     }
 
-    @Test
+    //@Test
     public void insertTest() {
         MongoCommonCard mc = new MongoCommonCard();
-        mc.setCommonCardCode(1002L);
+        mc.setCommonCardCode(1003);
         mongoRepo.save(mc);
     }
 
