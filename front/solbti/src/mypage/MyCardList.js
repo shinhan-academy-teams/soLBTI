@@ -1,6 +1,8 @@
 import "./cardliststyles.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
+import { useCookies } from "react-cookie";
 
 const cardVariants = {
   offscreen: {
@@ -55,53 +57,32 @@ function Card({ emoji, hueA, hueB }) {
     )
   );
 }
-const food = [
-  [
-    "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAQDD6N.png",
-    340,
-    10,
-  ],
-  [
-    "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditPLAD43.png",
-    20,
-    40,
-  ],
-  [
-    "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditBJACQ6.png",
-    60,
-    90,
-  ],
-  [
-    "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAXJCLT.gif",
-    80,
-    120,
-  ],
-  [
-    "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAXGC75_VISA.gif",
-    100,
-    140,
-  ],
-  [
-    "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditBOAD16.png",
-    205,
-    245,
-  ],
-  [
-    "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreaditBMABZ2.png",
-    260,
-    290,
-  ],
-  [
-    "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreaditBJABE3.png",
-    290,
-    320,
-  ],
-];
 
 export default function MyCardList() {
+  const [data, setData] = useState([]);
+  const [cookies] = useCookies(["memCode"]);
+  useEffect(() => {
+    axios({
+      url: "/auth/mycardlist.do",
+      method: "get",
+      params: { id: cookies.memCode },
+    })
+      .then((response) => {
+        const newData = response.data.map((item, index) => [
+          item.card.imgURL,
+          (957 * index) % 350,
+          (index * 257) % 350,
+        ]);
+        setData(newData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div id="cardlist">
-      {food.map(([emoji, hueA, hueB]) => (
+      {data.map(([emoji, hueA, hueB]) => (
         <Card emoji={emoji} hueA={hueA} hueB={hueB} key={emoji} />
       ))}
     </div>
