@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function MyInfoCheck(props) {
   const [members, setMembers] = useState([]);
+  const { cno } = useParams();
 
   //   useEffect(() => {
   //     const requestOption = {
@@ -50,7 +51,7 @@ function MyInfoCheck(props) {
             </Col>
           </Form.Group>
           <div className="d-grid gap-1">
-            <Link to={"/cardlist/myinfoauth"}>
+            <Link to="/cardlist/myinfoauth" state={{ cno: cno }}>
               <Button variant="secondary" type="submit">
                 다음
               </Button>

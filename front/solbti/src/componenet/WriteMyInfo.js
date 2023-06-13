@@ -6,19 +6,26 @@ import SecurityKeypad from "componenet/SecurityKeypad";
 import axios from "axios";
 
 function WriteMyInfo(props) {
-  const [password, setPassword] = useState({});
+  const [password, setPassword] = useState("");
   const { cno } = useParams();
   const [card, setCard] = useState({});
+
   const handleChange = (e) => {
     e.preventDefault();
     setCard({ ...card, [e.target.name]: e.target.value });
     //default event막기 ->왜냐하면 form은 기본으로 action이 들어가 있어서 axios가 적용이 안되고
     //자기 페이지로만 돌아가고 데이터를 디비에 전달하지 못함.
+  };
+  const handlePass = () => {
+    setCard({ ...card, password });
+  };
 
+  const handleClick = (e) => {
+    e.preventDefault();
     const instance = axios.create({
       withCredentials: true,
     });
-
+    console.log("card", card);
     instance
       .post(`/cardlist/join.do/${cno}`, card)
       .then((response) => {
@@ -27,8 +34,8 @@ function WriteMyInfo(props) {
       .catch((err) => {
         console.log(err);
       });
-    setPassword({ ...password, [e.target.name]: e.target.value });
   };
+
   const SelectBox = () => {
     return (
       <select>
@@ -50,6 +57,7 @@ function WriteMyInfo(props) {
       </select>
     );
   };
+
   return (
     <>
       <div>
@@ -70,6 +78,7 @@ function WriteMyInfo(props) {
                   type="text"
                   placeholder="firstname"
                   name="firstname"
+                  onChange={handleChange}
                 />
               </Col>
             </Form.Group>
@@ -84,6 +93,7 @@ function WriteMyInfo(props) {
                   type="text"
                   placeholder="lastname"
                   name="lastname"
+                  onChange={handleChange}
                 />
               </Col>
             </Form.Group>
@@ -94,7 +104,7 @@ function WriteMyInfo(props) {
               controlId="formPlaintextPassword"
             >
               <Col sm>
-                <select name="paymentdate">
+                <select name="paymentdate" onChange={handleChange}>
                   {Array.from({ length: 31 }, (_, index) => (
                     <option
                       key={index + 1}
@@ -109,7 +119,11 @@ function WriteMyInfo(props) {
             </Form.Group>
             비밀번호
             <div>
-              <SecurityKeypad> </SecurityKeypad>
+              <SecurityKeypad
+                password={password}
+                setPassword={setPassword}
+              ></SecurityKeypad>
+              <Button onClick={handlePass}>pass확정</Button>
             </div>
             <br></br>
             계좌
@@ -123,20 +137,19 @@ function WriteMyInfo(props) {
                   type="text"
                   placeholder="account"
                   name="account"
+                  onChange={handleChange}
                 />
               </Col>
             </Form.Group>
             브랜드
             <br></br>
-            <SelectBox></SelectBox>
+            <SelectBox onChange={handleChange}></SelectBox>
             <br></br>
             <div className="d-grid gap-1">
-              <Link to={"/cardlist/agree"}>
-                <br></br>
-                <Button variant="secondary" type="submit">
-                  다음
-                </Button>
-              </Link>
+              <br></br>
+              <Button variant="secondary" onClick={handleClick}>
+                다음
+              </Button>
             </div>
           </Form>
         </Container>
