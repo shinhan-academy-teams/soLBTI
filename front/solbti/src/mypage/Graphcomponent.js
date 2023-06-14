@@ -4,59 +4,29 @@ import { ResponsivePie } from "@nivo/pie";
 
 function Graphcomponent(props) {
   const [Data, setData] = useState([]);
+
   useEffect(() => {
     axios({
       url: "/payment/payrank",
       method: "get",
-      params: { year: props.yyyy, month: props.mm },
+      params: {
+        year: props.yyyy,
+        month: props.mm,
+        cardlist: props.cardList.join(","),
+      },
     })
       .then((response) => {
-        response.data.map((item, index) =>
-          setData({
-            ...Data,
-            id: item[0],
-            value: item[1],
-            color: "hsl(66, 70%, 50%)",
-          })
-        );
+        const newData = response.data.map((item) => ({
+          id: item[0],
+          value: item[1],
+          color: "hsl(66, 70%, 50%)",
+        }));
+        setData((prevData) => [...prevData, ...newData]);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [props.yyyy, props.mm]);
-
-  // const Data = [
-  //   {
-  //     id: "커피",
-  //     label: "커피 2번이나 사주신 팀장님 가슴 웅장해진다",
-  //     value: 431,
-  //     color: "hsl(66, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "국밥",
-  //     label: "뜨끈한 국밥 든든하게 먹고 말지",
-  //     value: 231,
-  //     color: "hsl(233, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "초밥",
-  //     label: "초밥 먹고싶다",
-  //     value: 356,
-  //     color: "hsl(214, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "파스타",
-  //     label: "토마토 미트볼 파스타 먹고 싶다",
-  //     value: 280,
-  //     color: "hsl(346, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "치킨",
-  //     label: "바삭바삭하게 튀긴 핫 크리스피 치킨 먹고싶다",
-  //     value: 518,
-  //     color: "hsl(129, 70%, 50%)",
-  //   },
-  // ];
 
   const MyResponsivePie = ({ data /* see data tab */ }) => (
     <ResponsivePie
@@ -150,31 +120,6 @@ function Graphcomponent(props) {
           id: "lines",
         },
       ]}
-      // legends={[
-      //   {
-      //     anchor: "right",
-      //     direction: "column",
-      //     justify: false,
-      //     translateX: -520,
-      //     translateY: 30,
-      //     itemsSpacing: 0,
-      //     itemWidth: 100,
-      //     itemHeight: 18,
-      //     itemTextColor: "#999",
-      //     itemDirection: "left-to-right",
-      //     itemOpacity: 1,
-      //     symbolSize: 18,
-      //     symbolShape: "circle",
-      //     effects: [
-      //       {
-      //         on: "hover",
-      //         style: {
-      //           itemTextColor: "#000",
-      //         },
-      //       },
-      //     ],
-      //   },
-      // ]}
     />
   );
   return (

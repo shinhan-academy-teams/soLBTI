@@ -20,6 +20,6 @@ public class MongoCommonCard {
     @Id
     private ObjectId id;
     private Long commonCardCode;
-    private Map benefit;
-    private List brand;
+    private Map<String,String> benefit;
+    private List<List> brand;
 }

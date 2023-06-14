@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { Routes, Route } from "react-router-dom";
-import Graphcomponent from "mypage/Graphcomponent";
 
 function Layout(props) {
   return (
-    <div>
-      <Header></Header>
+    <div
+      style={{ background: "url(/img/hero-bg.png", backgroundSize: "cover" }}
+    >
+      <Header />
       <main>{props.children}</main>
       <Footer />
     </div>

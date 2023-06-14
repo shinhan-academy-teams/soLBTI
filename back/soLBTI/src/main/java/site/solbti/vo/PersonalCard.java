@@ -1,9 +1,11 @@
 package site.solbti.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Getter
@@ -21,7 +23,7 @@ import java.sql.Timestamp;
         initialValue=1,
         allocationSize=1
 )
-public class PersonalCard {
+public class PersonalCard implements Serializable {
 
     @Id
     @GeneratedValue(
@@ -40,6 +42,7 @@ public class PersonalCard {
     private Timestamp paymentDate;
     private String brand;
     private String account;
+
     @JoinColumn(name = "common_card")
     @ManyToOne(fetch = FetchType.EAGER)
     private CommonCard card;
