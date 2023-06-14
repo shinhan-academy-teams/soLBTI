@@ -12,7 +12,6 @@ import site.solbti.repository.MongoCommonCardRepository;
 @RestController
 @RequestMapping("/test")
 public class TestController {
-
     @Autowired
     MongoCommonCardRepository mongorepo;
 

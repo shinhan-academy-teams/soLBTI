@@ -102,7 +102,6 @@ function PaymentList(props) {
                 <td>{index + 1}</td>
                 <td>
                   {pay.paymentDate.substring(0, pay.paymentDate.indexOf("T"))}
-                  //
                   {pay.paymentDate.substring(
                     pay.paymentDate.indexOf("T") + 1,
                     pay.paymentDate.indexOf(".")
