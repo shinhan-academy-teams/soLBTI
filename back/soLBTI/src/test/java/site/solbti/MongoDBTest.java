@@ -2,6 +2,8 @@ package site.solbti;
 
 import net.bytebuddy.build.ToStringPlugin;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,6 +17,8 @@ import java.util.Map;
 
 @SpringBootTest
 public class MongoDBTest {
+
+    private static final Logger log = LoggerFactory.getLogger(MongoDBTest.class);
     @Autowired
     MongoCommonCardRepository mongoRepo;
 
@@ -41,14 +45,14 @@ public class MongoDBTest {
     }
 
     //@Test
-    public void insertTest() {
+    void insertTest() {
         MongoCommonCard mc = new MongoCommonCard();
         mc.setCommonCardCode(1001L);
         mongoRepo.save(mc);
     }
 
     @Test
-    public void select(){
+    void select(){
 
 
         MongoCommonCard card = mongoRepo.findByCommonCardCode(1001L);
@@ -56,5 +60,11 @@ public class MongoDBTest {
         System.out.println("brand : "+card.getBrand());
 
 
+    }
+
+    @Test
+    void mongoSelect1(){
+        List<MongoCommonCard> cardList = mongoRepo.findByBenefitCustum("생활");
+        log.info(cardList.toString());
     }
 }

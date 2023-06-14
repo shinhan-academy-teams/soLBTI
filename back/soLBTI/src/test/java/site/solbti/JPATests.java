@@ -3,6 +3,8 @@ package site.solbti;
 import oracle.jdbc.logging.annotations.Log;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import site.solbti.controller.MemberController;
@@ -21,6 +23,8 @@ import java.util.Optional;
 
 @SpringBootTest
 class JPATests {
+
+	private static final Logger log = LoggerFactory.getLogger(JPATests.class);
 	@Autowired
 	MembersRepository memRepo;
 
@@ -81,19 +85,23 @@ class JPATests {
 	}
 
 	@Test
-	public void securityTest1(){
+	void securityTest1(){
 		Optional<Members> result = memRepo.findById(25L);
 		result.ifPresent(member-> System.out.println(member));
 	}
 
 
 	@Test
-	void emailDupCheckTest(){
-//		MemberController memberController = new MemberController();
-//		boolean result1 =  memberController.isValidEmail("test11@gmail.com");
-//		Assertions.assertThat(result1).isEqualTo(false);
-//		boolean result2 =  memberController.isValidEmail("noData@gmail.com");
-//		Assertions.assertThat(result2).isEqualTo(true);
+	void findByCardNameTest(){
+		List<CommonCard> resultCardList = commonCardRepo.findByCardNameLike("Deep");
+		log.info(resultCardList.toString());
 	}
+
+	@Test
+	void findByCardNameConTest(){
+		List<CommonCard> resultCardList = commonCardRepo.findByCardNameContaining("Deep");
+		log.info(resultCardList.toString());
+	}
+
 
 }
