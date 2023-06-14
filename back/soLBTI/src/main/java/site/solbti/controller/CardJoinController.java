@@ -23,7 +23,9 @@ public class CardJoinController {
     public PersonalCard registerCard(@PathVariable  Long cardNo, @RequestBody  PersonalCard pCard ){
         System.out.println(pCard);
         System.out.println("cno"+cardNo);
+
         pCard.setCard(commonRepo.findById(cardNo).orElse(null));
+        System.out.println(pcard+"<<");
         PersonalCard card = personRepo.save(pCard);
 
 
