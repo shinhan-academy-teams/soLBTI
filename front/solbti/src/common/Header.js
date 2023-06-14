@@ -2,7 +2,17 @@ import { Button, TextField, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { Nav, NavDropdown, Navbar, Container } from "react-bootstrap";
 import { useCookies } from "react-cookie";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    info: {
+      main: "#374BAA",
+      contrastText: "white",
+    },
+  },
+});
 
 function Header(props) {
   const [cookies, setCookie, removeCookie] = useCookies([
@@ -21,40 +31,52 @@ function Header(props) {
   if (locationNow.pathname === "/welcome" || locationNow.pathname === "/")
     return null;
   return (
-    <div>
-      <div className="header-top">
-        {/* before login */}
-        <Navbar bg="light" expand="lg">
-          <Container>
+    <Grid
+      container
+      spacing={2}
+      justifyContent="space-between"
+      alignItems={"center"}
+    >
+      <Grid item xs={6} ml={20}>
+        <Link to={"/home"}>
+          <img src="/img/Logo.png" alt="logo" height={40}></img>
+        </Link>
+      </Grid>
+      <Grid item xs={4} ml={15}>
+        <Navbar>
+          <Container className="login-section">
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                {memCode ? (
-                  <Nav.Link>
-                    <Button color="inherit" onClick={logout}>
-                      로그아웃
-                    </Button>
-                  </Nav.Link>
-                ) : (
-                  <>
-                    <Nav.Link href="/auth/login">
-                      <Button color="inherit">로그인</Button>
+              <ThemeProvider theme={theme}>
+                <Nav className="me-auto">
+                  {memCode ? (
+                    <Nav.Link>
+                      <Button color="info" onClick={logout} variant="contained">
+                        로그아웃
+                      </Button>
                     </Nav.Link>
-                    <Nav.Link href="/auth/signup">
-                      <Button color="inherit">회원가입</Button>
-                    </Nav.Link>
-                  </>
-                )}
-              </Nav>
+                  ) : (
+                    <>
+                      <Nav.Link href="/auth/login">
+                        <Button color="info" variant="outlined">
+                          로그인
+                        </Button>
+                      </Nav.Link>
+                      <Nav.Link href="/auth/signup">
+                        <Button color="info" variant="outlined">
+                          회원가입
+                        </Button>
+                      </Nav.Link>
+                    </>
+                  )}
+                </Nav>
+              </ThemeProvider>
             </Navbar.Collapse>
           </Container>
         </Navbar>
-      </div>
-      <div className="header-body">
-        <Navbar bg="light" expand="lg">
+      </Grid>
+      <Grid>
+        <Navbar>
           <Container>
-            <Navbar.Brand href="/home">
-              <img src="/img/Logo.png" alt="logo"></img>
-            </Navbar.Brand>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link href="#home">카드 TOP10</Nav.Link>
@@ -81,8 +103,8 @@ function Header(props) {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 }
 
