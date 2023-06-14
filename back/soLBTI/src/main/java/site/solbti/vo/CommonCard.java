@@ -1,6 +1,6 @@
 package site.solbti.vo;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @Getter

@@ -1,12 +1,12 @@
 package site.solbti.vo;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import site.solbti.vo.enums.MemberRole;
-
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -32,17 +32,18 @@ public class Members {
             generator = "MEMBERS_SEQ_GEN"
     )
     private long memCode;
-    @Column(nullable = false)
+
+    @Column(nullable = false, unique = true)
     private String memId;
     @Column(nullable = false)
     private String memPwd;
     @Column(nullable = false)
     private String memName;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String memEmail;
     @Column(nullable = false)
     private String memAddr;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String memPhone;
     @Column(nullable = false)
     @ColumnDefault("0.0")
@@ -50,11 +51,10 @@ public class Members {
     @CreationTimestamp
     private Timestamp created;
 
-
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    List<PersonalCard> myCards;
+    private List<PersonalCard> myCards;
 
-//    @Enumerated(EnumType.STRING)
-//    MemberRole memberRole;
+    @Enumerated(EnumType.STRING)
+    private MemberRole mrole;
 }

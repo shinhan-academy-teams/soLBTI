@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import "mypage/keypad.css";
@@ -9,6 +9,7 @@ function WriteMyInfo(props) {
   const [password, setPassword] = useState("");
   const { cno } = useParams();
   const [card, setCard] = useState({});
+  const [brand, setBrand] = useState({});
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -36,9 +37,23 @@ function WriteMyInfo(props) {
       });
   };
 
-  const SelectBox = () => {
+  useEffect(() => {
+    axios({
+      url: `/card/${cno}/brand`,
+      method: "get",
+    })
+      .then((responseData) => {
+        setBrand(responseData.data);
+        console.log(brand);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const SelectBox = ({ onChange, name }) => {
     return (
-      <select>
+      <select name={name} onChange={onChange}>
         <option key="town" value="town">
           국내
         </option>
@@ -77,7 +92,7 @@ function WriteMyInfo(props) {
                 <Form.Control
                   type="text"
                   placeholder="firstname"
-                  name="firstname"
+                  name="firstName"
                   onChange={handleChange}
                 />
               </Col>
@@ -92,7 +107,7 @@ function WriteMyInfo(props) {
                 <Form.Control
                   type="text"
                   placeholder="lastname"
-                  name="lastname"
+                  name="lastName"
                   onChange={handleChange}
                 />
               </Col>
@@ -104,7 +119,7 @@ function WriteMyInfo(props) {
               controlId="formPlaintextPassword"
             >
               <Col sm>
-                <select name="paymentdate" onChange={handleChange}>
+                <select name="paymentDate" onChange={handleChange}>
                   {Array.from({ length: 31 }, (_, index) => (
                     <option
                       key={index + 1}
@@ -143,7 +158,10 @@ function WriteMyInfo(props) {
             </Form.Group>
             브랜드
             <br></br>
-            <SelectBox onChange={handleChange}></SelectBox>
+            <SelectBox onChange={handleChange} name="brand"></SelectBox>
+            <div className="benefit-area">
+              <p>{brand[0]}</p>
+            </div>
             <br></br>
             <div className="d-grid gap-1">
               <br></br>

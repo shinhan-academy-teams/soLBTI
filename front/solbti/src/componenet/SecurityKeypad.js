@@ -5,6 +5,7 @@ const PASSWORD_MAX_LENGTH = 4; // 비밀번호 입력길이 제한 설정
 
 const shuffle = (nums) => {
   // 배열 섞는 함수
+
   let num_length = nums.length;
   while (num_length) {
     console.log("here");
@@ -86,7 +87,7 @@ const SecurityKeypad = ({ password, setPassword }) => {
           },
           n
         );
-        return i == nums.length - 1
+        return i === nums.length - 1
           ? React.createElement(
               React.Fragment,
               null,
