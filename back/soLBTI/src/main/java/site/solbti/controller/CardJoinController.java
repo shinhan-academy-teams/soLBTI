@@ -7,6 +7,7 @@ import site.solbti.repository.MongoCommonCardRepository;
 import site.solbti.repository.PersonalCardRepository;
 import site.solbti.vo.PersonalCard;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -32,19 +33,21 @@ public class CardJoinController {
     MongoCommonCardRepository mongoCommonCardRepository;
 
     @PostMapping(value = "/join.do/{cardNo}", consumes = "application/json")
-    public PersonalCard registerCard(@PathVariable  Long cardNo, @RequestBody  PersonalCard pCard ){
+    public PersonalCard registerCard(@PathVariable  Long cardNo, @RequestBody  PersonalCard pCard ) throws NoSuchAlgorithmException {
 
+        SHA256 sha256 = new SHA256();
+        String cryptogram = sha256.encrypt(String.valueOf(pCard.getPassword()));
+
+        //validated
         LocalDate currentDate= LocalDate.now();
-
         LocalDate futureDate = currentDate.plusYears(5);
-
         int futureYear = futureDate.getYear();
         Month futureMonth = futureDate.getMonth();
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = futureDate.format(formatter)+" 00:00:00.000";
         Timestamp timestamp = Timestamp.valueOf(formattedDate);
         pCard.setValidated(timestamp);
+
         //cvc 랜덤하게 주기
         pCard.setCardCvc(Integer.toString(((int)Math.random()*900)+100));
 
@@ -69,6 +72,7 @@ public class CardJoinController {
         String brands = mongoCommonCardRepository.findByCommonCardCode(cardNo).getBrand().toString();
 
         pCard.setBrand(brands);
+        pCard.setPassword(cryptogram);
 
         pCard.setCard(commonRepo.findById(cardNo).orElse(null));
         PersonalCard card = personRepo.save(pCard);
