@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "mypage/keypad.css";
 import SecurityKeypad from "componenet/SecurityKeypad";
 import axios from "axios";
@@ -9,7 +9,7 @@ function WriteMyInfo(props) {
   const [password, setPassword] = useState("");
   const { cno } = useParams();
   const [card, setCard] = useState({});
-  const [brand, setBrand] = useState({});
+  const [brand, setBrand] = useState([]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -51,27 +51,21 @@ function WriteMyInfo(props) {
       });
   }, []);
 
-  const SelectBox = ({ onChange, name }) => {
-    return (
-      <select name={name} onChange={onChange}>
-        <option key="town" value="town">
-          국내
-        </option>
-        <option key="visa" value="visa">
-          visa
-        </option>
-        <option key="s&" value="s&">
-          s&
-        </option>
-        <option key="union pay" value="union pay">
-          union pay
-        </option>
-        <option key="마스터카드" value="마스터카드">
-          마스터카드
-        </option>
-      </select>
-    );
-  };
+  // const SelectBox = ({ onChange, name }) => {
+  //   return (
+  //     <select name={name} onChange={onChange}>
+  //       {brand.map((option, index) => {
+  //         return (
+  //           <>
+  //             <option key={index} value={option[0]}>
+  //               {option}
+  //             </option>
+  //           </>
+  //         );
+  //       })}
+  //     </select>
+  //   );
+  // };
 
   return (
     <>
@@ -158,10 +152,18 @@ function WriteMyInfo(props) {
             </Form.Group>
             브랜드
             <br></br>
-            <SelectBox onChange={handleChange} name="brand"></SelectBox>
-            <div className="benefit-area">
-              <p>{brand[0]}</p>
-            </div>
+            <select name="brand" onChange={handleChange}>
+              {brand.map((option, index) => {
+                return (
+                  <>
+                    <option key={index} value={option[0]}>
+                      {option[0]}
+                    </option>
+                  </>
+                );
+              })}
+            </select>
+            <div className="benefit-area"></div>
             <br></br>
             <div className="d-grid gap-1">
               <br></br>
