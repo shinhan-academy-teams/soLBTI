@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import "./cardDetail.css";
+import { Option, Table } from "@mui/joy";
+import { Select } from "@mui/material";
 
 function CardDetail(props) {
   const { cno } = useParams();
   const [card, setCard] = useState({});
   const [benefit, setBenefit] = useState({});
-  const [brand, setBrand] = useState({});
+  const [brands, setBrands] = useState([]);
 
   useEffect(() => {
     axios({
@@ -44,8 +46,7 @@ function CardDetail(props) {
       method: "get",
     })
       .then((responseData) => {
-        setBrand(responseData.data);
-        console.log(brand);
+        setBrands(responseData.data);
       })
       .catch((error) => {
         console.log(error);
@@ -70,12 +71,42 @@ function CardDetail(props) {
         </div>
       </article>
 
-      {/* 카드 혜택 */}
-      <article className="card-benefit">
+      <article>
         <div className="inner-box2">
           <h3>주요 혜택</h3>
+          <div className="benefit-area">{/* <p>{benefit}</p> */}</div>
+        </div>
+      </article>
+
+      {/* 카드 브란도 */}
+      <article className="card-benefit">
+        <div className="inner-box3">
+          <h3>연회비</h3>
           <div className="benefit-area">
-            <p>{brand[0]}</p>
+            <Table aria-label="basic table">
+              <thead>
+                <tr>
+                  <th>브랜드</th>
+                  <th>옵션</th>
+                  <th>기본</th>
+                  <th>서비스</th>
+                  <th>총연회비</th>
+                </tr>
+              </thead>
+              <tbody>
+                {brands.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{item[0]}</td>
+                      <td>{item[1]}</td>
+                      <td>{item[2]}</td>
+                      <td>{item[3]}</td>
+                      <td>{item[4]}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
           </div>
         </div>
       </article>
