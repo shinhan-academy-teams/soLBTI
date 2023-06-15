@@ -17,6 +17,13 @@
   margin: 50px;
 }
 
+.inner-box3 {
+  position: relative;
+  padding: 60px 150px;
+  border-radius: 12px;
+  margin: 50px;
+}
+
 .btn-join {
   padding: 15px 30px;
 }
