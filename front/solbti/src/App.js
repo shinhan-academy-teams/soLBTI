@@ -7,9 +7,12 @@ import CardListHome from "componenet/CardListHome";
 import MyCardList from "mypage/MyCardList";
 import Myinfo from "mypage/Myinfo";
 import CardDetail from "componenet/CardDetail";
-import JoinCard from "componenet/JoinCard";
 import MyPage from "mypage/MyPage";
 import MyCardDetail from "mypage/MyCardDetail";
+import CardAgree from "componenet/CardAgree";
+import WriteMyInfo from "componenet/WriteMyInfo";
+import MyInfoCheck from "componenet/MyInfoCheck";
+import MyInfoAuth from "componenet/MyInfoAuth";
 import JwtTokenTest from "auth/JwtTokenTest";
 import { CookiesProvider } from "react-cookie";
 import { useCookies } from "react-cookie";
@@ -46,7 +49,10 @@ function App() {
         {/* card */}
         <Route path="/cardlist" element={<CardListHome />} />
         <Route path="/cardlist/detail/:cno" element={<CardDetail />} />
-        <Route path="/cardlist/join/:cno" element={<JoinCard />} />
+        <Route path="/cardlist/myinfoauth" element={<MyInfoAuth />} />
+        <Route path="/cardlist/join/:cno" element={<MyInfoCheck />} />
+        <Route path="/cardlist/writemyinfo/:cno" element={<WriteMyInfo />} />
+        <Route path="/cardlist/agree" element={<CardAgree></CardAgree>} />
       </Routes>
     </CookiesProvider>
   );

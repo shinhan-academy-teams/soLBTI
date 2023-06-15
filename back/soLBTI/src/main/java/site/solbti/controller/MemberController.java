@@ -94,8 +94,20 @@ public class MemberController {
     @PostMapping(value = "/isValidEmail")
     public Boolean isValidEmail(@RequestBody Members member){
 
-        log.info(member.getMemEmail()+"가 중복이니?"+memRepo.findByMemEmail(member.getMemEmail()));
-
         return !memRepo.findByMemEmail(member.getMemEmail()).isPresent();
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/isValidPhone")
+    public Boolean isValidPhone(@RequestBody Members member){
+
+        return !memRepo.findByMemPhone(member.getMemPhone()).isPresent();
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/isValidId")
+    public Boolean isValidId(@RequestBody Members member){
+
+        return !memRepo.findByMemId(member.getMemId()).isPresent();
     }
 }

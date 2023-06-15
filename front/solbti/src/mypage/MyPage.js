@@ -1,6 +1,5 @@
 import React, { setFile, useState, useRef } from "react";
 import styles from "Mypage.css";
-import Graphcomponent from "./Graphcomponent";
 import RecommendCard from "./RecommendCard";
 
 function MyPage(props) {
@@ -57,11 +56,6 @@ function MyPage(props) {
         onChange={onChange}
         ref={fileInput}
       />
-
-      <div className="col-xs-8 col-sm-6">
-        <h2>{"member"}님의 이번달 소비 그래프</h2>
-        <Graphcomponent></Graphcomponent>
-      </div>
       <div className="col-4 col-sm-6">
         <h2>이번달 지출 내역을 통한 추천 카드</h2>
         <h2>지출금액: </h2>

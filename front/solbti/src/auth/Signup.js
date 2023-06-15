@@ -27,11 +27,19 @@ function Signup(props) {
     memEmail: true,
     memAddr: true,
     memPhone: true,
+    emailDup: true,
+    idDup: true,
+    phonNumDup: true,
   });
 
   const handleChange = (e) => {
     setMember({ ...member, [e.target.name]: e.target.value });
     setIsValid({ ...isValid, [e.target.name]: e.target.value !== "" });
+    if (e.target.name === "memEmail")
+      setIsValid({ ...isValid, emailDup: true });
+    if (e.target.name === "memId") setIsValid({ ...isValid, idDup: true });
+    if (e.target.name === "memPhone")
+      setIsValid({ ...isValid, phonNumDup: true });
   };
 
   const handleSubmit = () => {
@@ -52,7 +60,20 @@ function Signup(props) {
         memAddr: member.memAddr !== "",
         memPhone: member.memPhone !== "",
       });
-      console.log("유효성 검사 실패");
+      alert("모두 입력하세요");
+      return;
+    }
+    if (isValid.idDup === true) {
+      alert("Id 중복체크하세요");
+      return;
+    }
+    if (isValid.emailDup === true) {
+      alert("email 중복체크하세요");
+      return;
+    }
+
+    if (isValid.phonNumDup === true) {
+      alert("전화번호 중복체크하세요");
       return;
     }
 
@@ -75,8 +96,8 @@ function Signup(props) {
       });
   };
 
+  // 유효성 검사
   const emailDupCheck = () => {
-    console.log(member.memEmail);
     axios({
       url: "/auth/isValidEmail",
       method: "post",
@@ -86,8 +107,52 @@ function Signup(props) {
         console.log(responseData.data);
         if (responseData.data == true) {
           alert("사용 가능한 이메일");
+          setIsValid({ ...isValid, emailDup: false });
         } else {
           alert("중복된 email");
+          setIsValid({ ...isValid, emailDup: true });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const idDupCheck = () => {
+    axios({
+      url: "/auth/isValidId",
+      method: "post",
+      data: member,
+    })
+      .then((responseData) => {
+        console.log(responseData.data);
+        if (responseData.data == true) {
+          alert("사용 가능한 아이디");
+          setIsValid({ ...isValid, idDup: false });
+        } else {
+          alert("중복된 아이디");
+          setIsValid({ ...isValid, idDup: true });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const phoneDupCheck = () => {
+    axios({
+      url: "/auth/isValidPhone",
+      method: "post",
+      data: member,
+    })
+      .then((responseData) => {
+        console.log(responseData.data);
+        if (responseData.data == true) {
+          alert("사용 가능한 전화번호");
+          setIsValid({ ...isValid, phonNumDup: false });
+        } else {
+          alert("이미 가입된 전화번호가 있습니다.");
+          setIsValid({ ...isValid, phonNumDup: true });
         }
       })
       .catch((error) => {
@@ -124,13 +189,6 @@ function Signup(props) {
 
   return (
     <Container maxWidth="sm">
-      <p>회원가입 컴포넌트</p>
-      <p>{member.memId}</p>
-      <p>{member.memAddr}</p>
-      <p>{member.memEmail}</p>
-      <p>{member.memName}</p>
-      <p>{member.memPhone}</p>
-      <p>{member.memPwd}</p>
       <Box
         component="form"
         sx={{
@@ -148,6 +206,8 @@ function Signup(props) {
             helperText={!isValid.memId ? "필수입니다." : ""}
             onChange={handleChange}
           />
+          <Button onClick={idDupCheck}>중복 확인</Button>
+          <p>{isValid.idDup ? "아이디 중복여부 체크하세요" : ""}</p>
         </div>
         <div>
           <TextField
@@ -189,6 +249,7 @@ function Signup(props) {
             onChange={handleChange}
           />
           <Button onClick={emailDupCheck}>중복 확인</Button>
+          <p>{isValid.emailDup ? "이메일 중복여부 체크하세요" : ""}</p>
         </div>
         <div>
           {/* <TextField id="sample6_postcode" />
@@ -206,6 +267,8 @@ function Signup(props) {
             helperText={!isValid.memPhone ? "필수입니다." : ""}
             onChange={handleChange}
           />
+          <Button onClick={phoneDupCheck}>중복 확인</Button>
+          <p>{isValid.phonNumDup ? "전화번호 중복여부 체크하세요" : ""}</p>
         </div>
         <div>
           <Button variant="outlined" onClick={handleSubmit}>
