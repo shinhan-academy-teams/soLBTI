@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import "./cardDetail.css";
-import { Option, Table } from "@mui/joy";
-import { Select } from "@mui/material";
+import { Table } from "@mui/joy";
 
 function CardDetail(props) {
   const { cno } = useParams();
   const [card, setCard] = useState({});
   const [benefit, setBenefit] = useState({});
   const [brands, setBrands] = useState([]);
+  const [benefitArr, setBenefitArr] = useState([]);
 
   useEffect(() => {
     axios({
@@ -32,15 +32,24 @@ function CardDetail(props) {
     })
       .then((responseData) => {
         setBenefit(responseData.data);
-        console.log(Object.keys(benefit));
-        console.log(Object.values(benefit));
+
+        const benefitTitles = Object.keys(responseData.data);
+        console.log(benefitTitles);
+
+        const benefitDetails = Object.values(responseData.data);
+        console.log(benefitDetails);
+
+        for (let i = 0; i < benefitTitles.length; i++) {
+          setBenefitArr((prevBenefitArr) => [
+            ...prevBenefitArr,
+            [benefitTitles[i], benefitDetails[i]],
+          ]);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
 
-  useEffect(() => {
     axios({
       url: `/card/${cno}/brand`,
       method: "get",
@@ -52,6 +61,8 @@ function CardDetail(props) {
         console.log(error);
       });
   }, []);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="card-detail">
@@ -74,7 +85,20 @@ function CardDetail(props) {
       <article>
         <div className="inner-box2">
           <h3>주요 혜택</h3>
-          <div className="benefit-area">{/* <p>{benefit}</p> */}</div>
+          <div className="benefit-area">
+            <Table>
+              <tbody>
+                {benefitArr.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td style={{ width: "20%" }}>{item[0]}</td>
+                      <td>{item[1]}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </div>
         </div>
       </article>
 
