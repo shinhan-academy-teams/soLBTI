@@ -68,6 +68,7 @@ export default function MyCardList() {
       params: { id: cookies.memCode },
     })
       .then((response) => {
+        console.log(response.data);
         const newData = response.data.map((item, index) => [
           item.card.imgURL,
           (957 * index) % 350,

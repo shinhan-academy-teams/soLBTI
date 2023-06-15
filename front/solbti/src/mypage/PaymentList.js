@@ -15,6 +15,8 @@ function PaymentList(props) {
 
   const [cookies] = useCookies(["memCode"]);
 
+  const [cardList, setCardList] = useState([]);
+
   useEffect(() => {
     // 카드 리스트 가져옴
     axios({
@@ -23,43 +25,37 @@ function PaymentList(props) {
       params: { id: cookies.memCode },
     })
       .then((response) => {
-        let cardList = [];
-        cardList = response.data.map((item) => item.personalCardCode);
-        fetchPaymentList(cardList);
+        const cardlist = response.data.map((item) => item.personalCardCode);
+        setCardList(cardlist);
+        fetchPaymentList(cardlist);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  useEffect(() => {
-    // 총 금액
-    axios({
-      url: "/payment/total",
-      method: "get",
-      params: { year: yyyy, month: mm },
-    })
-      .then((response) => {
-        setTotalPay(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  const fetchPaymentList = (cardList) => {
+  const fetchPaymentList = (list) => {
     //총 구매 내역
+
     axios({
       url: "/payment/list.do",
       method: "get",
-      params: { year: yyyy, month: mm, myCardCode: cardList.join(",") },
+      params: {
+        year: yyyy,
+        month: mm,
+        cardlist: list.join(","),
+      },
     })
       .then((response) => {
         let sum = 0;
         let list = response.data.sort((a, b) => {
-          sum += response.data.price;
           return a.paymentDate.localeCompare(b.paymentDate);
         });
+        list.map((item) => {
+          // 총 구매 내역
+          sum += item.price;
+        });
+
         setTotalPay(sum);
         setPayList(list);
       })
@@ -68,19 +64,31 @@ function PaymentList(props) {
       });
   };
 
+  useEffect(() => {
+    if (yyyy && mm && cardList.length > 0) {
+      // yyyy와 mm 값이 존재하고 cardList 배열이 비어 있지 않을 때에만 실행
+      // 추가적인 로직 또는 Graphcomponent의 prop 설정 등을 수행
+      // 예시로는 Graphcomponent를 출력하는 부분을 넣었습니다.
+      // console.log("yyyy:", yyyy);
+      // console.log("mm:", mm);
+      // console.log("cardList:", cardList);
+    }
+  }, [yyyy, mm, cardList]);
+
   return (
     <div style={{ textAlign: "center" }}>
       <h1>결제 내역</h1>
       <h3>날짜 선택</h3>
       <h2>
-        {yyyy}년 {mm}월 총 결제금액: {totalpay}
+        {yyyy}년 {mm}월 총 결제금액: {totalpay.toLocaleString()} 원
       </h2>
       <br />
 
-      <span>
-        <Graphcomponent />
-      </span>
-
+      {yyyy && mm && cardList.length > 0 && (
+        <div>
+          <Graphcomponent yyyy={yyyy} mm={mm} cardList={cardList} />
+        </div>
+      )}
       <br />
       <div style={{ width: "1500px", margin: "0 auto" }}>
         <table
