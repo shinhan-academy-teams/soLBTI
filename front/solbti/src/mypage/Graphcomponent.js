@@ -21,12 +21,16 @@ function Graphcomponent(props) {
           value: item[1],
           color: "hsl(66, 70%, 50%)",
         }));
-        setData((prevData) => [...prevData, ...newData]);
+        let sortedData = [...newData];
+        sortedData.sort((a, b) => b.value - a.value);
+        setData(sortedData);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [props.yyyy, props.mm]);
+
+  useEffect(() => {}, [Data]);
 
   const MyResponsivePie = ({ data /* see data tab */ }) => (
     <ResponsivePie
