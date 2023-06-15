@@ -13,11 +13,11 @@ import CardAgree from "componenet/CardAgree";
 import WriteMyInfo from "componenet/WriteMyInfo";
 import MyInfoCheck from "componenet/MyInfoCheck";
 import MyInfoAuth from "componenet/MyInfoAuth";
-import PaymentList from "mypage/PaymentList";
 import JwtTokenTest from "auth/JwtTokenTest";
 import { CookiesProvider } from "react-cookie";
 import { useCookies } from "react-cookie";
 import QuizMain from "quiz/QuizMain";
+import PaymentApp from "mypage/PaymentApp";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies([
@@ -44,7 +44,7 @@ function App() {
           <Route path="cards" element={<MyCardList />} />
           <Route path="4" element={<MyCardDetail />} />
           <Route path="info" element={<Myinfo />} />
-          <Route path="analyze" element={<PaymentList />} />
+          <Route path="analyze" element={<PaymentApp />} />
         </Route>
         {/* card */}
         <Route path="/cardlist" element={<CardListHome />} />
