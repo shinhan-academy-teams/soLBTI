@@ -10,9 +10,9 @@ import java.util.List;
 
 
 public interface PaymentHistoryRepository extends CrudRepository<PaymentHistory, Long> {
-    @Query(value="SELECT * FROM Payment_history WHERE EXTRACT(YEAR FROM payment_date) = ?1 AND EXTRACT(MONTH FROM payment_date) = ?2 and personal_card =?3", nativeQuery = true)
-    List<PaymentHistory> findByPaymentDayAndPersonalCardCode(int year, int month, Long code);
+    @Query(value="SELECT * FROM Payment_history WHERE EXTRACT(YEAR FROM payment_date) = ?1 AND EXTRACT(MONTH FROM payment_date) = ?2 and personal_card in ?3", nativeQuery = true)
+    List<PaymentHistory> findByPaymentDayAndPersonalCardCode(int year, int month, Long[] code);
 
-    @Query(value="select store_category, COUNT(*) AS count from Payment_history WHERE EXTRACT(YEAR FROM payment_date) = ?1 AND EXTRACT(MONTH FROM payment_date) = ?2 and personal_card =?3 GROUP By store_category", nativeQuery = true)
-    List<Object[]> payRankSelect(int year, int month, Long code);
+    @Query(value="select store_category, COUNT(*) AS count from Payment_history WHERE EXTRACT(YEAR FROM payment_date) = ?1 AND EXTRACT(MONTH FROM payment_date) = ?2 and personal_card in ?3 GROUP By store_category", nativeQuery = true)
+    List<Object[]> payRankSelect(int year, int month, Long[] code);
 }

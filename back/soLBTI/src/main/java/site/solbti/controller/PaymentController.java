@@ -29,20 +29,17 @@ public class PaymentController {
     public List<PaymentHistory> monthSelectAll(Integer year, Integer month, Long[] cardlist){ //결제 목록
         List<PaymentHistory> paylist = new ArrayList<>();
 
-        for( Long c : cardlist){
-            System.out.println(c);
-           paylist.addAll( payRepo.findByPaymentDayAndPersonalCardCode(year, month, c));
-        }
+        paylist.addAll( payRepo.findByPaymentDayAndPersonalCardCode(year, month, cardlist));
+
         return paylist;
     }
 
     @GetMapping("/payrank")
     public  List<Object[]> payRankSelect(int year, int month,  Long[] cardlist) { //결제 목록에 그릴 그래프
         List<Object[]> rank = new ArrayList<>();
-        for( Long c : cardlist){
 
-            rank.addAll( payRepo.payRankSelect(year, month, c) );
-        }
+        rank.addAll( payRepo.payRankSelect(year, month, cardlist) );
+
         return rank;
     }
 
