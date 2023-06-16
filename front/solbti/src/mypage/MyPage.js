@@ -1,8 +1,24 @@
-import React, { setFile, useState, useRef } from "react";
+import React, { setFile, useState, useRef, useEffect } from "react";
 import styles from "Mypage.css";
-import RecommendCard from "./RecommendCard";
+import { Outlet } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 function MyPage(props) {
+  const [cookies] = useCookies(["memCode"]);
+  const [member, setMember] = useState([]);
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `/auth/member-info.do/${cookies.memCode}`,
+    })
+      .then((res) => {
+        setMember(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   const [image, setImage] = useState(
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
   );
@@ -30,7 +46,10 @@ function MyPage(props) {
   return (
     <div className="text-center">
       <button type="button" className="btn btn-dark btn-block">
-        since {"가입일 불러오기"}
+        since{" "}
+        {member.created
+          ? member.created.substring(0, member.created.indexOf("T"))
+          : " "}
       </button>
 
       <img
@@ -47,7 +66,7 @@ function MyPage(props) {
         }}
       />
       <span style={{ marginLeft: "20px" }}>나의 신한 포인트</span>
-      <span style={{ marginLeft: "20px" }}>10000</span>
+      <span style={{ marginLeft: "20px" }}>{member.memPoint}</span>
       <input
         type="file"
         style={{ display: "none" }}
@@ -56,11 +75,7 @@ function MyPage(props) {
         onChange={onChange}
         ref={fileInput}
       />
-      <div className="col-4 col-sm-6">
-        <h2>이번달 지출 내역을 통한 추천 카드</h2>
-        <h2>지출금액: </h2>
-        <RecommendCard></RecommendCard>
-      </div>
+      <Outlet />
     </div>
   );
 }

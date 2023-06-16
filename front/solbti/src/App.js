@@ -12,7 +12,6 @@ import MyCardDetail from "mypage/MyCardDetail";
 import CardAgree from "componenet/CardAgree";
 import WriteMyInfo from "componenet/WriteMyInfo";
 import MyInfoCheck from "componenet/MyInfoCheck";
-import MyInfoAuth from "componenet/MyInfoAuth";
 import JwtTokenTest from "auth/JwtTokenTest";
 import { CookiesProvider } from "react-cookie";
 import QuizMain from "quiz/QuizMain";
@@ -34,8 +33,7 @@ function App() {
           <Route path="test" element={<JwtTokenTest />} />
         </Route>
         {/* mypage */}
-        <Route path="/mypage">
-          <Route path="0" element={<MyPage />} />
+        <Route path="/mypage" element={<MyPage />}>
           <Route path="cards" element={<MyCardList />} />
           <Route path="4" element={<MyCardDetail />} />
           <Route path="info" element={<Myinfo />} />
@@ -44,7 +42,7 @@ function App() {
         {/* card */}
         <Route path="/cardlist" element={<CardListHome />} />
         <Route path="/cardlist/detail/:cno" element={<CardDetail />} />
-        <Route path="/cardlist/myinfoauth" element={<MyInfoAuth />} />
+        {/* join card */}
         <Route path="/cardlist/join/:cno" element={<MyInfoCheck />} />
         <Route path="/cardlist/writemyinfo/:cno" element={<WriteMyInfo />} />
         <Route path="/cardlist/agree" element={<CardAgree></CardAgree>} />
