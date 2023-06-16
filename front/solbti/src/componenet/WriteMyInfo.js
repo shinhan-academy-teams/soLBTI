@@ -4,6 +4,30 @@ import { useParams } from "react-router-dom";
 import "mypage/keypad.css";
 import SecurityKeypad from "componenet/SecurityKeypad";
 import axios from "axios";
+import styled from "styled-components";
+
+const Title = styled.div`
+  font-family: "GmarketSansMedium";
+  font-size: 2.5rem;
+  text-align: center;
+  color: #374baa;
+  margin-top: 1.9rem;
+`;
+
+const Content = styled.div`
+  font-family: "GmarketSansMedium";
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-align: center;
+  color: #444444;
+  margin-bottom: 4rem;
+`;
+
+const Label = styled.div`
+  font-family: "GmarketSansMedium";
+  font-size: 1rem;
+  color: #444444;
+`;
 
 function WriteMyInfo(props) {
   const [password, setPassword] = useState("");
@@ -51,32 +75,14 @@ function WriteMyInfo(props) {
       });
   }, []);
 
-  // const SelectBox = ({ onChange, name }) => {
-  //   return (
-  //     <select name={name} onChange={onChange}>
-  //       {brand.map((option, index) => {
-  //         return (
-  //           <>
-  //             <option key={index} value={option[0]}>
-  //               {option}
-  //             </option>
-  //           </>
-  //         );
-  //       })}
-  //     </select>
-  //   );
-  // };
-
   return (
     <>
       <div>
-        <h1>카드 신청</h1>
-        <h2>신청정보를 입력해주세요</h2>
+        <Title>카드 신청</Title>
+        <Content>신청정보를 입력해주세요</Content>
         <Container className="panel">
-          firstname, lastname, paymentdate, pwd(보안키패드 적용 + sha256)
-          ,account , brand 입력받기
           <Form>
-            성
+            <Label>영문 이름</Label>
             <Form.Group
               as={Row}
               className="mb-3"
@@ -91,7 +97,7 @@ function WriteMyInfo(props) {
                 />
               </Col>
             </Form.Group>
-            이름
+            <Label>영문 성</Label>
             <Form.Group
               as={Row}
               className="mb-3"
@@ -106,7 +112,7 @@ function WriteMyInfo(props) {
                 />
               </Col>
             </Form.Group>
-            결제일
+            <Label>결제일</Label>
             <Form.Group
               as={Row}
               className="mb-3"
@@ -126,7 +132,7 @@ function WriteMyInfo(props) {
                 </select>
               </Col>
             </Form.Group>
-            비밀번호
+            <Label>카드 비밀번호</Label>
             <div>
               <SecurityKeypad
                 password={password}
@@ -135,7 +141,7 @@ function WriteMyInfo(props) {
               <Button onClick={handlePass}>pass확정</Button>
             </div>
             <br></br>
-            계좌
+            <Label>연결 계좌</Label>
             <Form.Group
               as={Row}
               className="mb-3"
@@ -150,7 +156,7 @@ function WriteMyInfo(props) {
                 />
               </Col>
             </Form.Group>
-            브랜드
+            <Label>브랜드</Label>
             <br></br>
             <select name="brand" onChange={handleChange}>
               {brand.map((option, index) => {

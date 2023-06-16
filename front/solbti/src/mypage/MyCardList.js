@@ -3,6 +3,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useCookies } from "react-cookie";
+import styled from "styled-components";
+
+const Title = styled.div`
+  font-family: "GmarketSansMedium";
+  font-size: 2.5rem;
+  text-align: center;
+  color: #374baa;
+`;
 
 const cardVariants = {
   offscreen: {
@@ -24,11 +32,6 @@ function Card({ emoji, hueA, hueB }) {
   return React.createElement(
     React.Fragment,
     null,
-    React.createElement(
-      "h1",
-      { style: { textAlign: "center", margin: "0 auto" } },
-      "\uB0B4 \uCE74\uB4DC \uC870\uD68C"
-    ),
     React.createElement(
       motion.div,
       {
@@ -82,10 +85,14 @@ export default function MyCardList() {
   }, []);
 
   return (
-    <div id="cardlist">
-      {data.map(([emoji, hueA, hueB]) => (
-        <Card emoji={emoji} hueA={hueA} hueB={hueB} key={emoji} />
-      ))}
-    </div>
+    <>
+      <Title>내 카드 조회</Title>
+      <div id="cardlist">
+        {data.length === 0 && "사용 중인 카드가 없습니다."}
+        {data.map(([emoji, hueA, hueB]) => (
+          <Card emoji={emoji} hueA={hueA} hueB={hueB} key={emoji} />
+        ))}
+      </div>
+    </>
   );
 }
