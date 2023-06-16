@@ -15,16 +15,11 @@ import MyInfoCheck from "componenet/MyInfoCheck";
 import MyInfoAuth from "componenet/MyInfoAuth";
 import JwtTokenTest from "auth/JwtTokenTest";
 import { CookiesProvider } from "react-cookie";
-import { useCookies } from "react-cookie";
 import QuizMain from "quiz/QuizMain";
 import PaymentApp from "mypage/PaymentApp";
+import CardChart from "componenet/CardChart";
 
 function App() {
-  const [cookies, setCookie, removeCookie] = useCookies([
-    "accessToken",
-    "memId",
-  ]);
-
   return (
     <CookiesProvider>
       <Routes>
@@ -53,6 +48,8 @@ function App() {
         <Route path="/cardlist/join/:cno" element={<MyInfoCheck />} />
         <Route path="/cardlist/writemyinfo/:cno" element={<WriteMyInfo />} />
         <Route path="/cardlist/agree" element={<CardAgree></CardAgree>} />
+        {/* card chart */}
+        <Route path="/chart" element={<CardChart />} />
       </Routes>
     </CookiesProvider>
   );
