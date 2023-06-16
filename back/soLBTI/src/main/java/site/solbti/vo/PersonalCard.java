@@ -35,7 +35,7 @@ public class PersonalCard implements Serializable {
     private String cardCvc;
     private String firstName;
     private String lastName;
-    private int password;
+    private String password;
     @CreationTimestamp
     private Timestamp created;
     private Timestamp validated;

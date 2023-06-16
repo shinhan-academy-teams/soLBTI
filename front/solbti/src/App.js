@@ -18,6 +18,9 @@ import { CookiesProvider } from "react-cookie";
 import { useCookies } from "react-cookie";
 import QuizMain from "quiz/QuizMain";
 import PaymentApp from "mypage/PaymentApp";
+import ContentsApp from "comtents/ContentsApp";
+import Adminpage from "admin/Adminpage";
+import PaymentManageComponent from "admin/PaymentManageComponent";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies([
@@ -53,6 +56,13 @@ function App() {
         <Route path="/cardlist/join/:cno" element={<MyInfoCheck />} />
         <Route path="/cardlist/writemyinfo/:cno" element={<WriteMyInfo />} />
         <Route path="/cardlist/agree" element={<CardAgree></CardAgree>} />
+        {/* contents */}
+        <Route path="/contents" element={<ContentsApp />}></Route>
+        {/* admin */}
+        <Route path="/admin">
+          <Route path="" element={<Adminpage />} />
+          <Route path="register" element={<PaymentManageComponent />} />
+        </Route>
       </Routes>
     </CookiesProvider>
   );
