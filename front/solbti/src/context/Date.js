@@ -19,7 +19,7 @@ export const PayProvider = (props) => {
   useEffect(() => {
     // 카드 리스트 가져옴
     axios({
-      url: "/auth/mycardlist.do",
+      url: "/api/auth/mycardlist.do",
       method: "get",
       params: { id: cookies.memCode },
     })
@@ -37,7 +37,7 @@ export const PayProvider = (props) => {
     //총 구매 내역
 
     axios({
-      url: "/payment/list.do",
+      url: "/api/payment/list.do",
       method: "get",
       params: {
         year: y,

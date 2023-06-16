@@ -99,7 +99,7 @@ function Signup(props) {
   // 유효성 검사
   const emailDupCheck = () => {
     axios({
-      url: "/auth/isValidEmail",
+      url: "/api/auth/isValidEmail",
       method: "post",
       data: member,
     })
@@ -120,7 +120,7 @@ function Signup(props) {
 
   const idDupCheck = () => {
     axios({
-      url: "/auth/isValidId",
+      url: "/api/auth/isValidId",
       method: "post",
       data: member,
     })
@@ -141,7 +141,7 @@ function Signup(props) {
 
   const phoneDupCheck = () => {
     axios({
-      url: "/auth/isValidPhone",
+      url: "/api/auth/isValidPhone",
       method: "post",
       data: member,
     })

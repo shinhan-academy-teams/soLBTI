@@ -33,7 +33,7 @@ function Login(props) {
     // 로그인 처리 로직 작성
 
     axios({
-      url: "/auth/login",
+      url: "/api/auth/login",
       method: "post",
       data: member,
     })

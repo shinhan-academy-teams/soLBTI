@@ -12,7 +12,7 @@ function CardDetail(props) {
 
   useEffect(() => {
     axios({
-      url: `/card-detail.do/${cno}`,
+      url: `/api/card-detail.do/${cno}`,
       method: "get",
     })
       .then((responseData) => {
@@ -25,7 +25,7 @@ function CardDetail(props) {
 
   useEffect(() => {
     axios({
-      url: `/card/${cno}/benefit`,
+      url: `/api/card/${cno}/benefit`,
       method: "get",
     })
       .then((responseData) => {
@@ -40,7 +40,7 @@ function CardDetail(props) {
 
   useEffect(() => {
     axios({
-      url: `/card/${cno}/brand`,
+      url: `/api/card/${cno}/brand`,
       method: "get",
     })
       .then((responseData) => {

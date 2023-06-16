@@ -63,7 +63,7 @@ export default function MyCardList() {
   const [cookies] = useCookies(["memCode"]);
   useEffect(() => {
     axios({
-      url: "/auth/mycardlist.do",
+      url: "/api/auth/mycardlist.do",
       method: "get",
       params: { id: cookies.memCode },
     })

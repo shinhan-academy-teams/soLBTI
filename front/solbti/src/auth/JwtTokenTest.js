@@ -7,7 +7,7 @@ function JwtTokenTest(props) {
     const accessToken = localStorage.getItem("accessToken");
 
     axios({
-      url: "/checktoken",
+      url: "/api/checktoken",
       method: "get",
       headers: { Authorization: `Bearer ${accessToken}` },
       data: accessToken,
@@ -22,7 +22,7 @@ function JwtTokenTest(props) {
 
   const fakeTokenSubmit = () => {
     axios({
-      url: "/checktoken",
+      url: "/api/checktoken",
       method: "get",
       headers: {
         Authorization: `Bearer fakeTokenasdfasdfasdfasdfasdfasdfasdf}`,

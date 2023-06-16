@@ -7,7 +7,7 @@ function Graphcomponent(props) {
 
   useEffect(() => {
     axios({
-      url: "/payment/payrank",
+      url: "/api/payment/payrank",
       method: "get",
       params: {
         year: props.yyyy,

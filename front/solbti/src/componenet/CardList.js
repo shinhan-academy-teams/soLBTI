@@ -23,9 +23,9 @@ function CardList(props) {
 
   const searchSubmit = () => {
     if (searchCategory == "cardName") {
-      url = "/card/search/";
+      url = "/api/card/search/";
     } else if (searchCategory == "cardBenefit") {
-      url = "/card/searchByBenefit/";
+      url = "/api/card/searchByBenefit/";
     }
 
     axios({ method: "get", url: url + search })
@@ -38,9 +38,9 @@ function CardList(props) {
   };
 
   if (option === "credit") {
-    url = "/credit-card.do";
+    url = "/api/credit-card.do";
   } else if (option === "debit") {
-    url = "/debit-card.do";
+    url = "/api/debit-card.do";
   }
   useEffect(() => {
     axios({

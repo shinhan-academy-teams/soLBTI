@@ -17,7 +17,7 @@ function JoinCard(props) {
 
     axios({
       method: "post",
-      url: `/cardlist/join.do/${cno}`, //주소 형식과 맞춰줌
+      url: `/api/cardlist/join.do/${cno}`, //주소 형식과 맞춰줌
       data: card,
     })
       .then((response) => {
