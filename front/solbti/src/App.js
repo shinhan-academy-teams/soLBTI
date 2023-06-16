@@ -16,7 +16,10 @@ import JwtTokenTest from "auth/JwtTokenTest";
 import { CookiesProvider } from "react-cookie";
 import QuizMain from "quiz/QuizMain";
 import PaymentApp from "mypage/PaymentApp";
+import PaymentMethod from "mypage/PaymentMethod";
+import SendSms from "sms/SendSms";
 import CardChart from "componenet/CardChart";
+
 
 function App() {
   return (
@@ -45,7 +48,9 @@ function App() {
         {/* join card */}
         <Route path="/cardlist/join/:cno" element={<MyInfoCheck />} />
         <Route path="/cardlist/writemyinfo/:cno" element={<WriteMyInfo />} />
-        <Route path="/cardlist/agree" element={<CardAgree></CardAgree>} />
+        <Route path="/cardlist/paymentMethod" element={<PaymentMethod />} />
+        <Route path="/cardlist/agree" element={<CardAgree></CardAgree>} />                       
+        <Route path="/cardlist/sms/send" element={<SendSms />} />
         {/* card chart */}
         <Route path="/chart" element={<CardChart />} />
       </Routes>
