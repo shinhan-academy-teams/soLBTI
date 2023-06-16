@@ -19,6 +19,7 @@ import { useCookies } from "react-cookie";
 import QuizMain from "quiz/QuizMain";
 import PaymentApp from "mypage/PaymentApp";
 import PaymentMethod from "mypage/PaymentMethod";
+import SendSms from "sms/SendSms";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies([
@@ -55,6 +56,7 @@ function App() {
         <Route path="/cardlist/writemyinfo/:cno" element={<WriteMyInfo />} />
         <Route path="/cardlist/paymentMethod" element={<PaymentMethod />} />
         <Route path="/cardlist/agree" element={<CardAgree></CardAgree>} />
+        <Route path="/cardlist/sms/send" element={<SendSms />} />
       </Routes>
     </CookiesProvider>
   );
