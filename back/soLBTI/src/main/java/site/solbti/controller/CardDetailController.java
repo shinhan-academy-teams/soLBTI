@@ -32,5 +32,16 @@ public class CardDetailController {
         return brands;
     }
 
-
+    @GetMapping("/pageview/{cno}")
+    public void veiwCount(@PathVariable Long cno){
+        MongoCommonCard card = mongoCommonCardRepository.findByCommonCardCode(cno);
+        System.out.println(card);
+        Integer cardview = card.getCardview();
+        if(cardview==null) {
+            card.setCardview(1);
+        } else {
+            card.setCardview(cardview+1);
+        }
+        mongoCommonCardRepository.save(card);
+    }
 }

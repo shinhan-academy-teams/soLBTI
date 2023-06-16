@@ -17,6 +17,8 @@ public interface MongoCommonCardRepository extends MongoRepository<MongoCommonCa
     @Query("{ 'benefit.?0': { $exists: true } }")
     List<MongoCommonCard> findByBenefitCustum(String value);
 
+    List<MongoCommonCard> findAllByOrderByCardviewDesc();
+
 
 
 }

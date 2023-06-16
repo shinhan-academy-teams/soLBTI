@@ -22,13 +22,13 @@ public class MongoDBTest {
     @Autowired
     MongoCommonCardRepository mongoRepo;
 
-    @Test
+    //@Test
     public void dataTest() {
         List<MongoCommonCard> list = mongoRepo.findAll();
         System.out.println(list.get(1));
     }
 
-    @Test
+    //@Test
     public void selectTest() {
         MongoCommonCard card = mongoRepo.findByCommonCardCode(1001L);
         System.out.println(card.getBenefit());
@@ -51,7 +51,7 @@ public class MongoDBTest {
         mongoRepo.save(mc);
     }
 
-    @Test
+    //@Test
     void select(){
 
 
@@ -62,9 +62,19 @@ public class MongoDBTest {
 
     }
 
-    @Test
+    //@Test
     void mongoSelect1(){
         List<MongoCommonCard> cardList = mongoRepo.findByBenefitCustum("생활");
         log.info(cardList.toString());
+    }
+
+    @Test
+    void sortingTest() {
+        List<MongoCommonCard> cardList = mongoRepo.findAllByOrderByCardviewDesc();
+        for(MongoCommonCard card : cardList) {
+            if(card.getCardview()!=null){
+                log.info(card.getCommonCardCode() + "" + card.getCardview());
+            }
+        }
     }
 }
