@@ -71,6 +71,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://moneypin.biz"
+  "proxy": "http://localhost:1190/"
   
 }
