@@ -1,22 +1,36 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useCookies } from "react-cookie";
 import { Link, useParams } from "react-router-dom";
 
 function MyInfoCheck(props) {
   const [members, setMembers] = useState([]);
   const { cno } = useParams();
-
+  const [cookies] = useCookies(["memPhone", "memName"]);
   //   useEffect(() => {
   //     const requestOption = {
   //       method: "GET",
   //       redirect: "follow",
   //     };
   //   });
+
+  useEffect(() => {
+    // 카드 리스트 가져옴
+    axios({
+      url: "/auth/mycardlist.do",
+      method: "get",
+      params: { email: cookies.memEmail, name: cookies.memName },
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, []);
+
   return (
     <div>
       <h1>카드 신청</h1>
       <h2>신청인 정보를 입력해주세요.</h2>
+      <br></br>
       <Container className="panel">
         <Form>
           이름
@@ -28,7 +42,7 @@ function MyInfoCheck(props) {
             <Col sm>
               <Form.Control
                 type="text"
-                placeholder="name"
+                placeholder={cookies.memName}
                 name="세션에서 가져올 name"
                 readOnly="readOnly"
               />
@@ -44,7 +58,7 @@ function MyInfoCheck(props) {
             <Col sm>
               <Form.Control
                 type="text"
-                placeholder="phonenumber"
+                placeholder={cookies.mem}
                 name="phonenumber"
                 readOnly="readOnly"
               />
