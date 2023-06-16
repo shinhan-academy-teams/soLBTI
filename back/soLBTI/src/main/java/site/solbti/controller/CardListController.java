@@ -63,4 +63,18 @@ public class CardListController {
 
         return resultCommonCard;
     }
+
+    @GetMapping("/card-chart.do")
+    public List<CommonCard> selectCardTopTen() {
+        List<MongoCommonCard> allCardView = mongoCommonCardRepository.findAllByOrderByCardviewDesc();
+        List<CommonCard> cardList = new ArrayList<>();
+        for(int i=0; i<10; i++) {
+            if(allCardView.get(i).getCardview()!=null) {
+                Long cardCode = allCardView.get(i).getCommonCardCode();
+                cardList.add(commonRepo.findById(cardCode).orElse(null));
+            }
+        }
+        System.out.println(cardList);
+        return cardList;
+    }
 }

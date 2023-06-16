@@ -2,6 +2,22 @@ import React, { useState, useEffect, useContext } from "react";
 import Graphcomponent from "mypage/Graphcomponent";
 import DateSelectComponent from "mypage/DateSelectComponent";
 import { PayContext } from "context/Date";
+import styled from "styled-components";
+
+const Title = styled.div`
+  font-family: "GmarketSansMedium";
+  font-size: 2.5rem;
+  text-align: center;
+  color: #374baa;
+`;
+
+const Content = styled.div`
+  font-family: "GmarketSansMedium";
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-align: center;
+  color: #444444;
+`;
 
 function PaymentList(props) {
   const { year, month, payList, cardList, totalpay } = useContext(PayContext);
@@ -17,11 +33,11 @@ function PaymentList(props) {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>결제 내역</h1>
+      <Title>결제 내역</Title>
 
-      <h2 style={{ textAlign: "center" }}>
+      <Content>
         {year}년 {month}월 총 결제금액: {totalpay.toLocaleString()} 원
-      </h2>
+      </Content>
 
       <br />
 
@@ -34,7 +50,6 @@ function PaymentList(props) {
       <div style={{ width: "1500px", margin: "0 auto" }}>
         <div
           style={{
-            backgroundColor: "#99CCFF",
             height: "2.5rem",
             display: "flex",
             alignItems: "center",
