@@ -28,7 +28,7 @@ function WriteMyInfo(props) {
     });
     console.log("card", card);
     instance
-      .post(`/cardlist/join.do/${cno}`, card)
+      .post(`/api/cardlist/join.do/${cno}`, card)
       .then((response) => {
         console.log(response);
       })
@@ -39,7 +39,7 @@ function WriteMyInfo(props) {
 
   useEffect(() => {
     axios({
-      url: `/card/${cno}/brand`,
+      url: `/api/card/${cno}/brand`,
       method: "get",
     })
       .then((responseData) => {
