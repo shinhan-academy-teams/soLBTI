@@ -83,9 +83,6 @@ function Header(props) {
                 <Nav.Link href="/cardlist">전체</Nav.Link>
                 <Nav.Link href="#link">콘텐츠</Nav.Link>
                 <NavDropdown title="My" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="/mypage/0">
-                    마이페이지
-                  </NavDropdown.Item>
                   <NavDropdown.Item href="/mypage/cards">
                     내 카드 조회
                   </NavDropdown.Item>
