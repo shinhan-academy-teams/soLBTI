@@ -35,6 +35,7 @@ public class PaymentHistory {
     private Long price;
     private String storeCategory;
     private PaymentStatus paymentStatus;
+    private String BusinessRegistrationNumber;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
