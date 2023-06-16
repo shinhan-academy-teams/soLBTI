@@ -110,4 +110,10 @@ public class MemberController {
 
         return !memRepo.findByMemId(member.getMemId()).isPresent();
     }
+
+    @GetMapping("/member-info.do/{mno}")
+    public Optional<Members> loginMemberInfo(@PathVariable long mno) {
+        Optional<Members> nowMember = memRepo.findByMemCode(mno);
+        return nowMember;
+    }
 }
