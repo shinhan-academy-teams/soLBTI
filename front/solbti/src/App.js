@@ -12,22 +12,16 @@ import MyCardDetail from "mypage/MyCardDetail";
 import CardAgree from "componenet/CardAgree";
 import WriteMyInfo from "componenet/WriteMyInfo";
 import MyInfoCheck from "componenet/MyInfoCheck";
-import MyInfoAuth from "componenet/MyInfoAuth";
 import JwtTokenTest from "auth/JwtTokenTest";
 import { CookiesProvider } from "react-cookie";
-import { useCookies } from "react-cookie";
 import QuizMain from "quiz/QuizMain";
 import PaymentApp from "mypage/PaymentApp";
-import ContentsApp from "comtents/ContentsApp";
-import Adminpage from "admin/Adminpage";
-import PaymentManageComponent from "admin/PaymentManageComponent";
+import PaymentMethod from "mypage/PaymentMethod";
+import SendSms from "sms/SendSms";
+import CardChart from "componenet/CardChart";
+
 
 function App() {
-  const [cookies, setCookie, removeCookie] = useCookies([
-    "accessToken",
-    "memId",
-  ]);
-
   return (
     <CookiesProvider>
       <Routes>
@@ -42,8 +36,7 @@ function App() {
           <Route path="test" element={<JwtTokenTest />} />
         </Route>
         {/* mypage */}
-        <Route path="/mypage">
-          <Route path="0" element={<MyPage />} />
+        <Route path="/mypage" element={<MyPage />}>
           <Route path="cards" element={<MyCardList />} />
           <Route path="4" element={<MyCardDetail />} />
           <Route path="info" element={<Myinfo />} />
@@ -52,17 +45,14 @@ function App() {
         {/* card */}
         <Route path="/cardlist" element={<CardListHome />} />
         <Route path="/cardlist/detail/:cno" element={<CardDetail />} />
-        <Route path="/cardlist/myinfoauth" element={<MyInfoAuth />} />
+        {/* join card */}
         <Route path="/cardlist/join/:cno" element={<MyInfoCheck />} />
         <Route path="/cardlist/writemyinfo/:cno" element={<WriteMyInfo />} />
-        <Route path="/cardlist/agree" element={<CardAgree></CardAgree>} />
-        {/* contents */}
-        <Route path="/contents" element={<ContentsApp />}></Route>
-        {/* admin */}
-        <Route path="/admin">
-          <Route path="" element={<Adminpage />} />
-          <Route path="register" element={<PaymentManageComponent />} />
-        </Route>
+        <Route path="/cardlist/paymentMethod" element={<PaymentMethod />} />
+        <Route path="/cardlist/agree" element={<CardAgree></CardAgree>} />                       
+        <Route path="/cardlist/sms/send" element={<SendSms />} />
+        {/* card chart */}
+        <Route path="/chart" element={<CardChart />} />
       </Routes>
     </CookiesProvider>
   );

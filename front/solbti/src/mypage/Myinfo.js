@@ -17,7 +17,7 @@ function Myinfo(props) {
 
   useEffect(() => {
     axios({
-      url: "/auth/modify.do",
+      url: "/api/auth/modify.do",
       method: "get",
       params: { memCode: cookies.memCode },
     })
@@ -72,7 +72,7 @@ function Myinfo(props) {
 
     axios({
       method: "put",
-      url: `/auth/modify.do`, //주소 형식과 맞춰줌
+      url: `/api/auth/modify.do`, //주소 형식과 맞춰줌
       params: {
         memCode: 21,
         phone: phone,
@@ -90,7 +90,6 @@ function Myinfo(props) {
 
   return (
     <div className="InfoBody">
-      <h1 style={{ textAlign: "center", margin: "0 auto" }}>내정보관리</h1>
       <div>
         <Accordion.Root
           className="AccordionRoot"

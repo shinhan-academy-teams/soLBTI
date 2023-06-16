@@ -61,6 +61,20 @@ function CardList(props) {
     setSearchCategory(e.target.value);
   };
 
+  // 카드 상세페이지 뷰 카운트
+  function countView(cardno) {
+    axios({
+      method: "get",
+      url: `/card/pageview/${cardno}`,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <div className="container">
       <FormControl>
@@ -90,7 +104,14 @@ function CardList(props) {
                 <Card.Title>{card.cardName}</Card.Title>
                 <Card.Text>{card.cardContent}</Card.Text>
                 <Link to={`/cardlist/detail/${card.commonCardCode}`}>
-                  <Button variant="secondary">자세히 보기</Button>
+                  <Button
+                    variant="secondary"
+                    onClick={(e) => {
+                      countView(card.commonCardCode);
+                    }}
+                  >
+                    자세히 보기
+                  </Button>
                 </Link>
               </Card.Body>
             </Card>

@@ -22,4 +22,5 @@ public class MongoCommonCard {
     private Long commonCardCode;
     private Map<String,String> benefit;
     private List<List> brand;
+    private Integer cardview;
 }
