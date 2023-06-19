@@ -58,9 +58,9 @@ function Login(props) {
 
   return (
     <Container maxWidth="sm">
-      <p>로그인 컴포넌트</p>
+      {/* <p>로그인 컴포넌트</p>
       <p>{member.memId}</p>
-      <p>{member.memPwd}</p>
+      <p>{member.memPwd}</p> */}
       <Box
         component="form"
         sx={{

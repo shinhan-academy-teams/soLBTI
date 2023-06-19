@@ -30,7 +30,6 @@ function Header(props) {
   const locationNow = useLocation();
   if (locationNow.pathname === "/welcome" || locationNow.pathname === "/")
     return null;
-
   return (
     <Grid
       container
@@ -43,7 +42,7 @@ function Header(props) {
           <img src="/img/Logo.png" alt="logo" height={40}></img>
         </Link>
       </Grid>
-      <Grid item xs={4} ml={5}>
+      <Grid item xs={4} ml={15}>
         <Navbar>
           <Container className="login-section">
             <Navbar.Collapse id="basic-navbar-nav">
@@ -75,14 +74,14 @@ function Header(props) {
           </Container>
         </Navbar>
       </Grid>
-      <Grid style={{ marginLeft: "11rem" }}>
+      <Grid>
         <Navbar>
           <Container>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link href="/chart">카드 TOP10</Nav.Link>
                 <Nav.Link href="/cardlist">전체</Nav.Link>
-                <Nav.Link href="/contents">콘텐츠</Nav.Link>
+                <Nav.Link href="#link">콘텐츠</Nav.Link>
                 <NavDropdown title="My" id="basic-nav-dropdown">
                   <NavDropdown.Item href="/mypage/cards">
                     내 카드 조회

@@ -36,6 +36,8 @@ public class PaymentHistory {
     private String storeCategory;
     private PaymentStatus paymentStatus;
 
+    private String storeBiggerCategory;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personal_card")
