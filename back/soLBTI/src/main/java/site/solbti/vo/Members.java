@@ -50,6 +50,8 @@ public class Members {
     private double memPoint;
     @CreationTimestamp
     private Timestamp created;
+    @Column(nullable = true)
+    private String memType;
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
