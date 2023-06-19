@@ -1,7 +1,5 @@
 package site.solbti.vo;
-
 import lombok.*;
-
 import java.util.List;
 
 @AllArgsConstructor
