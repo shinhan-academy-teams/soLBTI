@@ -40,10 +40,12 @@ function SendSms() {
 
     try {
       // 서버에 인증번호 검증 요청
+      // console.log("here");
       const response = await axios.post("/user/verify-sms", {
         phoneNumber,
         authCode,
       });
+      console.log("me");
       // 인증번호 검증에 성공한 경우
       setIsCodeVerified(true);
     } catch (error) {

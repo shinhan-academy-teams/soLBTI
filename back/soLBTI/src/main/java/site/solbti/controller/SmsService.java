@@ -69,16 +69,27 @@ public class SmsService {
     @Value("${naver-cloud-sms.secretKey}")
     private String secretKey;
 
+    private String generateAuthCode() {
+        // 인증번호 생성 로직 구현 (랜덤한 인증번호 생성)
+        int authCodeLength = 6;
+        StringBuilder authCodeBuilder = new StringBuilder();
+        for (int i = 0; i < authCodeLength; i++) {
+            int digit = (int) (Math.random() * 10);
+            authCodeBuilder.append(digit);
+        }
+        return authCodeBuilder.toString();
+    }
 
     public SmsResponse sendSms(String recipientPhoneNumber, String content) throws JsonProcessingException, UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, URISyntaxException {
         Long time = System.currentTimeMillis();
         List<Message> messages = new ArrayList<>();
-        content="인증번호";
+
+        content=generateAuthCode();
         messages.add(new Message(recipientPhoneNumber, content));
 
         String senderPhoneNumber = "01021227745";
 
-        SmsRequest smsRequest = new SmsRequest("SMS", "COMM", "82", senderPhoneNumber, "인증번호", messages);
+        SmsRequest smsRequest = new SmsRequest("SMS", "COMM", "82", senderPhoneNumber, content, messages);
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonBody = objectMapper.writeValueAsString(smsRequest);
 

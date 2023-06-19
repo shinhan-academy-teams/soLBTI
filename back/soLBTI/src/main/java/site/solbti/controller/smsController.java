@@ -2,6 +2,7 @@ package site.solbti.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,19 +42,20 @@ public class smsController {
         }
         return authCodeBuilder.toString();
     }
-//    @PostMapping("/user/request-sms")
-//    public ResponseEntity<?> requestSms(@RequestBody PhoneNumberRequest request) {
-//        try {
-//            String phoneNumber = request.getPhoneNumber();
-//            // 인증번호 생성 로직 구현
-//            String authCode = generateAuthCode();
-//            // SMS 발송
-//            smsService.sendSms(phoneNumber, authCode);
-//            return ResponseEntity.ok().build();
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
+    @PostMapping("/user/request-sms")
+    public ResponseEntity<?> requestSms(@RequestBody PhoneNumberRequest request) {
+        try {
+            String phoneNumber = request.getPhoneNumber();
+            // 인증번호 생성 로직 구현
+            String authCode = generateAuthCode();
+            // SMS 발송
+            smsService.sendSms(phoneNumber, authCode);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+    }
     public boolean verifyAuthCode(String userAuthCode, String generatedAuthCode) {
         // 사용자로부터 입력받은 인증번호와 서버에서 생성된 인증번호 비교
         return userAuthCode.equals(generatedAuthCode);
