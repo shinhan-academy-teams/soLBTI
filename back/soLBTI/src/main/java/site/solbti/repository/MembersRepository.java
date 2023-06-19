@@ -3,6 +3,7 @@ package site.solbti.repository;
 import org.springframework.data.repository.CrudRepository;
 import site.solbti.vo.Members;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface MembersRepository extends CrudRepository<Members, Long> {
@@ -10,4 +11,6 @@ public interface MembersRepository extends CrudRepository<Members, Long> {
     Optional<Members> findByMemCode(Long id);
     Optional<Members> findByMemEmail(String email);
     Optional<Members> findByMemPhone(String phone);
+
+    List<Members> findByMemType(String solBTI);
 }
