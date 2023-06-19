@@ -18,6 +18,7 @@ function Signup(props) {
     memEmail: "",
     memAddr: "",
     memPhone: "",
+    memPwdConfirm: "",
   });
 
   const [isValid, setIsValid] = useState({
@@ -30,6 +31,7 @@ function Signup(props) {
     emailDup: true,
     idDup: true,
     phonNumDup: true,
+    memPwdConfirm: true,
   });
 
   const handleChange = (e) => {
@@ -74,6 +76,10 @@ function Signup(props) {
 
     if (isValid.phonNumDup === true) {
       alert("전화번호 중복체크하세요");
+      return;
+    }
+    if (member.memPwd !== member.memPwdConfirm) {
+      alert("비밀번호가 일치하지 않아요");
       return;
     }
 
@@ -223,8 +229,11 @@ function Signup(props) {
         <div>
           <TextField
             required
+            name="memPwdConfirm"
             label="비밀번호 확인"
             type="password"
+            error={!isValid.memPwdConfirm}
+            helperText={!isValid.memPwdConfirm ? "필수입니다." : ""}
             onChange={handleChange}
           />
         </div>
@@ -266,6 +275,7 @@ function Signup(props) {
             error={!isValid.memPhone}
             helperText={!isValid.memPhone ? "필수입니다." : ""}
             onChange={handleChange}
+            placeholder="010-0000-0000"
           />
           <Button onClick={phoneDupCheck}>중복 확인</Button>
           <p>{isValid.phonNumDup ? "전화번호 중복여부 체크하세요" : ""}</p>
