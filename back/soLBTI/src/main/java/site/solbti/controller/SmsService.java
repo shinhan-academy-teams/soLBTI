@@ -28,6 +28,34 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
+import site.solbti.vo.Message;
+import site.solbti.vo.SmsRequest;
+import site.solbti.vo.SmsResponse;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import javax.transaction.Transactional;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
@@ -41,13 +69,27 @@ public class SmsService {
     @Value("${naver-cloud-sms.secretKey}")
     private String secretKey;
 
+    private String generateAuthCode() {
+        // 인증번호 생성 로직 구현 (랜덤한 인증번호 생성)
+        int authCodeLength = 6;
+        StringBuilder authCodeBuilder = new StringBuilder();
+        for (int i = 0; i < authCodeLength; i++) {
+            int digit = (int) (Math.random() * 10);
+            authCodeBuilder.append(digit);
+        }
+        return authCodeBuilder.toString();
+    }
 
     public SmsResponse sendSms(String recipientPhoneNumber, String content) throws JsonProcessingException, UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, URISyntaxException {
         Long time = System.currentTimeMillis();
         List<Message> messages = new ArrayList<>();
+
+        content=generateAuthCode();
         messages.add(new Message(recipientPhoneNumber, content));
 
-        SmsRequest smsRequest = new SmsRequest("SMS", "COMM", "82", "발신자 전화번호", "내용", messages);
+        String senderPhoneNumber = "01021227745";
+
+        SmsRequest smsRequest = new SmsRequest("SMS", "COMM", "82", senderPhoneNumber, content, messages);
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonBody = objectMapper.writeValueAsString(smsRequest);
 
@@ -67,6 +109,7 @@ public class SmsService {
         return smsResponse;
 
     }
+
     public String makeSignature(Long time) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
 
         String space = " ";
