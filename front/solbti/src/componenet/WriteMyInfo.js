@@ -120,7 +120,7 @@ function WriteMyInfo(props) {
             >
               <Col sm>
                 <select name="paymentDate" onChange={handleChange}>
-                  {Array.from({ length: 31 }, (_, index) => (
+                  {Array.from({ length: 27 }, (_, index) => (
                     <option
                       key={index + 1}
                       value={index + 1}
