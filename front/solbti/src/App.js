@@ -1,5 +1,5 @@
 import "./App.css";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "home/Home";
 import Login from "auth/Login";
 import Signup from "auth/Signup";
@@ -12,7 +12,6 @@ import MyCardDetail from "mypage/MyCardDetail";
 import CardAgree from "componenet/CardAgree";
 import WriteMyInfo from "componenet/WriteMyInfo";
 import MyInfoCheck from "componenet/MyInfoCheck";
-import JwtTokenTest from "auth/JwtTokenTest";
 import { CookiesProvider } from "react-cookie";
 import QuizMain from "quiz/QuizMain";
 import PaymentApp from "mypage/PaymentApp";
@@ -33,13 +32,12 @@ function App() {
       <Routes>
         {/* main */}
         <Route path="/" element={<Navigate to="/welcome" replace />} />
-        <Route path="/welcome" element={<QuizMain />} />
+        <Route path="/welcome" element={<QuizMain />}></Route>
         <Route path="/home" element={<Home />} />
         {/* login, signup */}
         <Route path="/auth">
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          {/* <Route path="test" element={<JwtTokenTest />} /> */}
         </Route>
         {/* mypage */}
         <Route path="/mypage" element={<MyPage />}>
