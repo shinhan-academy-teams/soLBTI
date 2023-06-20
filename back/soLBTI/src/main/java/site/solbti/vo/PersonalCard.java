@@ -38,7 +38,7 @@ public class PersonalCard implements Serializable {
     @CreationTimestamp
     private Timestamp created;
     private Timestamp validated;
-    private Timestamp paymentDate;
+    private Integer paymentDate;
     private String brand;
     private String account;
 
