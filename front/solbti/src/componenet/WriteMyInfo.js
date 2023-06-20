@@ -52,7 +52,7 @@ function WriteMyInfo(props) {
     });
     console.log("card", card);
     instance
-      .post(`/api/cardlist/join.do/${cno}`, card)
+      .post(`/cardlist/join.do/${cno}`, card)
       .then((response) => {
         console.log(response);
       })
@@ -63,7 +63,7 @@ function WriteMyInfo(props) {
 
   useEffect(() => {
     axios({
-      url: `/api/card/${cno}/brand`,
+      url: `/card/${cno}/brand`,
       method: "get",
     })
       .then((responseData) => {
@@ -120,7 +120,7 @@ function WriteMyInfo(props) {
             >
               <Col sm>
                 <select name="paymentDate" onChange={handleChange}>
-                  {Array.from({ length: 31 }, (_, index) => (
+                  {Array.from({ length: 27 }, (_, index) => (
                     <option
                       key={index + 1}
                       value={index + 1}

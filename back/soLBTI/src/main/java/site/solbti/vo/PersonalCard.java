@@ -1,6 +1,5 @@
 package site.solbti.vo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -39,7 +38,7 @@ public class PersonalCard implements Serializable {
     @CreationTimestamp
     private Timestamp created;
     private Timestamp validated;
-    private Timestamp paymentDate;
+    private Integer paymentDate;
     private String brand;
     private String account;
 
