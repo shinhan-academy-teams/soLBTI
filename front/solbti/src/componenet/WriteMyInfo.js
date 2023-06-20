@@ -30,7 +30,8 @@ const Label = styled.div`
 `;
 
 function WriteMyInfo(props) {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(""); //확정전 비밀번호
+  const [pass, setPass] = useState(""); //확정난 비밀번호
   const { cno } = useParams();
   const [card, setCard] = useState({});
   const [brand, setBrand] = useState([]);
@@ -42,7 +43,7 @@ function WriteMyInfo(props) {
     //자기 페이지로만 돌아가고 데이터를 디비에 전달하지 못함.
   };
   const handlePass = () => {
-    setCard({ ...card, password });
+    setCard({ ...card, password: pass });
   };
 
   const handleClick = (e) => {
@@ -124,7 +125,7 @@ function WriteMyInfo(props) {
                     <option
                       key={index + 1}
                       value={index + 1}
-                      style={{ order: 31 - index }}
+                      style={{ order: 27 - index }}
                     >
                       {index + 1}
                     </option>
@@ -137,6 +138,7 @@ function WriteMyInfo(props) {
               <SecurityKeypad
                 password={password}
                 setPassword={setPassword}
+                setPass={setPass}
               ></SecurityKeypad>
               <Button onClick={handlePass}>pass확정</Button>
             </div>

@@ -35,6 +35,7 @@ public class CardJoinController {
     @PostMapping(value = "/join.do/{cardNo}", consumes = "application/json")
     public PersonalCard registerCard(@PathVariable  Long cardNo, @RequestBody  PersonalCard pCard ) throws NoSuchAlgorithmException {
         SHA256 sha256 = new SHA256();
+        System.out.println("pcard>>"+pCard);
         String cryptogram = sha256.encrypt(String.valueOf(pCard.getPassword()));
 
         //validated
@@ -70,7 +71,6 @@ public class CardJoinController {
 
         pCard.setCard(commonRepo.findById(cardNo).orElse(null));
         PersonalCard card = personRepo.save(pCard);
-
 
         return card;
     }
