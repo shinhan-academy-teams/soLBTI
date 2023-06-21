@@ -9,11 +9,12 @@ const ResultTitle = styled.div`
   font-weight: 400;
   text-align: center;
   color: #374baa;
+  margin-bottom: 5.5rem;
 `;
 
 const ResultImg = styled.img`
   position: absolute;
-  width: 36.624rem;
+  width: 30rem;
 `;
 
 const Content = styled.div`
@@ -24,18 +25,20 @@ const Content = styled.div`
 `;
 
 const ResultSquare = styled.div`
+  margin: 2.2rem;
   position: relative;
   display: flex;
-
-  width: 33.1rem;
-  height: ${(props) => (props.isNormal < 16 ? "50rem" : "22.9rem")};
+  border: 5px solid #374baa;
+  width: 40rem;
+  height: 14rem;
   background-color: white;
   border-radius: 0.5rem;
+  text-align: center;
 
   ${ResultImg} {
     justify-content: center;
-    bottom: ${(props) => (props.isNormal < 16 ? "32rem" : "14rem")};
-    left: -1.6rem;
+    bottom: ${(props) => (props.isNormal < 16 ? "32rem" : "5rem")};
+    left: 7rem;
   }
 
   ${Content} {
@@ -61,7 +64,7 @@ function ResultPage({ EI, SN, JP }) {
     <>
       <ResultTitle>{results[result].name}</ResultTitle>
       <ResultSquare>
-        <ResultImg />
+        <ResultImg src={results[result].img} />
         <Content>{Parser(results[result].explain)}</Content>
       </ResultSquare>
     </>

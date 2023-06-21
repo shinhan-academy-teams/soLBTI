@@ -42,9 +42,6 @@ function QuizMain(props) {
     Aos.init();
   });
 
-  const goHome = () => {
-    window.location.href = "/home";
-  };
   const startBtn = () => {
     setIsShow(false);
     setIsQuizShow(true);
