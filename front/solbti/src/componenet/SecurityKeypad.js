@@ -17,15 +17,19 @@ const shuffle = (nums) => {
   return nums;
 };
 
-const SecurityKeypad = ({ password, setPassword }) => {
+const SecurityKeypad = ({ password, setPassword, setPass }) => {
   let nums_init = Array.from({ length: 10 }, (v, k) => k);
   const [nums, setNums] = useState(nums_init);
 
   const handlePasswordChange = useCallback(
     (num) => {
       if (password.length === PASSWORD_MAX_LENGTH) {
+        //erasePasswordOne();
+        const pass = password;
+        setPassword(pass);
         return;
       }
+      console.log("들어온 값 " + num);
       setPassword(password + num.toString());
       console.log(password);
     },
@@ -33,6 +37,7 @@ const SecurityKeypad = ({ password, setPassword }) => {
   );
   const erasePasswordOne = useCallback(
     (e) => {
+      //e.preventDefault();
       setPassword(
         password.slice(0, password.length === 0 ? 0 : password.length - 1)
       );
@@ -55,15 +60,21 @@ const SecurityKeypad = ({ password, setPassword }) => {
     [handlePasswordChange]
   );
 
-  const onClickSubmitButton = (e) => {
-    // 비밀번호 제출
-    e.preventDefault();
-    if (password.length === 0) {
-      alert("비밀번호를 입력 후 눌러주세요!");
-    } else {
-      alert(password + "을 입력하셨습니다.");
-    }
-  };
+  const onClickSubmitButton = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (password.length === 0) {
+        alert("비밀번호를 입력 후 눌러주세요!");
+      } else {
+        alert(password + "을 입력하셨습니다.");
+      }
+      setNums(nums_init);
+      const pass = password;
+      setPass(pass);
+      setPassword("");
+    },
+    [password, setPassword]
+  );
 
   return React.createElement(
     React.Fragment,
@@ -128,4 +139,5 @@ const SecurityKeypad = ({ password, setPassword }) => {
     )
   );
 };
+
 export default SecurityKeypad;
