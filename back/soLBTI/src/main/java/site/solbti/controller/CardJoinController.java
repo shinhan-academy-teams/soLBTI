@@ -42,7 +42,7 @@ public class CardJoinController {
 
 
         String pass = (String)requestData.get("password");
-        System.out.println(requestData);
+        System.out.println(pCard.get("paymentDate"));
 
         SHA256 sha256 = new SHA256();
 
@@ -88,7 +88,7 @@ public class CardJoinController {
        // PersonalCard card = personRepo.save(pCard);
 //        String fname= (String) requestData.get("firstName");
 //        String lname= (String) requestData.get("lastName");
-        Integer pDate =Integer.parseInt((String) requestData.get("paymentDate"));
+        Integer pDate =Integer.parseInt((String) pCard.get("paymentDate"));
 //        String account= (String) requestData.get("account");
 //        System.out.println(pDate+"<<pDate");
 //        PersonalCard pcard = PersonalCard.builder().cardCvc(Integer.toString(((int)Math.random()*900)+100)).brand((String) requestData.get("brand")).firstName(fname).lastName(lname)
