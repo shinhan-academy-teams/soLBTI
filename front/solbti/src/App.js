@@ -19,6 +19,7 @@ import CardChart from "componenet/CardChart";
 import PaymentMethod from "mypage/PaymentMethod";
 import SendSms from "sms/SendSms";
 import CheckLogin from "auth/CheckLogin";
+import ChatGPTComponent from "comtents/ChatGPTComponent";
 
 const PrivateRoute = ({ element }) => {
   const isAuthenticated = CheckLogin();
@@ -71,6 +72,7 @@ function App() {
         {/* card chart */}
         <Route path="/chart" element={<CardChart />} />
         {/* 다른 페이지 라우트 정의 */}
+        <Route path="/chat" element={<ChatGPTComponent />} />
       </Routes>
     </CookiesProvider>
   );
