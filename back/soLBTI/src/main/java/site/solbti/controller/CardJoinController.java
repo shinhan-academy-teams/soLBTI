@@ -6,6 +6,7 @@ import site.solbti.repository.CommonCardRepository;
 import site.solbti.repository.MembersRepository;
 import site.solbti.repository.MongoCommonCardRepository;
 import site.solbti.repository.PersonalCardRepository;
+import site.solbti.vo.CommonCard;
 import site.solbti.vo.PersonalCard;
 
 import java.security.NoSuchAlgorithmException;
@@ -36,6 +37,7 @@ public class CardJoinController {
     @PostMapping(value = "/join.do/{cardNo}", consumes = "application/json")
     public void registerCard(@PathVariable  Long cardNo, @RequestBody Map<String, Object> requestData ) throws NoSuchAlgorithmException {
 
+        CommonCard commoncard= commonRepo.findById(cardNo).orElse(null);
 
         LinkedHashMap pCard = (LinkedHashMap) requestData.get("pCard");
         Long memCode= Long.parseLong((String) requestData.get("memCode"));
@@ -72,7 +74,7 @@ public class CardJoinController {
         sN1+=sN3; sN1+="-";
         sN1+=sN4;
 
-        
+
 
         String fname= (String) pCard.get("firstName");
         String lname= (String) pCard.get("lastName");
@@ -82,7 +84,8 @@ public class CardJoinController {
         String account= (String) pCard.get("account");
         System.out.println(pDate+"<<pDate");
         PersonalCard pcard = PersonalCard.builder().cardCvc(Integer.toString(((int)Math.random()*900)+100)).brand((String) pCard.get("brand")).firstName(fname).lastName(lname)
-                .paymentDate(pDate).serialNumber(sN1).password(cryptogram).created(timestamp).validated(Timestamp.valueOf(formattedDate)).account(account).build();
+                .paymentDate(pDate).serialNumber(sN1).password(cryptogram).created(timestamp).validated(Timestamp.valueOf(formattedDate)).account(account).card(commoncard).build();
+
         personRepo.save(pcard);
 
         memRepo.findById(memCode).ifPresent(entity->{
