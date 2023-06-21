@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import results from "./contents/results";
 import styled from "styled-components";
 import Parser from "html-react-parser";
+import axios from "axios";
 
 const ResultTitle = styled.div`
   font-family: "양진체";
@@ -60,6 +61,22 @@ function ResultPage({ EI, SN, JP }) {
   EI >= 2 ? (result += "E") : (result += "I");
   SN >= 2 ? (result += "S") : (result += "N");
   JP >= 2 ? (result += "J") : (result += "P");
+
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `/result/${results[result].name}`,
+    })
+      .then((res) => {
+        setCategory(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <>
       <ResultTitle>{results[result].name}</ResultTitle>
@@ -67,6 +84,9 @@ function ResultPage({ EI, SN, JP }) {
         <ResultImg src={results[result].img} />
         <Content>{Parser(results[result].explain)}</Content>
       </ResultSquare>
+      {category[1]}
+      {category[2]}
+      {category[3]}
     </>
   );
 }
