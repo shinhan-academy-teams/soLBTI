@@ -86,16 +86,10 @@ function PaymentList(props) {
             {payList.map((pay, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>
-                  {pay.paymentDate.substring(0, pay.paymentDate.indexOf("T"))}
-                  {pay.paymentDate.substring(
-                    pay.paymentDate.indexOf("T") + 1,
-                    pay.paymentDate.indexOf(".")
-                  )}
-                </td>
+                <td>{pay.paymentDate}</td>
                 <td>{pay.price}</td>
                 <td>{pay.storeName}</td>
-                <td>{pay.storeCategory}</td>
+                <td>{pay.storeBiggerCategory}</td>
               </tr>
             ))}
           </tbody>
