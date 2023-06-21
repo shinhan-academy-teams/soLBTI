@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -38,7 +39,7 @@ public class PersonalCard implements Serializable {
     @CreationTimestamp
     private Timestamp created;
     private Timestamp validated;
-    private Timestamp paymentDate;
+    private Integer paymentDate;
     private String brand;
     private String account;
 

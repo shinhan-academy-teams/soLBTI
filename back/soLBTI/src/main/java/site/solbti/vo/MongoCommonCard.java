@@ -20,7 +20,7 @@ public class MongoCommonCard {
     @Id
     private ObjectId id;
     private Long commonCardCode;
-    private Map<String,String> benefit;
-    private List<List> brand;
+    private List<Map<String,String>> benefit;
+    private List<List<String>> brand;
     private Integer cardview;
 }
