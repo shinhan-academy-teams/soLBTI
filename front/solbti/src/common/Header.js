@@ -31,49 +31,50 @@ function Header(props) {
   if (locationNow.pathname === "/welcome" || locationNow.pathname === "/")
     return null;
   return (
-    <Grid
-      container
-      spacing={2}
-      justifyContent="space-between"
-      alignItems={"center"}
-    >
-      <Grid item xs={6} ml={20}>
-        <Link to={"/home"}>
-          <img src="/img/Logo.png" alt="logo" height={40}></img>
-        </Link>
-      </Grid>
-      <Grid item xs={4} ml={15}>
-        <Navbar>
-          <Container className="login-section">
-            <Navbar.Collapse id="basic-navbar-nav">
-              <ThemeProvider theme={theme}>
-                <Nav className="me-auto">
-                  {memCode ? (
-                    <Nav.Link>
-                      <Button color="info" onClick={logout} variant="contained">
-                        로그아웃
+    <>
+      {/*  <Grid
+       container
+       spacing={2}
+       justifyContent="space-between"
+       alignItems={"center"}
+     >
+       <Grid item xs={6} ml={20}>
+         <Link to={"/home"}>
+           <img src="/img/Logo.png" alt="logo" height={40}></img>
+         </Link>
+       </Grid>
+       <Grid item xs={4} ml={15}> */}
+      <Navbar>
+        <Container className="login-section">
+          <Navbar.Collapse id="basic-navbar-nav">
+            <ThemeProvider theme={theme}>
+              <Nav className="me-auto">
+                {memCode ? (
+                  <Nav.Link>
+                    <Button color="info" onClick={logout} variant="contained">
+                      로그아웃
+                    </Button>
+                  </Nav.Link>
+                ) : (
+                  <>
+                    <Nav.Link href="/auth/login">
+                      <Button color="info" variant="outlined">
+                        로그인
                       </Button>
                     </Nav.Link>
-                  ) : (
-                    <>
-                      <Nav.Link href="/auth/login">
-                        <Button color="info" variant="outlined">
-                          로그인
-                        </Button>
-                      </Nav.Link>
-                      <Nav.Link href="/auth/signup">
-                        <Button color="info" variant="outlined">
-                          회원가입
-                        </Button>
-                      </Nav.Link>
-                    </>
-                  )}
-                </Nav>
-              </ThemeProvider>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-      </Grid>
+                    <Nav.Link href="/auth/signup">
+                      <Button color="info" variant="outlined">
+                        회원가입
+                      </Button>
+                    </Nav.Link>
+                  </>
+                )}
+              </Nav>
+            </ThemeProvider>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      {/* </Grid> */}
       <Grid>
         <Navbar>
           <Container>
@@ -101,7 +102,8 @@ function Header(props) {
           </Container>
         </Navbar>
       </Grid>
-    </Grid>
+      {/* </Grid> */}
+    </>
   );
 }
 

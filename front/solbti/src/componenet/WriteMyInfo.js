@@ -32,7 +32,7 @@ const Label = styled.div`
 function WriteMyInfo(props) {
   const [password, setPassword] = useState("");
   const { cno } = useParams();
-  const [card, setCard] = useState({});
+  const [card, setCard] = useState({ paymentDate: 1 });
   const [brand, setBrand] = useState([]);
 
   const handleChange = (e) => {
