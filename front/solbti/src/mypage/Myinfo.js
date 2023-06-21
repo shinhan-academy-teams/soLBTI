@@ -17,7 +17,7 @@ function Myinfo(props) {
 
   useEffect(() => {
     axios({
-      url: "/api/auth/modify.do",
+      url: "/auth/modify.do",
       method: "get",
       params: { memCode: cookies.memCode },
     })
@@ -72,7 +72,7 @@ function Myinfo(props) {
 
     axios({
       method: "put",
-      url: `/api/auth/modify.do`, //주소 형식과 맞춰줌
+      url: `/auth/modify.do`, //주소 형식과 맞춰줌
       params: {
         memCode: 21,
         phone: phone,
