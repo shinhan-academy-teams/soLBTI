@@ -18,8 +18,8 @@ public class CardDetailController {
 
     @GetMapping("/{cno}/benefit")
     @ResponseBody
-    public Map<String, List> benefit(@PathVariable Long cno){
-        Map benefits = mongoCommonCardRepository.findByCommonCardCode(cno).getBenefit();
+    public List<Map<String, List>> benefit(@PathVariable Long cno){
+        List benefits = mongoCommonCardRepository.findByCommonCardCode(cno).getBenefit();
 
         return benefits;
     }
