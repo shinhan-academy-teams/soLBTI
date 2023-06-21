@@ -1,5 +1,5 @@
 import "./App.css";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "home/Home";
 import Login from "auth/Login";
 import Signup from "auth/Signup";
@@ -12,7 +12,6 @@ import MyCardDetail from "mypage/MyCardDetail";
 import CardAgree from "componenet/CardAgree";
 import WriteMyInfo from "componenet/WriteMyInfo";
 import MyInfoCheck from "componenet/MyInfoCheck";
-import JwtTokenTest from "auth/JwtTokenTest";
 import { CookiesProvider } from "react-cookie";
 import QuizMain from "quiz/QuizMain";
 import PaymentApp from "mypage/PaymentApp";
@@ -20,6 +19,7 @@ import CardChart from "componenet/CardChart";
 import PaymentMethod from "mypage/PaymentMethod";
 import SendSms from "sms/SendSms";
 import CheckLogin from "auth/CheckLogin";
+import ChatGPTComponent from "comtents/ChatGPTComponent";
 
 const PrivateRoute = ({ element }) => {
   const isAuthenticated = CheckLogin();
@@ -33,13 +33,12 @@ function App() {
       <Routes>
         {/* main */}
         <Route path="/" element={<Navigate to="/welcome" replace />} />
-        <Route path="/welcome" element={<QuizMain />} />
+        <Route path="/welcome" element={<QuizMain />}></Route>
         <Route path="/home" element={<Home />} />
         {/* login, signup */}
         <Route path="/auth">
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          {/* <Route path="test" element={<JwtTokenTest />} /> */}
         </Route>
         {/* mypage */}
         <Route path="/mypage" element={<MyPage />}>
@@ -73,6 +72,7 @@ function App() {
         {/* card chart */}
         <Route path="/chart" element={<CardChart />} />
         {/* 다른 페이지 라우트 정의 */}
+        <Route path="/chat" element={<ChatGPTComponent />} />
       </Routes>
     </CookiesProvider>
   );

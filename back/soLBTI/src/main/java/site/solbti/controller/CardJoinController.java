@@ -35,9 +35,8 @@ public class CardJoinController {
     @PostMapping(value = "/join.do/{cardNo}", consumes = "application/json")
     public PersonalCard registerCard(@PathVariable  Long cardNo, @RequestBody  PersonalCard pCard ) throws NoSuchAlgorithmException {
 
-        System.out.println(pCard);
-
         SHA256 sha256 = new SHA256();
+        System.out.println("pcard>>"+pCard);
         String cryptogram = sha256.encrypt(String.valueOf(pCard.getPassword()));
 
         //validated
@@ -69,11 +68,6 @@ public class CardJoinController {
         sN1+=sN3; sN1+="-";
         sN1+=sN4;
         pCard.setSerialNumber(sN1);
-
-        //brand
-        String brands = mongoCommonCardRepository.findByCommonCardCode(cardNo).getBrand().toString();
-
-        pCard.setBrand(brands);
         pCard.setPassword(cryptogram);
 
         pCard.setCard(commonRepo.findById(cardNo).orElse(null));
