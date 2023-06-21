@@ -69,6 +69,12 @@ public class SmsService {
     @Value("${naver-cloud-sms.secretKey}")
     private String secretKey;
 
+    private String Authkey;
+
+    public String getAuthkey() {
+        return Authkey;
+    }
+
     private String generateAuthCode() {
         // 인증번호 생성 로직 구현 (랜덤한 인증번호 생성)
         int authCodeLength = 6;
@@ -85,6 +91,7 @@ public class SmsService {
         List<Message> messages = new ArrayList<>();
 
         content=generateAuthCode();
+        this.Authkey = content;
         messages.add(new Message(recipientPhoneNumber, content));
 
         String senderPhoneNumber = "01021227745";

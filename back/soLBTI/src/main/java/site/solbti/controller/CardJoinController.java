@@ -73,12 +73,11 @@ public class CardJoinController {
         sN1+=sN2; sN1+="-";
         sN1+=sN3; sN1+="-";
         sN1+=sN4;
-
-
-
+        
         String fname= (String) pCard.get("firstName");
         String lname= (String) pCard.get("lastName");
         Integer pDate =Integer.parseInt(String.valueOf(pCard.get("paymentDate")));
+
 
         String account= (String) pCard.get("account");
         System.out.println(pDate+"<<pDate");
