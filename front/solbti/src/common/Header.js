@@ -44,7 +44,12 @@ function Header(props) {
          </Link>
        </Grid>
        <Grid item xs={4} ml={15}> */}
-      <Navbar>
+      <Navbar className="justify-content-end">
+        <Grid item xs={6} ml={20}>
+          <Link to={"/home"}>
+            <img src="/img/Logo.png" alt="logo" height={40}></img>
+          </Link>
+        </Grid>
         <Container className="login-section">
           <Navbar.Collapse id="basic-navbar-nav">
             <ThemeProvider theme={theme}>
@@ -58,7 +63,11 @@ function Header(props) {
                 ) : (
                   <>
                     <Nav.Link href="/auth/login">
-                      <Button color="info" variant="outlined">
+                      <Button
+                        color="info"
+                        variant="outlined"
+                        style={{ float: "right" }}
+                      >
                         로그인
                       </Button>
                     </Nav.Link>
