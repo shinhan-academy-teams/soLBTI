@@ -79,7 +79,7 @@ function Header2(props) {
           <Nav.Link href="/cardlist" style={{ marginRight: "30px" }}>
             전체
           </Nav.Link>
-          <Nav.Link href="#link" style={{ marginRight: "30px" }}>
+          <Nav.Link href="/contents" style={{ marginRight: "30px" }}>
             콘텐츠
           </Nav.Link>
           <NavDropdown
