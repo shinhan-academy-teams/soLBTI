@@ -42,13 +42,9 @@ public class CardJoinController {
         LinkedHashMap pCard = (LinkedHashMap) requestData.get("pCard");
         Long memCode= Long.parseLong((String) requestData.get("memCode"));
 
-
-        String pass = (String)requestData.get("password");
-        System.out.println(pCard.get("paymentDate"));
-
+        String pass = (String)pCard.get("password");
         SHA256 sha256 = new SHA256();
-
-        String cryptogram = sha256.encrypt(String.valueOf(pass));
+        String cryptogram = sha256.encrypt(pass);
 
         LocalDate currentDate= LocalDate.now();
         LocalDate futureDate = currentDate.plusYears(5);
@@ -73,15 +69,17 @@ public class CardJoinController {
         sN1+=sN2; sN1+="-";
         sN1+=sN3; sN1+="-";
         sN1+=sN4;
-        
+
         String fname= (String) pCard.get("firstName");
         String lname= (String) pCard.get("lastName");
         Integer pDate =Integer.parseInt(String.valueOf(pCard.get("paymentDate")));
 
+        int randomNumber = (int) (Math.random() * 900) + 100;
+        String cvc = Integer.toString(randomNumber);
 
         String account= (String) pCard.get("account");
         System.out.println(pDate+"<<pDate");
-        PersonalCard pcard = PersonalCard.builder().cardCvc(Integer.toString(((int)Math.random()*900)+100)).brand((String) pCard.get("brand")).firstName(fname).lastName(lname)
+        PersonalCard pcard = PersonalCard.builder().cardCvc(cvc).brand((String) pCard.get("brand")).firstName(fname).lastName(lname)
                 .paymentDate(pDate).serialNumber(sN1).password(cryptogram).created(timestamp).validated(Timestamp.valueOf(formattedDate)).account(account).card(commoncard).build();
 
         personRepo.save(pcard);
@@ -93,7 +91,6 @@ public class CardJoinController {
             memRepo.save(entity);
 
         });
-        System.out.println("pcard>>"+pCard);
-        System.out.println(pCard+"<<pCard"+memCode+"<<<memCode");
+
     }
 }
