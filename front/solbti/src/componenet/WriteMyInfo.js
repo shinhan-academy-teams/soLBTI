@@ -5,6 +5,7 @@ import "mypage/keypad.css";
 import SecurityKeypad from "componenet/SecurityKeypad";
 import axios from "axios";
 import styled from "styled-components";
+import { useCookies } from "react-cookie";
 
 const Title = styled.div`
   font-family: "GmarketSansMedium";
@@ -34,14 +35,25 @@ function WriteMyInfo(props) {
   const [pass, setPass] = useState(""); //확정난 비밀번호
   const { cno } = useParams();
   const [card, setCard] = useState({ paymentDate: 1 });
-  const [brand, setBrand] = useState([]);
+  const [cookies] = useCookies(["memCode"]);
+  const [brand, setBrand] = useState([]); //원래 브랜드 객체
+  const [selectedBrand, setSelectedBrand] = useState(""); //첫번째 브랜드
 
   const handleChange = (e) => {
     e.preventDefault();
-    setCard({ ...card, [e.target.name]: e.target.value });
-    //default event막기 ->왜냐하면 form은 기본으로 action이 들어가 있어서 axios가 적용이 안되고
-    //자기 페이지로만 돌아가고 데이터를 디비에 전달하지 못함.
+
+    if (e.target.name === "brand") setSelectedBrand(e.target.value);
+
+    setCard({
+      ...card,
+      [e.target.name]: e.target.value,
+      paymentDate: 1,
+    });
   };
+
+  //default event막기 ->왜냐하면 form은 기본으로 action이 들어가 있어서 axios가 적용이 안되고
+  //자기 페이지로만 돌아가고 데이터를 디비에 전달하지 못함.
+
   const handlePass = () => {
     setCard({ ...card, password: pass });
   };
@@ -51,9 +63,14 @@ function WriteMyInfo(props) {
     const instance = axios.create({
       withCredentials: true,
     });
+    const requestData = {
+      memCode: cookies.memCode,
+      pCard: card,
+    };
     console.log("card", card);
+    console.log(selectedBrand + "<<brand");
     instance
-      .post(`/cardlist/join.do/${cno}`, card)
+      .post(`/cardlist/join.do/${cno}`, requestData)
       .then((response) => {
         console.log(response);
       })
@@ -68,8 +85,11 @@ function WriteMyInfo(props) {
       method: "get",
     })
       .then((responseData) => {
-        setBrand(responseData.data);
-        console.log(brand);
+        const loadBrand = responseData.data;
+        setBrand(loadBrand);
+        // console.log(loadBrand[1][0] + "<<loadBrand[0][0]");
+        setSelectedBrand(loadBrand[0][0]);
+        setCard({ ...card, brand: loadBrand[0][0] });
       })
       .catch((error) => {
         console.log(error);
@@ -125,7 +145,7 @@ function WriteMyInfo(props) {
                     <option
                       key={index + 1}
                       value={index + 1}
-                      style={{ order: 27 - index }}
+                      style={{ order: 31 - index }}
                     >
                       {index + 1}
                     </option>
@@ -160,7 +180,7 @@ function WriteMyInfo(props) {
             </Form.Group>
             <Label>브랜드</Label>
             <br></br>
-            <select name="brand" onChange={handleChange}>
+            <select name="brand" value={selectedBrand} onChange={handleChange}>
               {brand.map((option, index) => {
                 return (
                   <>
