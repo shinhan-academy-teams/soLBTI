@@ -91,7 +91,7 @@ function Header(props) {
               <Nav className="me-auto">
                 <Nav.Link href="/chart">카드 TOP10</Nav.Link>
                 <Nav.Link href="/cardlist">전체</Nav.Link>
-                <Nav.Link href="#link">콘텐츠</Nav.Link>
+                <Nav.Link href="/contents">콘텐츠</Nav.Link>
                 <NavDropdown title="My" id="basic-nav-dropdown">
                   <NavDropdown.Item href="/mypage/cards">
                     내 카드 조회

@@ -5,13 +5,12 @@ import AnswerButton from "./components/AnswerBtn";
 import Parser from "html-react-parser";
 import RingLoader from "react-spinners/RingLoader";
 import ResultPage from "./ResultPage";
-import { ProgressBar } from "react-bootstrap";
+import { MDBProgress, MDBProgressBar } from "mdb-react-ui-kit";
 
 const Wrapper = styled.div`
   display: ${(props) => (props.isShow === true ? "flex" : "none")};
   width: 100%;
   height: 100vh;
-  background-color: white;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -20,6 +19,7 @@ const Container = styled.div`
   margin-bottom: 3rem;
   text-align: center;
   align-items: center;
+  width: 50rem;
 `;
 
 const Text = styled.div`
@@ -39,24 +39,18 @@ function QuizContentPage({ isShow }) {
   const [typeJP, setTypeJP] = useState(0);
   const [isProcess, setIsProcess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  //   const [myType, setMyType] = useState("");
 
   const onConditionChange = (key) => {
     let record = questions[questionNum].answers[key].score;
 
     if (questionNum === 0 || questionNum === 5 || questionNum === 7) {
       setTypeJP(typeJP + record);
-      console.log("JP" + record);
     } else if (questionNum === 1 || questionNum === 2 || questionNum === 4) {
       setTypeSN(typeSN + record);
-      console.log("SN" + record);
     } else if (questionNum === 3 || questionNum === 6) {
       setTypeEI(typeEI + record);
-      console.log("EI" + record);
     } else if (questionNum === 8) {
-      console.log("EI" + record);
       setTypeEI(typeEI + record);
-      console.log(typeEI + "" + typeSN + "" + typeJP);
       setIsLoading(true);
       setTimeout(function () {
         setIsLoading(false);
@@ -70,13 +64,15 @@ function QuizContentPage({ isShow }) {
       <>
         <Wrapper isShow={isShow}>
           <Container>
-            <ProgressBar
-              striped
-              variant="info"
-              animated
-              now={20}
-              className="pg-bar"
-            />
+            <MDBProgress>
+              <MDBProgressBar
+                striped
+                animated
+                width={((questionNum + 1) * 100) / 9}
+                valuemin={0}
+                valuemax={100}
+              />
+            </MDBProgress>
             <Text>{Parser(questions[questionNum].question)}</Text>
             {questions[questionNum].answers.map((answer, index) => (
               <AnswerButton
