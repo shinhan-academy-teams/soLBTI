@@ -56,14 +56,6 @@ public class CardJoinController {
         String formattedDate = futureDate.format(formatter)+" 00:00:00.000";
         Timestamp timestamp = Timestamp.valueOf(formattedDate);
 
-
-        //pCard.setValidated(timestamp);
-       // pCard.put("validated", (String)pCard.get("validated"));
-
-        //cvc 랜덤하게 주기
-        //pCard.setCardCvc(Integer.toString(((int)Math.random()*900)+100));
-       // pCard.put("cardCvc", pCard.get("cardCvc"));
-
         Random random= new Random();
 
         //serial_number
@@ -80,28 +72,26 @@ public class CardJoinController {
         sN1+=sN3; sN1+="-";
         sN1+=sN4;
 
+        
 
-        //pCard.setSerialNumber(sN1);
-        //pCard.setPassword(cryptogram);
+        String fname= (String) pCard.get("firstName");
+        String lname= (String) pCard.get("lastName");
+        Integer pDate =Integer.parseInt(String.valueOf(pCard.get("paymentDate")));
 
-        //pCard.setCard(commonRepo.findById(cardNo).orElse(null));
-       // PersonalCard card = personRepo.save(pCard);
-//        String fname= (String) requestData.get("firstName");
-//        String lname= (String) requestData.get("lastName");
-        Integer pDate =Integer.parseInt((String) pCard.get("paymentDate"));
-//        String account= (String) requestData.get("account");
-//        System.out.println(pDate+"<<pDate");
-//        PersonalCard pcard = PersonalCard.builder().cardCvc(Integer.toString(((int)Math.random()*900)+100)).brand((String) requestData.get("brand")).firstName(fname).lastName(lname)
-//                .paymentDate(pDate).serialNumber(sN1).password(cryptogram).created(timestamp).validated(Timestamp.valueOf(formattedDate)).account(account).build();
-//        pcard=personRepo.save(pcard);
 
-//        memRepo.findById(pCard.get).ifPresent(entity->{
-//            List<PersonalCard> myCards = entity.getMyCards();
-//            myCards.add(personalCard);
-//            entity.setMyCards(myCards);
-//            memRepo.save(entity);
-//
-//        });
+        String account= (String) pCard.get("account");
+        System.out.println(pDate+"<<pDate");
+        PersonalCard pcard = PersonalCard.builder().cardCvc(Integer.toString(((int)Math.random()*900)+100)).brand((String) pCard.get("brand")).firstName(fname).lastName(lname)
+                .paymentDate(pDate).serialNumber(sN1).password(cryptogram).created(timestamp).validated(Timestamp.valueOf(formattedDate)).account(account).build();
+        personRepo.save(pcard);
+
+        memRepo.findById(memCode).ifPresent(entity->{
+            List<PersonalCard> myCards = entity.getMyCards();
+            myCards.add(pcard);
+            entity.setMyCards(myCards);
+            memRepo.save(entity);
+
+        });
         System.out.println("pcard>>"+pCard);
         System.out.println(pCard+"<<pCard"+memCode+"<<<memCode");
     }
