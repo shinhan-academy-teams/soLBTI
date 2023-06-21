@@ -33,7 +33,7 @@ function WriteMyInfo(props) {
   const [password, setPassword] = useState(""); //확정전 비밀번호
   const [pass, setPass] = useState(""); //확정난 비밀번호
   const { cno } = useParams();
-  const [card, setCard] = useState({});
+  const [card, setCard] = useState({ paymentDate: 1 });
   const [brand, setBrand] = useState([]);
 
   const handleChange = (e) => {
