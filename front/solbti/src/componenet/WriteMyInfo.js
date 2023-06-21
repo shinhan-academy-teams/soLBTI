@@ -39,6 +39,7 @@ function WriteMyInfo(props) {
   const [brand, setBrand] = useState([]); //원래 브랜드 객체
   const [selectedBrand, setSelectedBrand] = useState(""); //첫번째 브랜드
 
+
   const handleChange = (e) => {
     e.preventDefault();
 
