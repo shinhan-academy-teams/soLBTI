@@ -44,7 +44,12 @@ function Header(props) {
          </Link>
        </Grid>
        <Grid item xs={4} ml={15}> */}
-      <Navbar>
+      <Navbar className="justify-content-end">
+        <Grid item xs={6} ml={20}>
+          <Link to={"/home"}>
+            <img src="/img/Logo.png" alt="logo" height={40}></img>
+          </Link>
+        </Grid>
         <Container className="login-section">
           <Navbar.Collapse id="basic-navbar-nav">
             <ThemeProvider theme={theme}>
@@ -58,7 +63,11 @@ function Header(props) {
                 ) : (
                   <>
                     <Nav.Link href="/auth/login">
-                      <Button color="info" variant="outlined">
+                      <Button
+                        color="info"
+                        variant="outlined"
+                        style={{ float: "right" }}
+                      >
                         로그인
                       </Button>
                     </Nav.Link>
@@ -82,7 +91,7 @@ function Header(props) {
               <Nav className="me-auto">
                 <Nav.Link href="/chart">카드 TOP10</Nav.Link>
                 <Nav.Link href="/cardlist">전체</Nav.Link>
-                <Nav.Link href="#link">콘텐츠</Nav.Link>
+                <Nav.Link href="/contents">콘텐츠</Nav.Link>
                 <NavDropdown title="My" id="basic-nav-dropdown">
                   <NavDropdown.Item href="/mypage/cards">
                     내 카드 조회
