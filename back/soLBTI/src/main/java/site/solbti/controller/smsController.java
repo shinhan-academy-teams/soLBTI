@@ -24,6 +24,7 @@ public class smsController {
     @Autowired
     private final SmsService smsService;
 
+
     @PostMapping("/user/sms") //
     public ResponseEntity<SmsResponse>  test(@RequestBody Request request)
             throws NoSuchAlgorithmException, URISyntaxException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
@@ -65,8 +66,9 @@ public class smsController {
         try {
             String phoneNumber = request.getPhoneNumber();
             String authCode = request.getAuthCode();
+            String authkey = smsService.getAuthkey();
             // 인증번호 검증 로직 구현
-            boolean isCodeValid = verifyAuthCode(phoneNumber, authCode);
+            boolean isCodeValid = verifyAuthCode(authCode, authkey);
             if (isCodeValid) {
                 return ResponseEntity.ok().build();
             } else {

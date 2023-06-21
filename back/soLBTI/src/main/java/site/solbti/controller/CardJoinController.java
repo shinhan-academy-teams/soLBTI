@@ -3,6 +3,7 @@ package site.solbti.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import site.solbti.repository.CommonCardRepository;
+import site.solbti.repository.MembersRepository;
 import site.solbti.repository.MongoCommonCardRepository;
 import site.solbti.repository.PersonalCardRepository;
 import site.solbti.vo.PersonalCard;
@@ -14,10 +15,7 @@ import java.time.LocalDate;
 
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @RestController
 @RequestMapping("/cardlist")
@@ -27,19 +25,29 @@ public class CardJoinController {
     PersonalCardRepository personRepo;
 
     @Autowired
+    MembersRepository memRepo;
+
+    @Autowired
     CommonCardRepository commonRepo;
 
     @Autowired
     MongoCommonCardRepository mongoCommonCardRepository;
 
     @PostMapping(value = "/join.do/{cardNo}", consumes = "application/json")
-    public PersonalCard registerCard(@PathVariable  Long cardNo, @RequestBody  PersonalCard pCard ) throws NoSuchAlgorithmException {
+    public void registerCard(@PathVariable  Long cardNo, @RequestBody Map<String, Object> requestData ) throws NoSuchAlgorithmException {
+
+
+        LinkedHashMap pCard = (LinkedHashMap) requestData.get("pCard");
+        Long memCode= Long.parseLong((String) requestData.get("memCode"));
+
+
+        String pass = (String)requestData.get("password");
+        System.out.println(pCard.get("paymentDate"));
 
         SHA256 sha256 = new SHA256();
-        System.out.println("pcard>>"+pCard);
-        String cryptogram = sha256.encrypt(String.valueOf(pCard.getPassword()));
 
-        //validated
+        String cryptogram = sha256.encrypt(String.valueOf(pass));
+
         LocalDate currentDate= LocalDate.now();
         LocalDate futureDate = currentDate.plusYears(5);
         int futureYear = futureDate.getYear();
@@ -47,10 +55,6 @@ public class CardJoinController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = futureDate.format(formatter)+" 00:00:00.000";
         Timestamp timestamp = Timestamp.valueOf(formattedDate);
-        pCard.setValidated(timestamp);
-
-        //cvc 랜덤하게 주기
-        pCard.setCardCvc(Integer.toString(((int)Math.random()*900)+100));
 
         Random random= new Random();
 
@@ -67,12 +71,28 @@ public class CardJoinController {
         sN1+=sN2; sN1+="-";
         sN1+=sN3; sN1+="-";
         sN1+=sN4;
-        pCard.setSerialNumber(sN1);
-        pCard.setPassword(cryptogram);
 
-        pCard.setCard(commonRepo.findById(cardNo).orElse(null));
-        PersonalCard card = personRepo.save(pCard);
+        
 
-        return card;
+        String fname= (String) pCard.get("firstName");
+        String lname= (String) pCard.get("lastName");
+        Integer pDate =Integer.parseInt(String.valueOf(pCard.get("paymentDate")));
+
+
+        String account= (String) pCard.get("account");
+        System.out.println(pDate+"<<pDate");
+        PersonalCard pcard = PersonalCard.builder().cardCvc(Integer.toString(((int)Math.random()*900)+100)).brand((String) pCard.get("brand")).firstName(fname).lastName(lname)
+                .paymentDate(pDate).serialNumber(sN1).password(cryptogram).created(timestamp).validated(Timestamp.valueOf(formattedDate)).account(account).build();
+        personRepo.save(pcard);
+
+        memRepo.findById(memCode).ifPresent(entity->{
+            List<PersonalCard> myCards = entity.getMyCards();
+            myCards.add(pcard);
+            entity.setMyCards(myCards);
+            memRepo.save(entity);
+
+        });
+        System.out.println("pcard>>"+pCard);
+        System.out.println(pCard+"<<pCard"+memCode+"<<<memCode");
     }
 }

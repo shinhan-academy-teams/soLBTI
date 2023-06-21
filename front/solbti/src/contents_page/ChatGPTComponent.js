@@ -20,9 +20,12 @@ function ChatGPTComponent(props) {
     })
       .then((response) => {
         console.log(response);
-        const answerText = response.data.answer;
-        if (!answerText) answerText = response.data;
-        setAnswer([answerText, ...answer]);
+        console.log(response.data);
+        console.log(response.data.hasOwnProperty("answer"));
+
+        if (response.data.hasOwnProperty("answer") === true) {
+          setAnswer([response.data.answer, ...answer]);
+        } else setAnswer([response.data, ...answer]);
       })
       .catch((err) => {
         console.log(err);
@@ -45,7 +48,6 @@ function ChatGPTComponent(props) {
       {answer.map((message, index) => (
         <div key={index}>
           <p>🤖 : {message}</p>
-          <hr />
         </div>
       ))}
     </div>
