@@ -28,19 +28,23 @@ public class MongoDBTest {
         System.out.println(list.get(1));
     }
 
-    //@Test
+    @Test
     public void selectTest() {
         MongoCommonCard card = mongoRepo.findByCommonCardCode(1001L);
-        System.out.println(card.getBenefit());
-        Map<String,String> benefit = card.getBenefit();
+
+        List<Map<String,String>> benefit = card.getBenefit();
+
+        System.out.println(benefit);
         List<List> brand = card.getBrand();
-        for(String s : benefit.keySet()) {
-            System.out.println(benefit.get(s));
-        }
-        for(List list : brand) {
-            System.out.println(list);
-            
-        }
+
+        System.out.println(brand);
+//        for(String s : benefit.keySet()) {
+//            System.out.println(benefit.get(s));
+//        }
+//        for(List list : brand) {
+//            System.out.println(list);
+//
+//        }
 
     }
 
@@ -59,12 +63,11 @@ public class MongoDBTest {
         System.out.println(card);
         System.out.println("brand : "+card.getBrand());
 
-
     }
 
-    //@Test
+    @Test
     void mongoSelect1(){
-        List<MongoCommonCard> cardList = mongoRepo.findByBenefitCustum("생활");
+        List<MongoCommonCard> cardList = mongoRepo.findByBenefitCustum("");
         log.info(cardList.toString());
     }
 
@@ -76,5 +79,10 @@ public class MongoDBTest {
                 log.info(card.getCommonCardCode() + "" + card.getCardview());
             }
         }
+    }
+    @Test
+    void deleteByCardNum(){
+        MongoCommonCard docu = mongoRepo.findByCommonCardCode(1105L);
+        mongoRepo.delete(docu);
     }
 }
