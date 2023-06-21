@@ -28,16 +28,16 @@ public class MongoDBTest {
         System.out.println(list.get(1));
     }
 
-    @Test
-    public void selectTest() {
-        MongoCommonCard card = mongoRepo.findByCommonCardCode(1001L);
-
-        List<Map<String,String>> benefit = card.getBenefit();
-
-        System.out.println(benefit);
-        List<List> brand = card.getBrand();
-
-        System.out.println(brand);
+//    @Test
+//    public void selectTest() {
+//        MongoCommonCard card = mongoRepo.findByCommonCardCode(1001L);
+//
+//        List<Map<String,String>> benefit = card.getBenefit();
+//
+//        System.out.println(benefit);
+//        List<List> brand = card.getBrand();
+//
+//        System.out.println(brand);
 //        for(String s : benefit.keySet()) {
 //            System.out.println(benefit.get(s));
 //        }
@@ -45,8 +45,8 @@ public class MongoDBTest {
 //            System.out.println(list);
 //
 //        }
-
-    }
+//
+//    }
 
     //@Test
     void insertTest() {

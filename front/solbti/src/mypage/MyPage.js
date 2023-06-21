@@ -1,5 +1,4 @@
 import React, { setFile, useState, useRef, useEffect } from "react";
-import styles from "Mypage.css";
 import { Outlet } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -53,7 +52,7 @@ function MyPage(props) {
       </button>
 
       <img
-        className={styles.MyPage}
+        className="profile"
         src={image}
         alt="Profile"
         style={{
