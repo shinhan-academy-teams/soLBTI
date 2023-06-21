@@ -8,9 +8,8 @@ import { Table } from "@mui/joy";
 function CardDetail(props) {
   const { cno } = useParams();
   const [card, setCard] = useState({});
-  const [benefit, setBenefit] = useState({});
+  const [benefit, setBenefit] = useState([{}]);
   const [brands, setBrands] = useState([]);
-  const [benefitArr, setBenefitArr] = useState([]);
 
   useEffect(() => {
     axios({
@@ -30,21 +29,14 @@ function CardDetail(props) {
       url: `/card/${cno}/benefit`,
       method: "get",
     })
-      .then((responseData) => {
-        setBenefit(responseData.data);
+      .then((response) => {
+        console.log(response.data);
 
-        const benefitTitles = Object.keys(responseData.data);
-        console.log(benefitTitles);
+        response.data.map((item, index) => {
+          setBenefit((prevArray) => [...prevArray, item]);
+        });
 
-        const benefitDetails = Object.values(responseData.data);
-        console.log(benefitDetails);
-
-        for (let i = 0; i < benefitTitles.length; i++) {
-          setBenefitArr((prevBenefitArr) => [
-            ...prevBenefitArr,
-            [benefitTitles[i], benefitDetails[i]],
-          ]);
-        }
+        console.log(benefit);
       })
       .catch((error) => {
         console.log(error);
@@ -88,11 +80,11 @@ function CardDetail(props) {
           <div className="benefit-area">
             <Table>
               <tbody>
-                {benefitArr.map((item, index) => {
+                {benefit.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td style={{ width: "20%" }}>{item[0]}</td>
-                      <td>{item[1]}</td>
+                      <td style={{ width: "20%" }}>{item.title}</td>
+                      <td>{item.content}</td>
                     </tr>
                   );
                 })}
