@@ -15,7 +15,6 @@ public class ChatGPTController {
 
     @PostMapping("/ask")
     public String test(@RequestBody String question){
-//        System.out.println(answer);
         return chatgptService.sendMessage(question);
     }
 }
