@@ -28,6 +28,7 @@ function ContentsMain(props) {
         <MDBCard onClick={clickContent1}>
           <MDBCardImage
             src="/img/contentsPage/content1.png"
+            className="rounded-pill"
             alt="..."
             position="top"
           />
@@ -39,8 +40,9 @@ function ContentsMain(props) {
 
         <MDBCard onClick={clickContent2}>
           <MDBCardImage
-            src="/img/contentsPage/content2.png"
+            src="/img/contentsPage/sobipattern.png"
             alt="..."
+            className="rounded-pill"
             position="top"
           />
           <MDBCardBody>
@@ -51,7 +53,7 @@ function ContentsMain(props) {
 
         <MDBCard onClick={clickContent3}>
           <MDBCardImage
-            src="/img/contentsPage/content3.png"
+            src="/img/contentsPage/chat.png"
             alt="..."
             position="top"
           />
