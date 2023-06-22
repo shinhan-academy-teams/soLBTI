@@ -8,7 +8,7 @@ import StartButton from "./components/StartButton";
 const Wrapper = styled.div`
   display: ${(props) => (props.isShow === true ? "flex" : "none")};
   width: 100%;
-  background-color: white;
+  // background-color: white;
   flex-direction: column;
   align-items: center;
   justify-content: center;

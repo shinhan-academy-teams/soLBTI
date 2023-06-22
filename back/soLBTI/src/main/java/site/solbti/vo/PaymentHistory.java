@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import lombok.*;
 import site.solbti.vo.enums.PaymentStatus;
-import java.sql.Timestamp;
+
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -30,7 +31,7 @@ public class PaymentHistory {
     )
     private Long paymentCode;
 
-    private Timestamp paymentDate;
+    private Date paymentDate;
     private String storeName;
     private Long price;
     private String storeCategory;
