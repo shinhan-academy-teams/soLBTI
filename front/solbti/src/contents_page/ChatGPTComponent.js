@@ -61,7 +61,7 @@ function ChatGPTComponent(props) {
         id="seconed"
         style={{
           width: "50rem", // 적절한 값으로 변경
-          backgroundColor: "#E0FFFF",
+          backgroundColor: "#0088CC60",
           height: "calc(100% - 50px)",
           padding: "8px",
           borderRadius: "16px",
@@ -81,7 +81,7 @@ function ChatGPTComponent(props) {
               >
                 <span
                   style={{
-                    backgroundColor: "	#00FF0080",
+                    backgroundColor: "	#1EC80080",
                     padding: "8px",
                     borderRadius: "8px",
                   }}
@@ -117,8 +117,9 @@ function ChatGPTComponent(props) {
       <input
         type="text"
         style={{
-          border: "5px solid blue",
-          width: `48rem`,
+          border: "5px solid skyblue",
+          width: `46rem`,
+          margin: "0.3rem",
         }}
         value={question}
         onChange={inputChange}
