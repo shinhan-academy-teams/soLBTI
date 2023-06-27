@@ -22,12 +22,12 @@ const ResultTitle = styled.div`
   font-weight: 400;
   text-align: center;
   color: #374baa;
-  margin-bottom: 8rem;
+  margin-bottom: 6rem;
 `;
 
 const ResultImg = styled.img`
   position: absolute;
-  width: 30rem;
+  width: 13rem;
 `;
 
 const Content = styled.div`
@@ -43,26 +43,27 @@ const ResultSquare = styled.div`
   display: flex;
   border: 5px solid #374baa;
   width: 40rem;
-  height: 14rem;
+  height: 18rem;
   background-color: white;
   border-radius: 0.5rem;
   text-align: center;
 
   ${ResultImg} {
     justify-content: center;
-    bottom: ${(props) => (props.isNormal < 16 ? "32rem" : "5rem")};
-    left: 7rem;
+    bottom: 11rem;
+    left: 13rem;
   }
 
   ${Content} {
     width: 85%;
     left: 50%;
     word-break: keep-all;
+    bottom: 5rem;
 
     ${(props) =>
       props.isNormal < 16
         ? `transform: translateX(-50%);
-        bottom : 2rem;`
+        bottom : 5rem;`
         : `top: 50%;
         transform: translate(-50%, -50%);`};
   }
@@ -81,7 +82,7 @@ const FlexLayout = styled.div`
   justify-content: center;
   margin-left: 10rem;
   margin-right: 10rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 `;
 
 const MatchElement = styled.div`
@@ -109,24 +110,17 @@ const SmallSub = styled.div`
   color: #374baa;
 `;
 
-const MatchImg = styled.img`
-  width: 15.8rem;
-`;
-
 const MatchSqaure = styled.div`
   position: relative;
-  width: 5rem;
-  height: 5rem;
+  width: 4.5rem;
+  height: 4.5rem;
   background-color: white;
   border-radius: 0.5rem;
   text-align: center;
+  border: 2px solid #374baa;
 
   ${SmallSub} {
-    margin-top: 1.4rem;
-  }
-
-  ${MatchImg} {
-    margin-top: 0.6rem;
+    margin-top: 1.7rem;
   }
 `;
 
@@ -205,21 +199,18 @@ function ResultPage({ EI, SN, JP }) {
             <MatchElement>
               <SubTitle>1위</SubTitle>
               <MatchSqaure>
-                <MatchImg />
                 <SmallSub>{category[1]}</SmallSub>
               </MatchSqaure>
             </MatchElement>
             <MatchElement>
               <SubTitle>2위</SubTitle>
               <MatchSqaure>
-                <MatchImg />
                 <SmallSub>{category[2]}</SmallSub>
               </MatchSqaure>
             </MatchElement>
             <MatchElement>
               <SubTitle>3위</SubTitle>
               <MatchSqaure>
-                <MatchImg />
                 <SmallSub>{category[3]}</SmallSub>
               </MatchSqaure>
             </MatchElement>
