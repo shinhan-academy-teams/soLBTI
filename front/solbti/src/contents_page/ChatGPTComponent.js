@@ -51,7 +51,7 @@ function ChatGPTComponent(props) {
     <div
       id="first"
       style={{
-        margin: "0 auto",
+        marginTop: "2rem",
         textAlign: "center",
         height: "80vh", // 부모 요소의 고정 높이 지정
       }}
@@ -117,7 +117,7 @@ function ChatGPTComponent(props) {
       <input
         type="text"
         style={{
-          border: "5px solid skyblue",
+          border: "5px solid #374BAA",
           width: `46rem`,
           margin: "0.3rem",
         }}
