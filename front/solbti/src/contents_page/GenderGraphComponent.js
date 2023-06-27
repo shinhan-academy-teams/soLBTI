@@ -2,20 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ResponsivePie } from "@nivo/pie";
 
-function Graphcomponent(props) {
+function GenderGraphComponent(props) {
   const [Data, setData] = useState([]);
 
   useEffect(() => {
     axios({
-      url: "/payment/payrank",
+      url: "/payment/gender/" + props.gender,
       method: "get",
-      params: {
-        year: props.yyyy,
-        month: props.mm,
-        cardlist: props.cardList.join(","),
-      },
     })
       .then((response) => {
+        console.log(response.data);
         const newData = response.data.map((item) => ({
           id: item[0],
           value: item[1],
@@ -28,7 +24,7 @@ function Graphcomponent(props) {
       .catch((err) => {
         console.log(err);
       });
-  }, [props.yyyy, props.mm]);
+  }, []);
 
   useEffect(() => {}, [Data]);
 
@@ -103,4 +99,4 @@ function Graphcomponent(props) {
   );
 }
 
-export default Graphcomponent;
+export default GenderGraphComponent;
