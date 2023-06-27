@@ -25,6 +25,7 @@ public class DBAdmin {
     @Test
     void addBiggerCategorize(){
 
+
         Map<String, String> categoryMap = new HashMap<>();
 
         biggerCategoryRepository.findAll().forEach(category->{
@@ -35,15 +36,9 @@ public class DBAdmin {
 
         historyRepository.findAll().forEach(history->{
 
-            String smallCategory = history.getStoreCategory();
-            System.out.println(smallCategory);
-            for(String key:categoryMap.keySet()){
-                if(key.equals(smallCategory)){
+            history.setStoreBiggerCategory(categoryMap.get(history.getStoreCategory()));
 
-                    history.setStoreBiggerCategory(categoryMap.get(key));
-                }
-                historyRepository.save(history);
-            }
+            historyRepository.save(history);
         });
 
     }

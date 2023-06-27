@@ -39,11 +39,13 @@ function Header2(props) {
               <img src="/img/Logo.png" alt="logo" height={40}></img>
             </Link>
             {memCode ? (
-              <Nav.Link>
-                <Button color="info" onClick={logout} variant="outlined">
-                  로그아웃
-                </Button>
-              </Nav.Link>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <Nav.Link>
+                    <p onClick={logout}>로그아웃</p>
+                  </Nav.Link>
+                </li>
+              </ul>
             ) : (
               <ul class="navbar-nav">
                 <li class="nav-item">
