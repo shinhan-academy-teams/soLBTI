@@ -12,11 +12,19 @@ import Layout from "common/Layout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+const mainStyle = {
+  backgroundImage: `url("/img/hero-bg.png")`,
+  backgroundSize: "cover",
+  height: "100vh",
+};
+
 root.render(
-  <BrowserRouter>
-    <Layout>
-      <App />
-    </Layout>
-  </BrowserRouter>
+  <div style={mainStyle}>
+    <BrowserRouter>
+      <Layout>
+        <App />
+      </Layout>
+    </BrowserRouter>
+  </div>
 );
 reportWebVitals();
