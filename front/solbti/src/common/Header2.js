@@ -83,7 +83,7 @@ function Header2(props) {
             콘텐츠
           </Nav.Link>
           <NavDropdown
-            title="My"
+            title="마이"
             id="basic-nav-dropdown"
             style={{ marginRight: "30px" }}
           >
