@@ -27,14 +27,14 @@ function ContentsMain(props) {
       <MDBCardGroup>
         <MDBCard onClick={clickContent1}>
           <MDBCardImage
-            src="/img/contentsPage/content1.png"
+            src="/img/contentsPage/sobiti.png"
             className="rounded-pill"
             alt="..."
             position="top"
           />
           <MDBCardBody>
-            <MDBCardTitle>나의 SOLBTI는?</MDBCardTitle>
-            <MDBCardText>어쩌고 저쩌고</MDBCardText>
+            <MDBCardTitle></MDBCardTitle>
+            <MDBCardText></MDBCardText>
           </MDBCardBody>
         </MDBCard>
 
@@ -46,8 +46,8 @@ function ContentsMain(props) {
             position="top"
           />
           <MDBCardBody>
-            <MDBCardTitle>소비패턴 구경하기</MDBCardTitle>
-            <MDBCardText>어쩌고저쩌고</MDBCardText>
+            <MDBCardTitle> </MDBCardTitle>
+            <MDBCardText></MDBCardText>
           </MDBCardBody>
         </MDBCard>
 
@@ -58,8 +58,8 @@ function ContentsMain(props) {
             position="top"
           />
           <MDBCardBody>
-            <MDBCardTitle>채팅</MDBCardTitle>
-            <MDBCardText>어쩌고저쩌고</MDBCardText>
+            <MDBCardTitle></MDBCardTitle>
+            <MDBCardText></MDBCardText>
           </MDBCardBody>
         </MDBCard>
       </MDBCardGroup>
