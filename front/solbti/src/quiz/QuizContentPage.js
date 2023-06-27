@@ -24,7 +24,7 @@ const Container = styled.div`
 
 const Text = styled.div`
   font-family: "GmarketSansMedium";
-  font-size: 1.9rem;
+  font-size: 1.7rem;
   font-weight: light;
   margin: 0.5rem;
   text-align: center;
@@ -55,7 +55,7 @@ function QuizContentPage({ isShow }) {
       setTimeout(function () {
         setIsLoading(false);
         setIsProcess(true);
-      }, 2000);
+      }, 1000);
     }
     setQuestionNum(questionNum + 1);
   };

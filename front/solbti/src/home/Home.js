@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 
 function Home(props) {
   return (
-    <Container fluid>
+    <Container>
       <Carousels />
     </Container>
   );
