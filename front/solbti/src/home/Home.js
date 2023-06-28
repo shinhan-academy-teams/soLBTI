@@ -1,4 +1,3 @@
-import Header from "common/Header";
 import Carousels from "componenet/Carousels";
 import React from "react";
 import { Container } from "react-bootstrap";
