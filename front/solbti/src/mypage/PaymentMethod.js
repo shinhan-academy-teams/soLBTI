@@ -4,20 +4,18 @@ import React, { useState } from "react";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import Typography from "@mui/joy/Typography";
-import { useNavigate } from "react-router-dom";
+
 import "mypage/PaymentMethod.css";
 import { Button } from "react-bootstrap";
 
 function PaymentMethod(props) {
-  const navigate = useNavigate();
-
   const handleClick = (e) => {
     alert("카드 신청이 완료되었습니다.");
     window.location.replace("/mypage/cards");
   };
   return (
     <>
-      <div class="centered">
+      <div className="centered">
         <Box sx={{ width: 343 }}>
           <Typography id="topping" level="body2" fontWeight="lg" mb={2}>
             명세서 받는 방법
