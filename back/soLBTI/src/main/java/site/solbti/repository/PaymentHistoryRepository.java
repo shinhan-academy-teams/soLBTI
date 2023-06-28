@@ -20,5 +20,4 @@ public interface PaymentHistoryRepository extends CrudRepository<PaymentHistory,
 
     @Query("SELECT p.storeBiggerCategory, COUNT(*) AS count FROM PaymentHistory p WHERE p.personalCard.personalCardCode IN ?1 GROUP BY p.storeBiggerCategory ")
     List<Object[]> findCountByStoreCategory(List<Long> ids);
-
 }
