@@ -63,9 +63,9 @@ public class QuizResultController {
     @GetMapping("/recommend")
     public List<CommonCard> recommendCard(@RequestParam String category1, @RequestParam String category2, @RequestParam String category3) {
         Map<String, Integer> category = new LinkedHashMap<>();
-        category.put(category1,10);
-        category.put(category2,5);
-        category.put(category3,3);
+        category.put(category1,5);
+        category.put(category2,3);
+        category.put(category3,2);
         Map<Long, Integer> cardScore = new HashMap<>();
         for(String key : category.keySet()) {
             List<MongoCommonCard> cards = mongoRepo.findByBenefitCustum(key);
