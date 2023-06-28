@@ -17,11 +17,12 @@ function PaymentMethod(props) {
   };
   return (
     <>
-      <div class="TextBox">
+      <div class="centered">
         <Box sx={{ width: 343 }}>
           <Typography id="topping" level="body2" fontWeight="lg" mb={2}>
             명세서 받는 방법
           </Typography>
+          <br></br>
           <Box
             sx={{ width: 343, display: "flex", justifyContent: "center" }}
             role="group"
@@ -54,10 +55,12 @@ function PaymentMethod(props) {
           </Box>
         </Box>
         <br></br>
+        <br></br>
         <Box sx={{ width: 343 }}>
           <Typography id="topping" level="body2" fontWeight="lg" mb={2}>
             상품안내장 수령방법
           </Typography>
+          <br></br>
           <Box role="group" aria-labelledby="topping">
             <List
               orientation="horizontal"
@@ -79,9 +82,11 @@ function PaymentMethod(props) {
         </Box>
         <br></br>
         <Box sx={{ width: 343 }}>
+          <br></br>
           <Typography id="topping" level="body2" fontWeight="lg" mb={2}>
             카카오톡 공지성 정보 수신동의
           </Typography>
+          <br></br>
           <Box role="group" aria-labelledby="topping">
             <List
               orientation="horizontal"
