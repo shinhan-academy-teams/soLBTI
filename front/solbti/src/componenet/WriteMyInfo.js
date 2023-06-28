@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "mypage/keypad.css";
 import SecurityKeypad from "componenet/SecurityKeypad";
 import axios from "axios";
@@ -38,8 +38,11 @@ function WriteMyInfo(props) {
   const [cookies] = useCookies(["memCode"]);
   const [brand, setBrand] = useState([]); //원래 브랜드 객체
   const [selectedBrand, setSelectedBrand] = useState(""); //첫번째 브랜드
+  const navigate = useNavigate();
 
-
+  const navigateToAgree = () => {
+    navigate("/cardlist/agree");
+  };
   const handleChange = (e) => {
     e.preventDefault();
 
@@ -72,12 +75,14 @@ function WriteMyInfo(props) {
     console.log(selectedBrand + "<<brand");
     instance
       .post(`/cardlist/join.do/${cno}`, requestData)
+      // .post("/cardlist/agree")
       .then((response) => {
         console.log(response);
       })
       .catch((err) => {
         console.log(err);
       });
+    navigateToAgree();
   };
 
   useEffect(() => {
@@ -228,9 +233,11 @@ function WriteMyInfo(props) {
             <br></br>
             <div className="d-grid gap-1">
               <br></br>
-              <Button variant="secondary" onClick={handleClick}>
-                다음
-              </Button>
+              <Link to="/cardlist/agree">
+                <Button variant="secondary" type="submit" onClick={handleClick}>
+                  다음
+                </Button>
+              </Link>
             </div>
           </Form>
         </Container>

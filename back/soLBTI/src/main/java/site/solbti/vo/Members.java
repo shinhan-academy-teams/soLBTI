@@ -52,6 +52,8 @@ public class Members {
     private Timestamp created;
     @Column(nullable = true)
     private String memType;
+    private String memGender;
+    private String memBirth;
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)

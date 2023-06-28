@@ -4,8 +4,16 @@ import React, { useState } from "react";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import Typography from "@mui/joy/Typography";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function PaymentMethod(props) {
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    alert("카드 신청이 완료되었습니다.");
+    window.location.replace("/mypage/cards");
+  };
   return (
     <>
       <Box sx={{ width: 343 }}>
@@ -79,6 +87,11 @@ function PaymentMethod(props) {
               </ListItem>
             ))}
           </List>
+          <br></br>
+
+          <Button variant="secondary" type="submit" onClick={handleClick}>
+            다음
+          </Button>
         </Box>
       </Box>
     </>
