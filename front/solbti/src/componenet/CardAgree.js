@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import "componenet/CardAgree.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+//import { Link, useNavigate } from "react-router-dom";
 
 const CardAgree = () => {
   const [allAgreed, setAllAgreed] = useState(false);
+  const navigate = useNavigate();
+
+  const navigateToPaymentMethod = () => {
+    navigate("/cardlist/paymentMethod");
+  };
 
   const [agreements, setAgreements] = useState({
     termsAgreed: false,
@@ -145,9 +151,11 @@ const CardAgree = () => {
             <button className="fpmgBt1">비동의</button>
           </li>
           <li>
-            <Link to="/cardlist/paymentMethod">
-              <button className="fpmgBt2">동의</button>
-            </Link>
+            {/* <Link to="/cardlist/paymentMethod"> */}
+            <button className="fpmgBt2" onClick={navigateToPaymentMethod}>
+              동의
+            </button>
+            {/* </Link> */}
           </li>
         </ul>
       </form>
