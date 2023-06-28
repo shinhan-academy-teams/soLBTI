@@ -194,7 +194,7 @@ function Signup(props) {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" className="loginContainer">
       <Box
         component="form"
         sx={{
@@ -203,6 +203,7 @@ function Signup(props) {
         noValidate
         autoComplete="off"
       >
+        <h1 className="margin-bottom-50"> 회원가입 </h1>
         <div>
           <TextField
             required

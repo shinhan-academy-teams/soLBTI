@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login(props) {
   const [cookies, setCookie, removeCookie] = useCookies([
@@ -48,7 +49,7 @@ function Login(props) {
 
           navi(-1);
         } else {
-          alert("로그인 실패");
+          alert("회원 정보가 일치하지 않습니다.");
         }
       })
       .catch((error) => {
@@ -57,11 +58,12 @@ function Login(props) {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" className="loginContainer textAlign">
       {/* <p>로그인 컴포넌트</p>
       <p>{member.memId}</p>
       <p>{member.memPwd}</p> */}
       <Box
+        className="50px"
         component="form"
         sx={{
           "& .MuiTextField-root": { m: 1, width: "25ch" },
@@ -69,6 +71,7 @@ function Login(props) {
         noValidate
         autoComplete="off"
       >
+        <h1 className="margin-bottom-50"> 로그인 </h1>
         <div>
           <TextField
             required
@@ -92,9 +95,12 @@ function Login(props) {
             onChange={handleChange}
           />
         </div>
-        <Button variant="outlined" onClick={handleSubmit}>
-          로그인
-        </Button>
+
+        <div className="textEnd">
+          <Button variant="outlined" onClick={handleSubmit}>
+            로그인
+          </Button>
+        </div>
       </Box>
     </Container>
   );
