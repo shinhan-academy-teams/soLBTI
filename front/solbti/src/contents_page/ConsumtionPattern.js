@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Switch from "@mui/joy/Switch";
 import AgeConsumptionPatternGraph from "./AgeConsumptionPatternGraph";
 import GenderConsumptionPatternGraph from "./GenderConsumptionPatternGraph";
+import { Container } from "@mui/material";
+import { motion } from "framer-motion";
 
 function ConsumtionPattern(props) {
   const [dark, setDark] = useState(false);
@@ -11,8 +13,7 @@ function ConsumtionPattern(props) {
   };
   return (
     <div>
-      <h2>소비패턴 페이지</h2>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center", marginTop: "3rem" }}>
         <Switch
           color={dark ? "primary" : "danger"}
           slotProps={{ input: { "aria-label": "dark mode" } }}
@@ -32,17 +33,18 @@ function ConsumtionPattern(props) {
           onChange={handleChange}
         />
       </div>
-
-      {!dark && (
-        <div>
-          <AgeConsumptionPatternGraph />
-        </div>
-      )}
-      {dark && (
-        <div>
-          <GenderConsumptionPatternGraph />
-        </div>
-      )}
+      <Container>
+        {!dark && (
+          <div>
+            <AgeConsumptionPatternGraph />
+          </div>
+        )}
+        {dark && (
+          <div>
+            <GenderConsumptionPatternGraph />
+          </div>
+        )}
+      </Container>
     </div>
   );
 }
