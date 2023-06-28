@@ -7,6 +7,7 @@ import site.solbti.repository.MembersRepository;
 import site.solbti.repository.MongoCommonCardRepository;
 import site.solbti.repository.PersonalCardRepository;
 import site.solbti.vo.CommonCard;
+import site.solbti.vo.MongoCommonCard;
 import site.solbti.vo.PersonalCard;
 
 import java.security.NoSuchAlgorithmException;
@@ -91,6 +92,16 @@ public class CardJoinController {
             memRepo.save(entity);
 
         });
+
+        // 카드 인기차트 반영
+        MongoCommonCard card = mongoCommonCardRepository.findByCommonCardCode(cardNo);
+        Integer cardview = card.getCardview();
+        if(cardview==null) {
+            card.setCardview(3);
+        } else {
+            card.setCardview(cardview+3);
+        }
+        mongoCommonCardRepository.save(card);
 
     }
 }
