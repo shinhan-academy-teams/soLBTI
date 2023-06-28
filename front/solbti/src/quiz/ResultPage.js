@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Parser from "html-react-parser";
 import axios from "axios";
 import CardModal from "./components/CardModal";
+import cookies from "react-cookies";
+import { useCookies } from "react-cookie";
 
 const Wrapper = styled.div`
   display: flex;
@@ -146,6 +148,8 @@ function ResultPage({ EI, SN, JP }) {
   const [category, setCategory] = useState([]);
   const [cards, setCards] = useState([]);
   const [popup, setPopup] = useState({ open: false });
+  const [cookie, setCookie] = useCookies(["accessToken", "memCode"]);
+  const [memCode, setmemCode] = useState(cookie.memCode);
 
   useEffect(() => {
     axios({
@@ -154,7 +158,6 @@ function ResultPage({ EI, SN, JP }) {
     })
       .then((res) => {
         setCategory(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -182,7 +185,10 @@ function ResultPage({ EI, SN, JP }) {
   };
 
   const handleSaveType = () => {
-    window.location.href = "/home";
+    cookies.save("type", results[result].name);
+    memCode
+      ? (window.location.href = "/home")
+      : (window.location.href = "/auth/login");
   };
 
   return (
