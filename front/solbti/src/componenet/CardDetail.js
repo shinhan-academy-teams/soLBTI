@@ -64,7 +64,7 @@ function CardDetail(props) {
           <div className="card-img">
             <img src={card.imgURL} alt="카드 이미지" width={400} />
           </div>
-          <div className="card-name">
+          <div className="card-name" style={{ width: "100rem" }}>
             <h1>{card.cardName}</h1>
             <p>{card.cardContent}</p>
             <Link to={`/cardlist/join/${cno}`}>
