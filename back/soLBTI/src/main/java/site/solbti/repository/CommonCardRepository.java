@@ -1,6 +1,5 @@
 package site.solbti.repository;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import site.solbti.vo.CommonCard;
 
@@ -16,4 +15,7 @@ public interface CommonCardRepository extends CrudRepository<CommonCard, Long> {
     List<CommonCard> findByCardNameContaining(String cardName);
 
     List<CommonCard> findByCommonCardCodeIn(List<Long> cardNoList);
+
+
+    List<CommonCard> findAll();
 }

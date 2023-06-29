@@ -12,6 +12,7 @@ import site.solbti.vo.MongoCommonCard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Log
 @RestController
@@ -75,6 +76,12 @@ public class CardListController {
             }
         }
         System.out.println(cardList);
+        return cardList;
+    }
+
+    @GetMapping("/cardCarousel")
+    public List<String> selectCardList(){
+        List<String> cardList = commonRepo.findAll().stream().map(CommonCard::getImgURL).collect(Collectors.toList());
         return cardList;
     }
 }
