@@ -29,33 +29,34 @@ function CarouselComponent(props) {
         itemsToScroll={1}
         responsiveProps={[
           {
-            itemsToShow: 3,
+            itemsToShow: 5,
             itemsToScroll: 1,
-            minWidth: 1500,
+            minWidth: 1000,
           },
         ]}
         speed={400}
         easing="linear"
-        autoplayDelay={800}
+        autoplayDelay={1300}
       >
         {/* here you can also pass any other element attributes. Also, you can use your custom components as slides */}
 
         {cardurl.map((item) => (
           <div
             style={{
-              width: 200,
-              height: 350,
-              background: "#EFEFFB",
-              borderRadius: "8%",
-              margin: "1rem",
+              width: 230,
+              height: 330,
+              borderRadius: "10%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center", // 추가: 세로 축 가운데 정렬을 위해 사용할 수 있습니다.
             }}
           >
             {/* {item} */}
             <img
               src={item}
               style={{
-                width: 316,
-                height: 200,
+                width: 280,
+                height: 180,
                 transform: "rotate(90deg)",
               }}
             />
