@@ -1,3 +1,4 @@
+import { Button, TextField } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 
@@ -50,6 +51,7 @@ function SendSms() {
       setIsCodeVerified(true);
     } catch (error) {
       console.log(error);
+      alert("인증 실패!");
       // 인증번호 검증에 실패한 경우
     }
   };
@@ -64,33 +66,29 @@ function SendSms() {
 
   return (
     <div>
-      <h1>전화번호 인증</h1>
+      {/* <h1>전화번호 인증</h1> */}
       <form>
         <div>
-          <label>전화번호:</label>
-          <input
+          <TextField
             type="text"
             value={phoneNumber}
             onChange={handlePhoneNumberChange}
           />
+          {!isCodeRequested && (
+            <Button onClick={handleRequestCode}>인증번호 요청</Button>
+          )}
         </div>
-
-        {!isCodeRequested && (
-          <button onClick={handleRequestCode}>인증번호 요청</button>
-        )}
 
         {isCodeRequested && (
           <div>
             <div>
-              <label>인증번호:</label>
-              <input
+              <TextField
                 type="text"
                 value={authCode}
                 onChange={handleAuthCodeChange}
               />
+              <Button onClick={handleVerifyCode}>인증하기</Button>
             </div>
-
-            <button onClick={handleVerifyCode}>인증하기</button>
           </div>
         )}
       </form>

@@ -50,6 +50,7 @@ function DateSelectComponent(props) {
           </Option>
         ))}
       </Select>
+
       <span
         style={{ marginRight: "10px", display: "flex", alignItems: "center" }}
       >
