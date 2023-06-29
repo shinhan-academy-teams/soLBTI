@@ -1,14 +1,10 @@
 import { Box, Button, Container, TextField } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
-import DaumPostcodeEmbed from "react-daum-postcode";
+import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useNavigate } from "react-router-dom";
 
 function Signup(props) {
-  // const [postcode, setPostcode] = useState("");
-  // const [address, setAddress] = useState("");
-  // const [detailAddress, setDetailAddress] = useState("");
-  // const [extraAddress, setExtraAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [authCode, setAuthCode] = useState("");
   const [isCodeRequested, setIsCodeRequested] = useState(false);
@@ -93,19 +89,6 @@ function Signup(props) {
     }
   };
 
-  // const formatPhoneNumber = (value) => {
-  //   // 입력된 값에서 "-"를 제외한 숫자만 추출합니다.
-  //   const phoneNumberDigits = value.replace(/-/g, "");
-
-  //   // 숫자를 원하는 형식으로 변환합니다. (예: 1234567890 -> 123-456-7890)
-  //   const formattedNumber = phoneNumberDigits.replace(
-  //     /(\d{3})(\d{4})(\d{4})/,
-  //     "$1-$2-$3"
-  //   );
-
-  //   return formattedNumber;
-  // };
-
   const handleSubmit = () => {
     if (
       member.memId === "" ||
@@ -115,8 +98,7 @@ function Signup(props) {
       member.memAddr === "" ||
       member.memPhone === "" ||
       member.memGender === "" ||
-      member.memBirth === "" ||
-      !isCodeVerified
+      member.memBirth === ""
     ) {
       // 유효성 검사 실패: 값이 비어 있음
       setIsValid({
@@ -223,8 +205,6 @@ function Signup(props) {
         } else {
           alert("이미 가입된 전화번호가 있습니다.");
           setIsValid({ ...isValid, phonNumDup: true });
-          return;
-          alert("asdfasdf");
         }
       })
       .catch((error) => {
@@ -232,7 +212,10 @@ function Signup(props) {
       });
   };
 
-  //주소입력
+  const open = useDaumPostcodePopup(
+    "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
+  );
+
   const handleComplete = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
@@ -257,6 +240,11 @@ function Signup(props) {
       ...prevIsValid,
       memAddr: fullAddress !== "",
     }));
+    //console.log(fullAddress);
+  };
+
+  const handleClick = () => {
+    open({ onComplete: handleComplete });
   };
 
   return (
@@ -308,8 +296,6 @@ function Signup(props) {
             name="memPwdConfirm"
             label="비밀번호 확인"
             type="password"
-            error={!isValid.memPwdConfirm}
-            helperText={!isValid.memPwdConfirm ? "필수입니다." : ""}
             onChange={handleChange}
           />
         </div>
@@ -392,10 +378,15 @@ function Signup(props) {
           <p>{isValid.emailDup ? "이메일 중복여부 체크하세요" : ""}</p>
         </div>
         <div>
+          {/* <p>{member.memAddr}</p> */}
           {/* <TextField id="sample6_postcode" />
           <Button onclick={sample6_execDaumPostcode} /> */}
-          <DaumPostcodeEmbed onComplete={handleComplete} {...props} />
+          {/* <DaumPostcodeEmbed onComplete={handleComplete} {...props} /> */}
           <TextField aria-readonly value={member.memAddr} />
+
+          <Button type="button" onClick={handleClick}>
+            주소 찾기
+          </Button>
         </div>
 
         <div>
