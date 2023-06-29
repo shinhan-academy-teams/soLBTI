@@ -37,6 +37,7 @@
     "react-cookies": "^0.1.1",
     "react-daum-postcode": "^3.1.1",
     "react-dom": "^18.2.0",
+    "react-horizontal-scrolling-menu": "^4.1.0",
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.12.1",
     "react-scripts": "5.0.1",
