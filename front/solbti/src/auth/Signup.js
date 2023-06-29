@@ -1,14 +1,43 @@
-import { Alert, Box, Button, Container, TextField } from "@mui/material";
+import { Box, Button, Container, TextField } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { useNavigate } from "react-router-dom";
 
 function Signup(props) {
-  const [postcode, setPostcode] = useState("");
-  const [address, setAddress] = useState("");
-  const [detailAddress, setDetailAddress] = useState("");
-  const [extraAddress, setExtraAddress] = useState("");
+  // const [postcode, setPostcode] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [detailAddress, setDetailAddress] = useState("");
+  // const [extraAddress, setExtraAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [authCode, setAuthCode] = useState("");
+  const [isCodeRequested, setIsCodeRequested] = useState(false);
+  const [isCodeVerified, setIsCodeVerified] = useState(false);
+
+  const handleAuthCodeChange = (e) => {
+    setAuthCode(e.target.value);
+  };
+
+  const handleRequestCode = async (e) => {
+    try {
+      const response = await axios.post("/user/request-sms", { phoneNumber });
+      setIsCodeRequested(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleVerifyCode = async (e) => {
+    try {
+      const response = await axios.post("/user/verify-sms", {
+        phoneNumber,
+        authCode,
+      });
+      setIsCodeVerified(true);
+    } catch (error) {
+      console.log(error);
+      alert("인증 실패!");
+    }
+  };
   const navi = useNavigate();
 
   const [member, setMember] = useState({
@@ -19,6 +48,8 @@ function Signup(props) {
     memAddr: "",
     memPhone: "",
     memPwdConfirm: "",
+    memBirth: "",
+    memGender: "",
   });
 
   const [isValid, setIsValid] = useState({
@@ -32,17 +63,48 @@ function Signup(props) {
     idDup: true,
     phonNumDup: true,
     memPwdConfirm: true,
+    memBirth: true,
+    memGender: true,
   });
 
   const handleChange = (e) => {
     setMember({ ...member, [e.target.name]: e.target.value });
     setIsValid({ ...isValid, [e.target.name]: e.target.value !== "" });
     if (e.target.name === "memEmail")
-      setIsValid({ ...isValid, emailDup: true });
-    if (e.target.name === "memId") setIsValid({ ...isValid, idDup: true });
-    if (e.target.name === "memPhone")
-      setIsValid({ ...isValid, phonNumDup: true });
+      setIsValid({
+        ...isValid,
+        emailDup: true,
+        [e.target.name]: e.target.value !== "",
+      });
+    if (e.target.name === "memId") {
+      setIsValid({
+        ...isValid,
+        idDup: true,
+        [e.target.name]: e.target.value !== "",
+      });
+    }
+    if (e.target.name === "memPhone") {
+      setPhoneNumber(e.target.value);
+    }
+    if (e.target.name === "memGender") {
+      if (e.target.value % 2 == "1") {
+        setMember({ ...member, memGender: "M" });
+      } else setMember({ ...member, memGender: "F" });
+    }
   };
+
+  // const formatPhoneNumber = (value) => {
+  //   // 입력된 값에서 "-"를 제외한 숫자만 추출합니다.
+  //   const phoneNumberDigits = value.replace(/-/g, "");
+
+  //   // 숫자를 원하는 형식으로 변환합니다. (예: 1234567890 -> 123-456-7890)
+  //   const formattedNumber = phoneNumberDigits.replace(
+  //     /(\d{3})(\d{4})(\d{4})/,
+  //     "$1-$2-$3"
+  //   );
+
+  //   return formattedNumber;
+  // };
 
   const handleSubmit = () => {
     if (
@@ -51,7 +113,10 @@ function Signup(props) {
       member.memName === "" ||
       member.memEmail === "" ||
       member.memAddr === "" ||
-      member.memPhone === ""
+      member.memPhone === "" ||
+      member.memGender === "" ||
+      member.memBirth === "" ||
+      !isCodeVerified
     ) {
       // 유효성 검사 실패: 값이 비어 있음
       setIsValid({
@@ -61,6 +126,8 @@ function Signup(props) {
         memEmail: member.memEmail !== "",
         memAddr: member.memAddr !== "",
         memPhone: member.memPhone !== "",
+        memBirth: member.memBirth !== "",
+        memGender: member.memGender !== "",
       });
       alert("모두 입력하세요");
       return;
@@ -74,17 +141,14 @@ function Signup(props) {
       return;
     }
 
-    if (isValid.phonNumDup === true) {
-      alert("전화번호 중복체크하세요");
+    if (!isCodeVerified) {
+      alert("전화번호를 인증해주세요.");
       return;
     }
     if (member.memPwd !== member.memPwdConfirm) {
       alert("비밀번호가 일치하지 않아요");
       return;
     }
-
-    // 유효성 검사 통과
-    // 로그인 처리 로직 작성
 
     axios({
       url: "/auth/signup",
@@ -159,6 +223,8 @@ function Signup(props) {
         } else {
           alert("이미 가입된 전화번호가 있습니다.");
           setIsValid({ ...isValid, phonNumDup: true });
+          return;
+          alert("asdfasdf");
         }
       })
       .catch((error) => {
@@ -203,6 +269,15 @@ function Signup(props) {
         noValidate
         autoComplete="off"
       >
+        {/* <p>{member.memAddr}</p>
+        <p>{member.memEmail}</p>
+        <p>{member.memGender}</p>
+        <p>{member.memId}</p>
+        <p>{member.memName}</p>
+        <p>{member.memPhone}</p>
+        <p>{member.memPwd}</p>
+        <p>{member.memPwdConfirm}</p>
+        <p>{member.memBirth}</p> */}
         <h1 className="margin-bottom-50"> 회원가입 </h1>
         <div>
           <TextField
@@ -248,6 +323,61 @@ function Signup(props) {
             onChange={handleChange}
           />
         </div>
+
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <TextField
+            style={{ width: "150px" }}
+            required
+            name="memBirth"
+            label="주민등록번호"
+            error={!isValid.memBirth}
+            helperText={!isValid.memBirth ? "필수입니다." : ""}
+            onChange={handleChange}
+          />
+          <span style={{ fontSize: "20px" }}>-</span>
+          <TextField
+            style={{ width: "50px" }}
+            name="memGender"
+            required
+            error={!isValid.memGender}
+            helperText={!isValid.memGender ? " " : ""}
+            onChange={handleChange}
+          />
+          <span span style={{ fontSize: "20px" }}>
+            ●●●●●●
+          </span>
+        </div>
+        <div>
+          {/* <SendSms></SendSms> */}
+          <TextField
+            required
+            name="memPhone"
+            label="전화번호"
+            type="text"
+            disabled={isCodeVerified}
+            value={member.memPhone}
+            error={!isValid.memPhone}
+            helperText={!isValid.memPhone ? "필수입니다." : ""}
+            onChange={handleChange}
+          />
+          <Button onClick={(phoneDupCheck, handleRequestCode)}>
+            전화번호 인증
+          </Button>
+          {/* <p>{isValid.phonNumDup ? "" : ""}</p> */}
+        </div>
+        {isCodeRequested && (
+          <div>
+            <div>
+              <TextField
+                type="text"
+                value={authCode}
+                onChange={handleAuthCodeChange}
+              />
+              <Button onClick={handleVerifyCode}>인증하기</Button>
+            </div>
+            {isCodeVerified ? "인증이 완료되었습니다." : "전화번호 인증하세요"}
+          </div>
+        )}
         <div>
           <TextField
             required
@@ -267,20 +397,7 @@ function Signup(props) {
           <DaumPostcodeEmbed onComplete={handleComplete} {...props} />
           <TextField aria-readonly value={member.memAddr} />
         </div>
-        <div>
-          {/*-표시 아직 안나옴 */}
-          <TextField
-            required
-            name="memPhone"
-            label="전화번호"
-            error={!isValid.memPhone}
-            helperText={!isValid.memPhone ? "필수입니다." : ""}
-            onChange={handleChange}
-            placeholder="010-0000-0000"
-          />
-          <Button onClick={phoneDupCheck}>중복 확인</Button>
-          <p>{isValid.phonNumDup ? "전화번호 중복여부 체크하세요" : ""}</p>
-        </div>
+
         <div>
           <Button variant="outlined" onClick={handleSubmit}>
             가입하기
