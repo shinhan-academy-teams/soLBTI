@@ -1,0 +1,13 @@
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  padding-top: 0;
+}
+
+.centered .container {
+  padding-top: 20px;
+  transform: translateY(-10px);
+}
