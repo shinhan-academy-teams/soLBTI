@@ -52,12 +52,12 @@ function QuizMain(props) {
       <QuizPageHeader />
       <Wrapper isShow={isShow}>
         <Container>
-          <Title data-aos="fade-up">나의 소비 습관 MBTI는?</Title>
+          <Title data-aos="fade-up">나는 어떤 유형의 소비자일까?!</Title>
           <Intro data-aos="fade-up">
-            재미로 알아보는 나의 소비 MBTI 그리고 카드 추천까지!
+            재미로 알아보는 나의 SOLBTI 그리고 카드 추천까지!
           </Intro>
           <div data-aos="zoom-out" data-aos-delay="200">
-            <img src="/img/hero-img.png" className="img-fluid" alt="" />
+            <img src="/img/QuizTitle.png" className="img-fluid" alt="" />
           </div>
           <StartButton type={true} text={"테스트 시작"} onclick={startBtn} />
         </Container>
