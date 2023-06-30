@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Nav, NavDropdown, Container } from "react-bootstrap";
 import { useCookies } from "react-cookie";
 import { Link, useLocation } from "react-router-dom";
+import "./header.css";
 
 function Header(props) {
   const [cookies, setCookie, removeCookie] = useCookies([
@@ -52,15 +53,15 @@ function Header(props) {
           </div>
         </Nav>
       </Container>
-      <Container>
+      <Container id="nav-container">
         <Nav>
-          <Nav.Link href="/chart" style={{ marginRight: "30px" }}>
+          <Nav.Link href="/chart" id="nav-bar">
             카드 TOP10
           </Nav.Link>
-          <Nav.Link href="/cardlist" style={{ marginRight: "30px" }}>
+          <Nav.Link href="/cardlist" id="nav-bar">
             전체
           </Nav.Link>
-          <Nav.Link href="/contents" style={{ marginRight: "30px" }}>
+          <Nav.Link href="/contents" id="nav-bar">
             콘텐츠
           </Nav.Link>
           <NavDropdown

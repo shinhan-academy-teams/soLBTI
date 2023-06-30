@@ -1,0 +1,13 @@
+#basic-nav-dropdown,
+#nav-bar {
+  color: #374baa;
+}
+
+#nav-bar {
+  margin-right: 50px;
+  margin-bottom: 1rem;
+}
+
+#nav-bar:first-child {
+  margin-left: 10px;
+}
